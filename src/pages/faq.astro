@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
+const base = import.meta.env.BASE_URL;
 const faqs = [
   {
     category: 'General',
@@ -111,16 +111,16 @@ const faqSchema = {
           <a href="tel:+17188771197" class="btn btn-primary" style="width:100%;text-align:center;margin-bottom:0.75rem;">
             📞 (718) 877-1197
           </a>
-          <a href="/contact" class="btn btn-outline" style="width:100%;text-align:center;">
+          <a href={`${base}contact`} class="btn btn-outline" style="width:100%;text-align:center;">
             Contact Form
           </a>
         </div>
         <div class="sidebar-box">
           <h3>Our Services</h3>
           <ul>
-            <li><a href="/services/landscaping">Landscaping</a></li>
-            <li><a href="/services/excavation">Excavation</a></li>
-            <li><a href="/services/property-maintenance">Property Maintenance</a></li>
+            <li><a href={`${base}services/landscaping`}>Landscaping</a></li>
+            <li><a href={`${base}services/excavation`}>Excavation</a></li>
+            <li><a href={`${base}services/property-maintenance`}>Property Maintenance</a></li>
           </ul>
         </div>
       </aside>

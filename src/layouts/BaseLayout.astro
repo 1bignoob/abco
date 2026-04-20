@@ -34,12 +34,14 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 <!doctype html>
 <html lang="en">
   <head>
+    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#d95210" />
 
-    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="landscaping, excavation, property maintenance, lawn care, Eagle Lake PA, Gouldsboro PA, Covington Township PA, ABCO Landscaping" />
+    <meta name="author" content="ABCO Landscaping & Construction" />
+    <meta name="publisher" content="ABCO Landscaping & Construction" />
 
     {noindex
       ? <meta name="robots" content="noindex, nofollow" />
@@ -48,6 +50,13 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
     <link rel="canonical" href={canonicalUrl} />
 
+    <meta name="theme-color" content="#d95210" />
+
+    <!-- Apple mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ABCO" />
+
     <!-- Open Graph -->
     <meta property="og:type"        content={ogType} />
     <meta property="og:site_name"   content="ABCO Landscaping & Construction" />
@@ -55,6 +64,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta property="og:description" content={description} />
     <meta property="og:url"         content={canonicalUrl} />
     <meta property="og:image"       content={ogImage} />
+    <meta property="og:image:alt"   content="ABCO Landscaping & Construction" />
     <meta property="og:locale"      content="en_US" />
 
     <!-- Twitter -->

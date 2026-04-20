@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
@@ -40,7 +41,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>We reserve the right to update these terms at any time. Continued use of the site following changes constitutes acceptance of the updated terms.</p>
 
       <h2>Contact</h2>
-      <p>Questions about these terms? <a href="/contact">Contact us</a> or call <a href="tel:+17188771197">(718) 877-1197</a>.</p>
+      <p>Questions about these terms? <a href={`${base}contact`}>Contact us</a> or call <a href="tel:+17188771197">(718) 877-1197</a>.</p>
 
     </div>
   </section>

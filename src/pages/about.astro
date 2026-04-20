@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTA from '../components/CTA.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
@@ -44,12 +45,12 @@ import CTA from '../components/CTA.astro';
         <p>
           We primarily serve Eagle Lake, Gouldsboro, and Covington Township PA (ZIP 18424) and
           surrounding communities. Not sure if we cover your area?
-          <a href="/contact">Just ask</a> — we're happy to let you know.
+          <a href={`${base}contact`}>Just ask</a> — we're happy to let you know.
         </p>
 
         <div class="about-cta">
-          <a href="/contact" class="btn btn-primary">Get a Free Estimate</a>
-          <a href="/services" class="btn btn-outline">Our Services</a>
+          <a href={`${base}contact`} class="btn btn-primary">Get a Free Estimate</a>
+          <a href={`${base}services`} class="btn btn-outline">Our Services</a>
         </div>
       </div>
 

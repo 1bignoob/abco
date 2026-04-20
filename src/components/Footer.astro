@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 ---
 
@@ -37,10 +38,10 @@ const year = new Date().getFullYear();
       <div class="footer-col">
         <h3>Services</h3>
         <ul>
-          <li><a href="/services/landscaping">Landscaping</a></li>
-          <li><a href="/services/excavation">Excavation</a></li>
-          <li><a href="/services/property-maintenance">Property Maintenance</a></li>
-          <li><a href="/services">All Services</a></li>
+          <li><a href={`${base}services/landscaping`} title="Landscaping Services">Landscaping</a></li>
+          <li><a href={`${base}services/excavation`} title="Excavation Services">Excavation</a></li>
+          <li><a href={`${base}services/property-maintenance`} title="Property Maintenance Services">Property Maintenance</a></li>
+          <li><a href={`${base}services`} title="All Services">All Services</a></li>
         </ul>
       </div>
 
@@ -48,10 +49,10 @@ const year = new Date().getFullYear();
       <div class="footer-col">
         <h3>Company</h3>
         <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/contact">Contact Us</a></li>
+          <li><a href={`${base}about`} title="About ABCO Landscaping">About Us</a></li>
+          <li><a href={`${base}blog`} title="ABCO Landscaping Blog">Blog</a></li>
+          <li><a href={`${base}faq`} title="Frequently Asked Questions">FAQ</a></li>
+          <li><a href={`${base}contact`} title="Contact ABCO Landscaping">Contact Us</a></li>
         </ul>
       </div>
 
@@ -76,9 +77,9 @@ const year = new Date().getFullYear();
         Site by <a href="https://gothamwebdev.com" target="_blank" rel="noopener noreferrer">Gothamwebdev.com</a>
       </p>
       <nav aria-label="Legal links">
-        <a href="/terms-of-use">Terms of Use</a>
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/disclaimer">Disclaimer</a>
+        <a href={`${base}terms-of-use`} title="Terms of Use">Terms of Use</a>
+        <a href={`${base}privacy-policy`} title="Privacy Policy">Privacy Policy</a>
+        <a href={`${base}disclaimer`} title="Disclaimer">Disclaimer</a>
       </nav>
     </div>
   </div>

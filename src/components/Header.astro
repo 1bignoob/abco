@@ -2,13 +2,14 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/ABCO-logo.webp';
 
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: '/',            label: 'Home' },
-  { href: '/services',    label: 'Services' },
-  { href: '/blog',        label: 'Blog' },
-  { href: '/about',       label: 'About' },
-  { href: '/faq',         label: 'FAQ' },
-  { href: '/contact',     label: 'Contact' },
+  { href: base,                  label: 'Home' },
+  { href: `${base}services`,     label: 'Services' },
+  { href: `${base}blog`,         label: 'Blog' },
+  { href: `${base}about`,        label: 'About' },
+  { href: `${base}faq`,          label: 'FAQ' },
+  { href: `${base}contact`,      label: 'Contact' },
 ];
 
 const { pathname } = Astro.url;
@@ -17,7 +18,7 @@ const { pathname } = Astro.url;
 <header class="site-header" role="banner">
   <div class="header-inner container">
 
-    <a href="/" class="logo-link" aria-label="ABCO Landscaping – Home">
+    <a href={base} class="logo-link" aria-label="ABCO Landscaping – Home">
       <Image
         src={logo}
         alt="ABCO Landscaping & Construction"
@@ -45,7 +46,8 @@ const { pathname } = Astro.url;
           <li>
             <a
               href={link.href}
-              aria-current={pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)) ? 'page' : undefined}
+              title={link.label}
+              aria-current={pathname === link.href || (link.href !== base && pathname.startsWith(link.href)) ? 'page' : undefined}
             >
               {link.label}
             </a>

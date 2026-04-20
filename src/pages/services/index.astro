@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
@@ -36,7 +37,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <li>Lawn mowing &amp; edging</li>
             <li>Fertilization &amp; weed control</li>
           </ul>
-          <a href="/services/landscaping" class="btn btn-outline">Learn About Landscaping</a>
+          <a href={`${base}services/landscaping`} class="btn btn-outline">Learn About Landscaping</a>
         </article>
 
         <article class="hub-card">
@@ -52,7 +53,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <li>Foundation prep</li>
             <li>Drainage solutions</li>
           </ul>
-          <a href="/services/excavation" class="btn btn-outline">Learn About Excavation</a>
+          <a href={`${base}services/excavation`} class="btn btn-outline">Learn About Excavation</a>
         </article>
 
         <article class="hub-card">
@@ -68,14 +69,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <li>Deck &amp; patio maintenance</li>
             <li>General property upkeep</li>
           </ul>
-          <a href="/services/property-maintenance" class="btn btn-outline">Learn About Maintenance</a>
+          <a href={`${base}services/property-maintenance`} class="btn btn-outline">Learn About Maintenance</a>
         </article>
 
       </div>
 
       <div class="hub-cta">
-        <p>Not sure which service you need? <a href="/contact">Call or message us</a> — we'll help you figure it out.</p>
-        <a href="/contact" class="btn btn-primary">Get a Free Estimate</a>
+        <p>Not sure which service you need? <a href={`${base}contact`}>Call or message us</a> — we'll help you figure it out.</p>
+        <a href={`${base}contact`} class="btn btn-primary">Get a Free Estimate</a>
       </div>
 
     </div>

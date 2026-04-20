@@ -7,6 +7,7 @@ import FAQPreview from '../components/FAQPreview.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
 const allPosts = await getCollection('blog');
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
@@ -56,7 +57,7 @@ const homeSchema = {
                 <span class="blog-tag">{post.data.tags[0]}</span>
               )}
               <h3 class="blog-card-title">
-                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                <a href={`${base}blog/${post.id}`}>{post.data.title}</a>
               </h3>
               <p class="blog-card-desc">{post.data.description}</p>
             </div>
@@ -64,7 +65,7 @@ const homeSchema = {
               <time datetime={post.data.pubDate.toISOString()} class="blog-date">
                 {formatDate(post.data.pubDate)}
               </time>
-              <a href={`/blog/${post.id}`} class="blog-read-more" aria-label={`Read: ${post.data.title}`}>
+              <a href={`${base}blog/${post.id}`} class="blog-read-more" aria-label={`Read: ${post.data.title}`}>
                 Read Article →
               </a>
             </div>
@@ -73,7 +74,7 @@ const homeSchema = {
       </div>
 
       <div class="blog-home-cta">
-        <a href="/blog" class="btn btn-outline">View All Articles</a>
+        <a href={`${base}blog`} class="btn btn-outline">View All Articles</a>
       </div>
 
     </div>

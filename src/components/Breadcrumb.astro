@@ -4,7 +4,13 @@
 // All other pages: Home (link) / Current Page
 // Pages with sub-paths (e.g. /services/landscaping): Home / Services / Landscaping
 
-const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL; // e.g. '/abco/'
+const basePath = base.replace(/\/$/, ''); // strip trailing slash
+const rawPathname = Astro.url.pathname;
+// Strip deployment base so breadcrumbs work at any subpath
+const pathname = rawPathname.startsWith(basePath)
+  ? rawPathname.slice(basePath.length) || '/'
+  : rawPathname;
 
 const segmentLabels: Record<string, string> = {
   services:             'Services',
@@ -26,11 +32,11 @@ const segments = pathname.replace(/\/$/, '').split('/').filter(Boolean);
 type CrumbItem = { label: string; href: string; current: boolean };
 
 const crumbs: CrumbItem[] = [
-  { label: 'Home', href: '/', current: segments.length === 0 },
+  { label: 'Home', href: base, current: segments.length === 0 },
 ];
 
 segments.forEach((seg, i) => {
-  const href = '/' + segments.slice(0, i + 1).join('/');
+  const href = base + segments.slice(0, i + 1).join('/');
   const label = segmentLabels[seg] ?? seg.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   crumbs.push({ label, href, current: i === segments.length - 1 });
 });

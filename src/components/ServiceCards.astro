@@ -1,25 +1,26 @@
 ---
+const base = import.meta.env.BASE_URL;
 const services = [
   {
     icon: '🌿',
     title: 'Landscaping',
     description:
       'Full-service landscaping for residential and commercial properties — design, planting, tree pruning, removal, and seasonal lawn care to keep your property looking its best.',
-    href: '/services/landscaping',
+    href: `${base}services/landscaping`,
   },
   {
     icon: '🏗️',
     title: 'Excavation',
     description:
       'Professional excavation, grading, leveling, and resurfacing services for construction projects of any scale throughout Covington Township and the surrounding area.',
-    href: '/services/excavation',
+    href: `${base}services/excavation`,
   },
   {
     icon: '🏡',
     title: 'Property Maintenance',
     description:
       'Reliable year-round maintenance including lawn mowing, fertilization, weed control, deck and patio upkeep, and seasonal cleanup for homes, businesses, and RV sites.',
-    href: '/services/property-maintenance',
+    href: `${base}services/property-maintenance`,
   },
 ];
 ---
@@ -73,6 +74,7 @@ const services = [
   }
 
   .svc-card {
+    position: relative;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(217, 82, 16, 0.28);
     border-radius: 10px;
@@ -114,4 +116,11 @@ const services = [
   }
 
   .svc-link:hover { color: #f06520; }
+
+  /* Stretch the link to cover the whole card */
+  .svc-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
 </style>
