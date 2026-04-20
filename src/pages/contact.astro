@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactSection from '../components/ContactSection.astro';
+---
+
+<BaseLayout
+  title="Contact ABCO Landscaping — Free Estimates | Eagle Lake PA"
+  description="Get in touch with ABCO Landscaping & Construction for a free estimate. We serve Eagle Lake, Gouldsboro, and Covington Township PA. Call (718) 877-1197."
+  canonical="/contact"
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you. Fill out the form below or call us directly.</p>
+    </div>
+  </div>
+
+  <ContactSection />
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
+    border-bottom: 1px solid #2e2e2e;
+    padding-block: 3rem 2.5rem;
+  }
+  .page-header h1 { margin-bottom: 0.4rem; }
+  .page-header p { color: #a09890; font-size: 1.1rem; }
+</style>

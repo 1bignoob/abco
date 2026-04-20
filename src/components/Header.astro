@@ -1,0 +1,264 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/ABCO-logo.webp';
+
+const navLinks = [
+  { href: '/',            label: 'Home' },
+  { href: '/services',    label: 'Services' },
+  { href: '/blog',        label: 'Blog' },
+  { href: '/about',       label: 'About' },
+  { href: '/faq',         label: 'FAQ' },
+  { href: '/contact',     label: 'Contact' },
+];
+
+const { pathname } = Astro.url;
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner container">
+
+    <a href="/" class="logo-link" aria-label="ABCO Landscaping – Home">
+      <Image
+        src={logo}
+        alt="ABCO Landscaping & Construction"
+        height={64}
+        loading="eager"
+      />
+      <span class="logo-name" aria-hidden="true">ABCO</span>
+    </a>
+
+    <button
+      id="menu-toggle"
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      aria-label="Open navigation menu"
+    >
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+
+    <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+      <ul role="list">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="tel:+17188771197" class="header-phone" aria-label="Call ABCO at 718-877-1197">
+        📞&nbsp;(718)&nbsp;877-1197
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const nav    = document.getElementById('main-nav')    as HTMLElement | null;
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('is-open');
+      toggle.classList.toggle('is-active');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target as Node) && !nav.contains(e.target as Node)) {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+        toggle.classList.remove('is-active');
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+        toggle.classList.remove('is-active');
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background-color: #0d0d0d;
+    border-bottom: 1px solid #2e2e2e;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: 1rem;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .logo-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  /* ── Desktop nav ── */
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    align-items: center;
+  }
+
+  .main-nav ul a {
+    display: block;
+    padding: 0.5rem 0.85rem;
+    color: #f0ede8;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: color 0.2s, background-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .main-nav ul a:hover,
+  .main-nav ul a:focus {
+    color: #d95210;
+    background-color: rgba(217, 82, 16, 0.1);
+  }
+
+  .main-nav ul a[aria-current='page'] {
+    color: #d95210;
+  }
+
+  .header-phone {
+    margin-left: 1rem;
+    padding: 0.6rem 1.25rem;
+    background-color: #d95210;
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .header-phone:hover,
+  .header-phone:focus {
+    background-color: #f06520;
+    color: #fff !important;
+  }
+
+  /* ── Hamburger button ── */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: 2px solid #f0ede8;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    flex-shrink: 0;
+  }
+
+  .ham-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #f0ede8;
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+
+  /* Animated X when active */
+  .menu-toggle.is-active .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.is-active .ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .menu-toggle.is-active .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile styles ── */
+  @media (max-width: 860px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background-color: #111111;
+      border-top: 1px solid #2e2e2e;
+      border-bottom: 3px solid #d95210;
+      padding: 1rem 1.5rem 1.5rem;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .main-nav.is-open {
+      display: flex;
+    }
+
+    .main-nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .main-nav ul a {
+      font-size: 1.2rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .header-phone {
+      display: block;
+      text-align: center;
+      margin-left: 0;
+      margin-top: 0.75rem;
+      font-size: 1.15rem;
+      padding: 0.9rem 1rem;
+    }
+  }
+</style>

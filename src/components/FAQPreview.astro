@@ -1,0 +1,92 @@
+---
+const faqs = [
+  {
+    q: 'What areas do you serve?',
+    a: 'We serve Eagle Lake, Gouldsboro, Covington Township, and surrounding communities in northeastern Pennsylvania (ZIP 18424).',
+  },
+  {
+    q: 'Do you offer free estimates?',
+    a: 'Yes — we provide free, no-obligation estimates for all landscaping, excavation, and property maintenance projects.',
+  },
+  {
+    q: 'What are your business hours?',
+    a: 'Monday through Friday 8:00 AM – 6:00 PM, Saturday 9:30 AM – 4:30 PM. We are closed on Sundays.',
+  },
+  {
+    q: 'Do you work with residential and commercial customers?',
+    a: 'Absolutely. We take on residential homeowners, commercial property managers, and RV community sites across the Eagle Lake area.',
+  },
+];
+---
+
+<section class="faq-preview section" aria-labelledby="faq-heading">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+      <hr class="orange-line" aria-hidden="true" />
+    </div>
+
+    <dl class="faq-list">
+      {faqs.map(item => (
+        <div class="faq-item">
+          <dt>{item.q}</dt>
+          <dd>{item.a}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <p class="faq-more">
+      <a href="/faq">View all FAQs →</a>
+    </p>
+
+  </div>
+</section>
+
+<style>
+  .faq-preview { background-color: #0d0d0d; }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .faq-item {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #2e2e2e;
+  }
+
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-item dt {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item dd {
+    color: #a09890;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-left: 0;
+    max-width: 72ch;
+  }
+
+  .faq-more {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    max-width: none;
+  }
+
+  .faq-more a {
+    color: #d95210;
+    text-decoration: none;
+  }
+  .faq-more a:hover { color: #f06520; }
+</style>

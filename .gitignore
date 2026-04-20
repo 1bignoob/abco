@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# ABCO instruction/reference files
+ABCO-schema.txt
+ABCO-accessibility-and-performance.txt
+ABCO-additional-info.txt
+ABCO-master-prompt.txt
+ABCO-design.txt

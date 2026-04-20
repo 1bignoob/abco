@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "datePublished": post.data.pubDate.toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": post.data.author ?? "ABCO Team",
+    "url": "https://abcoguys.com",
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ABCO Landscaping & Construction",
+    "url": "https://abcoguys.com",
+  },
+  "url": `https://abcoguys.com/blog/${post.id}`,
+  "mainEntityOfPage": `https://abcoguys.com/blog/${post.id}`,
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | ABCO Blog`}
+  description={post.data.description}
+  canonical={`/blog/${post.id}`}
+  ogType="article"
+  schemaJson={blogSchema}
+>
+
+  <article class="blog-post">
+
+    <!-- Post header -->
+    <header class="post-header">
+      <div class="container post-header-inner">
+
+        <h1>{post.data.title}</h1>
+
+        <div class="post-byline">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formatDate(post.data.pubDate)}
+          </time>
+          {post.data.author && (
+            <span>by {post.data.author}</span>
+          )}
+          {post.data.tags && (
+            <div class="post-tags" aria-label="Tags">
+              {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          )}
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Post content -->
+    <div class="post-body">
+      <div class="container">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <!-- End-of-article CTA -->
+        <aside class="post-cta" aria-label="Contact prompt">
+          <p>
+            <strong>Ready to put this into action?</strong> ABCO Landscaping serves Eagle Lake,
+            Gouldsboro, and Covington Township PA.
+            <a href="/contact">Contact us for a free estimate.</a>
+          </p>
+        </aside>
+
+        <!-- Nav between posts -->
+        <div class="back-link">
+          <a href="/blog">← Back to All Articles</a>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+</BaseLayout>
+
+<style>
+  /* Post header */
+  .post-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-bottom: 1px solid #2e2e2e;
+    padding-block: 3rem 2.5rem;
+  }
+
+  .post-header-inner { max-width: 860px; }
+
+  /* Breadcrumb */
+  .breadcrumb { margin-bottom: 1.25rem; }
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  .breadcrumb a { color: #a09890; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: #d95210; }
+  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
+  .breadcrumb li[aria-hidden="true"] { color: #404040; }
+
+  .post-header h1 {
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .post-byline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: #706860;
+    font-size: 0.95rem;
+  }
+
+  .post-byline time,
+  .post-byline span { color: #706860; }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: rgba(217, 82, 16, 0.12);
+    color: #d95210;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+  }
+
+  /* Body */
+  .post-body {
+    background: #0d0d0d;
+    padding-block: 3.5rem;
+  }
+
+  .post-body .container { max-width: 860px; }
+
+  /* End-of-post CTA box */
+  .post-cta {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(217, 82, 16, 0.08);
+    border-left: 4px solid #d95210;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .post-cta p {
+    color: #c0b8b0;
+    font-size: 1.1rem;
+    max-width: none;
+  }
+
+  .post-cta strong { color: #fff; }
+
+  .post-cta a { color: #d95210; font-weight: 700; }
+  .post-cta a:hover { color: #f06520; }
+
+  .back-link {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .back-link a {
+    color: #a09890;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .back-link a:hover { color: #d95210; }
+</style>

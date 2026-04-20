@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Our Services — Landscaping, Excavation & Property Maintenance | ABCO"
+  description="ABCO offers landscaping, excavation, and property maintenance services in Eagle Lake, Gouldsboro, and Covington Township PA. Browse our full service menu."
+  canonical="/services"
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p>
+        ABCO Landscaping &amp; Construction handles everything from lawn care to full excavation projects
+        for residential, commercial, and RV property owners throughout Eagle Lake and Covington Township, PA.
+      </p>
+    </div>
+  </div>
+
+  <section class="services-hub section" aria-label="Service areas">
+    <div class="container">
+
+      <div class="hub-grid">
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🌿</div>
+          <h2>Landscaping</h2>
+          <p>
+            Full-service landscaping including planting, tree pruning and removal, shrub maintenance,
+            and lawn care designed to keep your property healthy and looking great year round.
+          </p>
+          <ul class="hub-list">
+            <li>Tree pruning, trimming &amp; removal</li>
+            <li>Seasonal planting</li>
+            <li>Lawn mowing &amp; edging</li>
+            <li>Fertilization &amp; weed control</li>
+          </ul>
+          <a href="/services/landscaping" class="btn btn-outline">Learn About Landscaping</a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🏗️</div>
+          <h2>Excavation</h2>
+          <p>
+            Professional excavation, grading, leveling, and resurfacing for driveways, foundations,
+            drainage projects, and land clearing across Covington Township and surrounding areas.
+          </p>
+          <ul class="hub-list">
+            <li>Site clearing &amp; grading</li>
+            <li>Driveway excavation</li>
+            <li>Foundation prep</li>
+            <li>Drainage solutions</li>
+          </ul>
+          <a href="/services/excavation" class="btn btn-outline">Learn About Excavation</a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🏡</div>
+          <h2>Property Maintenance</h2>
+          <p>
+            Reliable year-round upkeep for homes, businesses, and RV sites — so you spend less time
+            worrying about your property and more time enjoying it.
+          </p>
+          <ul class="hub-list">
+            <li>Seasonal cleanup (spring &amp; fall)</li>
+            <li>Lawn mowing &amp; edging</li>
+            <li>Deck &amp; patio maintenance</li>
+            <li>General property upkeep</li>
+          </ul>
+          <a href="/services/property-maintenance" class="btn btn-outline">Learn About Maintenance</a>
+        </article>
+
+      </div>
+
+      <div class="hub-cta">
+        <p>Not sure which service you need? <a href="/contact">Call or message us</a> — we'll help you figure it out.</p>
+        <a href="/contact" class="btn btn-primary">Get a Free Estimate</a>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-bottom: 1px solid #2e2e2e;
+    padding-block: 3rem 2.5rem;
+  }
+  .page-header h1 { margin-bottom: 0.5rem; }
+  .page-header p { color: #a09890; font-size: 1.1rem; max-width: 65ch; }
+
+  .breadcrumb { margin-bottom: 1rem; }
+  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
+  .breadcrumb a { color: #a09890; text-decoration: none; }
+  .breadcrumb a:hover { color: #d95210; }
+  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
+  .breadcrumb li[aria-hidden="true"] { color: #404040; }
+
+  .services-hub { background: #0d0d0d; }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .hub-card {
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hub-icon { font-size: 2.5rem; line-height: 1; }
+
+  .hub-card h2 { font-size: 1.5rem; margin: 0; }
+
+  .hub-card p { color: #a09890; font-size: 1.05rem; line-height: 1.7; flex: 1; }
+
+  .hub-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .hub-list li {
+    color: #c0b8b0;
+    font-size: 1rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .hub-list li::before {
+    content: '✓';
+    color: #d95210;
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .hub-cta {
+    text-align: center;
+    padding: 2.5rem;
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .hub-cta p { color: #a09890; font-size: 1.1rem; max-width: 50ch; text-align: center; }
+  .hub-cta a:not(.btn) { color: #d95210; }
+</style>

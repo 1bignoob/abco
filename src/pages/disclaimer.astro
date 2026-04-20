@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Disclaimer | ABCO Landscaping"
+  description="Disclaimer for abcoguys.com — ABCO Landscaping & Construction."
+  canonical="/disclaimer"
+  noindex={true}
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Disclaimer</h1>
+      <p>Last updated: April 2026</p>
+    </div>
+  </div>
+
+  <section class="legal-section section">
+    <div class="container legal-content">
+
+      <p>The information on abcoguys.com is provided for general informational purposes only. While we make every effort to keep content accurate and up to date, we make no guarantees about the completeness, accuracy, or reliability of any information on this site.</p>
+
+      <h2>Professional Advice</h2>
+      <p>Content on this website, including blog posts, is for general guidance only. Always consult a qualified professional before undertaking any landscaping, construction, or excavation project.</p>
+
+      <h2>Pricing</h2>
+      <p>Any pricing or estimate information mentioned on this site is general in nature. Actual pricing depends on the specifics of your project and is determined only after an on-site estimate.</p>
+
+      <h2>External Links</h2>
+      <p>We are not responsible for the content of external websites linked from this site.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? <a href="/contact">Reach out to us</a> directly or call <a href="tel:+17188771197">(718) 877-1197</a>.</p>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-bottom: 1px solid #2e2e2e;
+    padding-block: 2.5rem 2rem;
+  }
+  .page-header h1 { margin-bottom: 0.3rem; }
+  .page-header p { color: #706860; font-size: 1rem; max-width: none; }
+
+  .legal-section { background: #0d0d0d; }
+
+  .legal-content { max-width: 760px; }
+
+  .legal-content h2 { font-size: 1.3rem; margin-top: 2.5rem; margin-bottom: 0.5rem; color: #fff; }
+
+  .legal-content p { color: #a09890; font-size: 1.05rem; line-height: 1.75; margin-bottom: 1rem; }
+
+  .legal-content a { color: #d95210; }
+</style>

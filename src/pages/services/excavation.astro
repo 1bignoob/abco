@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Excavation Services in Covington Township & Gouldsboro PA | ABCO"
+  description="Professional excavation, grading, site clearing, and land prep services in Covington Township, Eagle Lake, and Gouldsboro PA. Free estimates — call (718) 877-1197."
+  canonical="/services/excavation"
+>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Excavation Services</h1>
+      <p>Covington Township, Eagle Lake &amp; Gouldsboro, PA</p>
+    </div>
+  </div>
+
+  <section class="service-detail section">
+    <div class="container detail-grid">
+
+      <div class="detail-content">
+        <h2>What We Do</h2>
+        <hr class="orange-line" aria-hidden="true" />
+        <p>
+          ABCO handles excavation projects of all sizes — from a single driveway to full site clearing
+          and land prep for construction. We operate in Covington Township, Eagle Lake, Gouldsboro,
+          and the surrounding 18424 area.
+        </p>
+        <ul class="detail-list">
+          <li>Site clearing and land grading</li>
+          <li>Driveway excavation and preparation</li>
+          <li>Foundation excavation</li>
+          <li>Drainage correction and French drains</li>
+          <li>Topsoil removal and fill placement</li>
+          <li>Stump and root removal</li>
+          <li>Resurfacing and final grading</li>
+        </ul>
+
+        <h2>Our Process</h2>
+        <p>
+          Every job starts with a site walk and free estimate. We call 811 before any digging
+          and handle utility marking as standard practice. Read our
+          <a href="/blog/residential-excavation-covington-township">excavation project guide</a>
+          for a step-by-step overview of what to expect.
+        </p>
+
+        <div class="detail-cta">
+          <a href="/contact" class="btn btn-primary">Request a Free Estimate</a>
+          <a href="/services" class="btn btn-outline">All Services</a>
+        </div>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="sidebar-box">
+          <h3>Quick Facts</h3>
+          <ul>
+            <li><strong>Residential &amp; commercial</strong></li>
+            <li><strong>All sizes welcome</strong></li>
+            <li><strong>Free estimates</strong></li>
+            <li><strong>Mon–Fri 8 AM – 6 PM</strong></li>
+            <li><strong>Sat 9:30 AM – 4:30 PM</strong></li>
+          </ul>
+        </div>
+        <div class="sidebar-box sidebar-cta">
+          <p>Ready to get started?</p>
+          <a href="tel:+17188771197" class="btn btn-primary">📞 (718) 877-1197</a>
+        </div>
+        <div class="sidebar-box">
+          <h3>Related Services</h3>
+          <ul class="related-list">
+            <li><a href="/services/landscaping">Landscaping</a></li>
+            <li><a href="/services/property-maintenance">Property Maintenance</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-bottom: 1px solid #2e2e2e;
+    padding-block: 3rem 2.5rem;
+  }
+  .page-header h1 { margin-bottom: 0.3rem; }
+  .page-header p { color: #d95210; font-size: 1.1rem; font-weight: 600; max-width: none; }
+
+  .breadcrumb { margin-bottom: 1rem; }
+  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
+  .breadcrumb a { color: #a09890; text-decoration: none; }
+  .breadcrumb a:hover { color: #d95210; }
+  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
+  .breadcrumb li[aria-hidden="true"] { color: #404040; }
+
+  .service-detail { background: #0d0d0d; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
+
+  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .detail-content p { color: #a09890; font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
+  .detail-content a:not(.btn) { color: #d95210; }
+
+  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .detail-list li { color: #c0b8b0; font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
+  .detail-list li::before { content: '✓'; color: #d95210; position: absolute; left: 0; font-weight: 700; }
+
+  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+
+  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+  .sidebar-box { background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; padding: 1.5rem; }
+  .sidebar-box h3 { font-size: 1rem; color: #d95210; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
+  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .sidebar-box ul li { color: #c0b8b0; font-size: 1rem; }
+  .sidebar-cta { text-align: center; }
+  .sidebar-cta p { color: #a09890; font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
+  .sidebar-cta .btn { width: 100%; }
+  .related-list li a { color: #d95210; text-decoration: none; font-weight: 600; }
+  .related-list li a:hover { color: #f06520; }
+
+  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,117 @@
+---
+const services = [
+  {
+    icon: '🌿',
+    title: 'Landscaping',
+    description:
+      'Full-service landscaping for residential and commercial properties — design, planting, tree pruning, removal, and seasonal lawn care to keep your property looking its best.',
+    href: '/services/landscaping',
+  },
+  {
+    icon: '🏗️',
+    title: 'Excavation',
+    description:
+      'Professional excavation, grading, leveling, and resurfacing services for construction projects of any scale throughout Covington Township and the surrounding area.',
+    href: '/services/excavation',
+  },
+  {
+    icon: '🏡',
+    title: 'Property Maintenance',
+    description:
+      'Reliable year-round maintenance including lawn mowing, fertilization, weed control, deck and patio upkeep, and seasonal cleanup for homes, businesses, and RV sites.',
+    href: '/services/property-maintenance',
+  },
+];
+---
+
+<section class="services-section" aria-labelledby="services-heading">
+  <div class="container">
+
+    <div class="section-header text-center">
+      <h2 id="services-heading">Our Services</h2>
+      <hr class="orange-line center" aria-hidden="true" />
+      <p>
+        Residential, commercial, and RV owners throughout Eagle Lake,
+        Gouldsboro, and Covington Township, PA trust ABCO Guys for
+        quality outdoor work done right.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+      {services.map(s => (
+        <article class="svc-card">
+          <div class="svc-icon" aria-hidden="true">{s.icon}</div>
+          <h3>{s.title}</h3>
+          <p>{s.description}</p>
+          <a href={s.href} class="svc-link">
+            Learn More <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .services-section {
+    /* Gradient that connects the warm hero image to the dark site background */
+    background: linear-gradient(
+      180deg,
+      #2e1405 0%,
+      #1c0e04 18%,
+      #141414 50%,
+      #0d0d0d 100%
+    );
+    padding-block: 5rem;
+  }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+
+  .svc-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(217, 82, 16, 0.28);
+    border-radius: 10px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .svc-card:hover {
+    border-color: #d95210;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
+  }
+
+  .svc-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .svc-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+
+  .svc-card p {
+    color: #b0a8a0;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .svc-link {
+    color: #d95210;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .svc-link:hover { color: #f06520; }
+</style>

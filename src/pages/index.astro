@@ -1,11 +1,186 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import CTA from '../components/CTA.astro';
+import FAQPreview from '../components/FAQPreview.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://abcoguys.com/#website",
+  "url": "https://abcoguys.com",
+  "name": "ABCO Landscaping & Construction",
+  "description": "Landscaping, excavation, and property maintenance in Eagle Lake and Covington Township, PA.",
+};
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Landscaping & Outdoor Services in Eagle Lake, Covington Township PA | ABCO"
+  description="ABCO Landscaping & Construction serves Eagle Lake, Gouldsboro, and Covington Township PA with professional landscaping, excavation, and property maintenance. Call (718) 877-1197."
+  schemaJson={homeSchema}
+>
+
+  <!-- Hero with background image -->
+  <Hero />
+
+  <!-- Services — includes warm-to-dark gradient transition -->
+  <ServiceCards />
+
+  <!-- Blog highlights — main focus of the site -->
+  <section class="blog-home section" aria-labelledby="blog-home-heading">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 id="blog-home-heading">From the Blog</h2>
+        <hr class="orange-line" aria-hidden="true" />
+        <p>Landscaping tips, project guides, and local advice for Eagle Lake &amp; Gouldsboro area homeowners.</p>
+      </div>
+
+      <div class="blog-grid">
+        {recentPosts.map(post => (
+          <article class="blog-card">
+            <div class="blog-card-body">
+              {post.data.tags && post.data.tags[0] && (
+                <span class="blog-tag">{post.data.tags[0]}</span>
+              )}
+              <h3 class="blog-card-title">
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              </h3>
+              <p class="blog-card-desc">{post.data.description}</p>
+            </div>
+            <div class="blog-card-footer">
+              <time datetime={post.data.pubDate.toISOString()} class="blog-date">
+                {formatDate(post.data.pubDate)}
+              </time>
+              <a href={`/blog/${post.id}`} class="blog-read-more" aria-label={`Read: ${post.data.title}`}>
+                Read Article →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="blog-home-cta">
+        <a href="/blog" class="btn btn-outline">View All Articles</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Orange CTA banner -->
+  <CTA />
+
+  <!-- FAQ preview -->
+  <FAQPreview />
+
+  <!-- Contact form placeholder -->
+  <ContactSection />
+
+</BaseLayout>
+
+<style>
+  .blog-home {
+    background-color: #0d0d0d;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-card {
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .blog-card:hover {
+    border-color: #d95210;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(217, 82, 16, 0.12);
+  }
+
+  .blog-card-body {
+    padding: 1.75rem 1.75rem 0;
+    flex: 1;
+  }
+
+  .blog-tag {
+    display: inline-block;
+    background: rgba(217, 82, 16, 0.15);
+    color: #d95210;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card-title {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card-title a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .blog-card-title a:hover { color: #d95210; }
+
+  .blog-card-desc {
+    color: #a09890;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.75rem 1.5rem;
+    border-top: 1px solid #252525;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .blog-date {
+    color: #706860;
+    font-size: 0.9rem;
+  }
+
+  .blog-read-more {
+    color: #d95210;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .blog-read-more:hover { color: #f06520; }
+
+  .blog-home-cta {
+    text-align: center;
+  }
+</style>

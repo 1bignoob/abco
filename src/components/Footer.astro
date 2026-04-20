@@ -1,0 +1,217 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" role="contentinfo">
+
+  <div class="footer-main container">
+    <div class="footer-grid">
+
+      <!-- Brand / Contact -->
+      <div class="footer-brand">
+        <p class="footer-name">ABCO Landscaping &amp; Construction</p>
+        <p class="footer-tagline">Serving Eagle Lake, Gouldsboro &amp; Covington Township, PA</p>
+
+        <p class="footer-contact-row">
+          <a href="tel:+17188771197" aria-label="Call ABCO at 718-877-1197">(718) 877-1197</a>
+        </p>
+        <p class="footer-contact-row">
+          <a href="mailto:sales@abcoguys.com">sales@abcoguys.com</a>
+        </p>
+        <!-- Address placeholder — add when ready -->
+        <!-- <address class="footer-address">[Business Address, Gouldsboro, PA 18424]</address> -->
+
+        <div class="footer-social">
+          <a
+            href="https://www.facebook.com/share/1b15VtsNao/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ABCO Landscaping on Facebook (opens in new tab)"
+          >
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="/services/landscaping">Landscaping</a></li>
+          <li><a href="/services/excavation">Excavation</a></li>
+          <li><a href="/services/property-maintenance">Property Maintenance</a></li>
+          <li><a href="/services">All Services</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div class="footer-col">
+        <h3>Hours</h3>
+        <ul class="hours-list">
+          <li><span>Mon – Fri</span><span>8:00 AM – 6:00 PM</span></li>
+          <li><span>Saturday</span><span>9:30 AM – 4:30 PM</span></li>
+          <li><span>Sunday</span><span>Closed</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>
+        &copy; {year} Abco Landscaping &amp; Construction &middot; All Rights Reserved &middot;
+        Site by <a href="https://gothamwebdev.com" target="_blank" rel="noopener noreferrer">Gothamwebdev.com</a>
+      </p>
+      <nav aria-label="Legal links">
+        <a href="/terms-of-use">Terms of Use</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/disclaimer">Disclaimer</a>
+      </nav>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #0a0a0a;
+    border-top: 3px solid #d95210;
+    margin-top: auto;
+  }
+
+  .footer-main { padding-block: 3rem 2rem; }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Brand column */
+  .footer-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+  .footer-tagline {
+    color: #787070;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    max-width: 34ch;
+  }
+  .footer-contact-row {
+    margin-bottom: 0.4rem;
+  }
+  .footer-contact-row a {
+    color: #c8c0b8;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-contact-row a:hover { color: #d95210; }
+
+  .footer-social { margin-top: 1.25rem; }
+  .footer-social a {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    color: #c8c0b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social a:hover { border-color: #d95210; color: #d95210; }
+
+  /* Other columns */
+  .footer-col h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #d95210;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .footer-col ul,
+  .hours-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-col ul a {
+    color: #908880;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: #f0ede8; }
+
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.95rem;
+    color: #908880;
+  }
+  .hours-list li span:first-child { color: #c8c0b8; }
+
+  /* Bottom bar */
+  .footer-bottom {
+    border-top: 1px solid #1a1a1a;
+    padding-block: 1.1rem;
+  }
+  .footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #5a5450;
+  }
+  .footer-bottom-inner p { color: #5a5450; max-width: none; }
+  .footer-bottom-inner a { color: #706860; text-decoration: none; }
+  .footer-bottom-inner a:hover { color: #a09890; }
+
+  .footer-bottom-inner nav {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 550px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-bottom-inner nav { justify-content: center; }
+  }
+</style>
