@@ -9,7 +9,7 @@ const {
   subtext  = 'Call us today for a free estimate — no pressure, no obligation.',
 } = Astro.props;
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 ---
 
 <section class="cta-section" aria-labelledby="cta-heading">
