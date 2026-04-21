@@ -1,6 +1,4 @@
 ---
-// Web3Forms placeholder — replace ACCESS_KEY with your actual key from web3forms.com
-// The user will migrate the real form here.
 ---
 
 <section class="contact-section section" aria-labelledby="contact-heading" id="contact">
@@ -30,21 +28,18 @@
       </ul>
     </div>
 
-    <!-- ================================================
-         WEB3FORMS PLACEHOLDER
-         Replace YOUR_ACCESS_KEY with the real key from
-         https://web3forms.com/ before going live.
-         ================================================ -->
     <div class="contact-form-wrap">
       <form
+        id="contact-form"
         action="https://api.web3forms.com/submit"
         method="POST"
         class="contact-form"
         aria-label="Contact form"
         novalidate
       >
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY" />
-        <input type="hidden" name="subject" value="New message from abcoguys.com" />
+        <input type="hidden" name="access_key" value="45cf7455-aaec-477c-b046-b458c3c8a9bf" />
+        <input type="hidden" name="subject" id="cf-subject" value="New message from abcoguys.com" />
+        <input type="hidden" name="redirect" value="false" />
         <!-- Honeypot spam protection -->
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true" />
 
@@ -109,13 +104,57 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="submit" class="btn btn-primary" id="cf-submit">Send Message</button>
 
       </form>
+
+      <div id="cf-thankyou" class="cf-thankyou" aria-live="polite" hidden>
+        <p class="ty-icon" aria-hidden="true">✅</p>
+        <h3>Message Received!</h3>
+        <p>Thanks for reaching out. We'll be in touch shortly — usually within one business day.</p>
+      </div>
     </div>
 
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const thankyou = document.getElementById('cf-thankyou') as HTMLElement | null;
+  const nameInput = document.getElementById('cf-name') as HTMLInputElement | null;
+  const subjectInput = document.getElementById('cf-subject') as HTMLInputElement | null;
+
+  // Keep subject in sync with name field
+  nameInput?.addEventListener('input', () => {
+    if (subjectInput && nameInput.value.trim()) {
+      subjectInput.value = nameInput.value.trim();
+    }
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (data.success) {
+        form.hidden = true;
+        if (thankyou) thankyou.hidden = false;
+      } else {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+        alert('Something went wrong. Please try calling us at (718) 877-1197.');
+      }
+    } catch {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+      alert('Network error. Please try calling us at (718) 877-1197.');
+    }
+  });
+</script>
 
 <style>
   .contact-section { background-color: #111111; }
@@ -221,6 +260,27 @@
     align-self: flex-start;
     font-size: 1.1rem;
     padding: 0.9rem 2.25rem;
+  }
+
+  .cf-thankyou {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .ty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .cf-thankyou h3 {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .cf-thankyou p {
+    color: #a09890;
+    font-size: 1.05rem;
   }
 
   @media (max-width: 860px) {
