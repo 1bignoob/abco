@@ -143,6 +143,7 @@
       });
       const data = await res.json();
       if (data.success) {
+        form.reset();
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.textContent = 'Thank you';
