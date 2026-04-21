@@ -109,7 +109,12 @@
       </form>
 
       <div id="cf-thankyou" class="cf-thankyou" aria-live="polite" hidden>
-        <p class="ty-icon" aria-hidden="true">✅</p>
+        <div class="ty-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <circle cx="26" cy="26" r="25" stroke="#d95210" stroke-width="2"/>
+            <path d="M14 27l9 9 15-18" stroke="#d95210" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3>Message Received!</h3>
         <p>Thanks for reaching out. We'll be in touch shortly — usually within one business day.</p>
       </div>
@@ -280,8 +285,14 @@
   }
 
   .ty-icon {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1rem;
+  }
+
+  .ty-icon svg {
+    width: 56px;
+    height: 56px;
   }
 
   .cf-thankyou h3 {
