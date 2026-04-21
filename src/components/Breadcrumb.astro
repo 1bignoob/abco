@@ -4,7 +4,7 @@
 // All other pages: Home (link) / Current Page
 // Pages with sub-paths (e.g. /services/landscaping): Home / Services / Landscaping
 
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/'; // e.g. '/abco/'
+const base = '/'; // e.g. '/abco/'
 const basePath = base.replace(/\/$/, ''); // strip trailing slash
 const rawPathname = Astro.url.pathname;
 // Strip deployment base so breadcrumbs work at any subpath
