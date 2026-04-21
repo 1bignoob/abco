@@ -132,7 +132,7 @@
   // Keep subject in sync with name field
   nameInput?.addEventListener('input', () => {
     if (subjectInput && nameInput.value.trim()) {
-      subjectInput.value = nameInput.value.trim();
+      subjectInput.value = `${nameInput.value.trim()} sent a message through abcoguys.com`;
     }
   });
 
