@@ -6,6 +6,7 @@ import CTA from '../components/CTA.astro';
 import FAQPreview from '../components/FAQPreview.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
+import { createHomePageSchema } from '../lib/schema';
 
 const base = import.meta.env.BASE_URL;
 const allPosts = await getCollection('blog');
@@ -17,14 +18,7 @@ function formatDate(d: Date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-const homeSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://abcoguys.com/#website",
-  "url": "https://abcoguys.com",
-  "name": "ABCO Landscaping & Construction",
-  "description": "Landscaping, excavation, tree removal and pruning, and property maintenance in Eagle Lake and Covington Township, PA.",
-};
+const homeSchema = createHomePageSchema();
 ---
 
 <BaseLayout

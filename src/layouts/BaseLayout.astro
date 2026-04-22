@@ -89,45 +89,6 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
       <script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />
     )}
 
-    <!-- Base org schema on every page -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://abcoguys.com/#business",
-      "name": "ABCO Landscaping & Construction",
-      "alternateName": "ABCO Guys",
-      "url": "https://abcoguys.com",
-      "telephone": "+17188771197",
-      "email": "sales@abcoguys.com",
-      "sameAs": ["https://www.facebook.com/share/1b15VtsNao/?mibextid=wwXIfr"],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Gouldsboro",
-        "addressRegion": "PA",
-        "postalCode": "18424",
-        "addressCountry": "US"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Saturday"],
-          "opens": "09:30",
-          "closes": "16:30"
-        }
-      ],
-      "areaServed": [
-        "Eagle Lake, PA",
-        "Gouldsboro, PA",
-        "Covington Township, PA"
-      ],
-      "priceRange": "$$"
-    })} />
   </head>
   <body>
     <a href="#main-content" class="skip-link" title="Skip to main content">Skip to main content</a>

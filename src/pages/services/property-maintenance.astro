@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
+const propertyMaintenanceSchema = createServicePageSchema({
+  slug: 'property-maintenance',
+  name: 'Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+  description:
+    'Property maintenance services including lawn mowing, seasonal cleanup, fertilization, debris hauling, and deck or patio upkeep in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+  serviceType: 'Property maintenance',
+});
 ---
 
 <BaseLayout
   title="Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Year-round property maintenance for homes, businesses, and managed communities in Eagle Lake, Gouldsboro, and Covington Township, PA."
-  canonical="/services/property-maintenance"
+  canonical="/services/property-maintenance/"
+  schemaJson={propertyMaintenanceSchema}
 >
 
   <div class="page-header">

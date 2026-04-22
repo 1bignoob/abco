@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
+const landscapingSchema = createServicePageSchema({
+  slug: 'landscaping',
+  name: 'Landscaping Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+  description:
+    'Professional landscaping, tree pruning, seasonal planting, lawn care, mulching, and cleanup services for properties in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+  serviceType: 'Landscaping',
+});
 ---
 
 <BaseLayout
   title="Landscaping Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Professional landscaping, tree pruning, seasonal planting, and lawn care for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
-  canonical="/services/landscaping"
+  canonical="/services/landscaping/"
+  schemaJson={landscapingSchema}
 >
 
   <div class="page-header">

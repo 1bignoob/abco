@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createServicesHubSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
+const servicesHubSchema = createServicesHubSchema();
 ---
 
 <BaseLayout
   title="Landscaping, Excavation & Property Maintenance Services | Eagle Lake, PA"
   description="Browse ABCO Landscaping & Construction services for Eagle Lake, Gouldsboro, and Covington Township, PA, including landscaping, excavation, and property maintenance."
-  canonical="/services"
+  canonical="/services/"
+  schemaJson={servicesHubSchema}
 >
 
   <div class="page-header">

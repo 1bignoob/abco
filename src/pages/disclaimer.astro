@@ -1,13 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createLegalPageSchema } from '../lib/schema';
 const base = import.meta.env.BASE_URL;
+const disclaimerSchema = createLegalPageSchema({
+  path: '/disclaimer/',
+  name: 'Disclaimer | ABCO Landscaping & Construction',
+  description: 'Disclaimer for abcoguys.com and ABCO Landscaping & Construction.',
+});
 ---
 
 <BaseLayout
   title="Disclaimer | ABCO Landscaping & Construction"
   description="Disclaimer for abcoguys.com and ABCO Landscaping & Construction."
-  canonical="/disclaimer"
+  canonical="/disclaimer/"
   noindex={true}
+  schemaJson={disclaimerSchema}
 >
 
   <div class="page-header">

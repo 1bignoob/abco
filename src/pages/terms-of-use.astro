@@ -1,13 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createLegalPageSchema } from '../lib/schema';
 const base = import.meta.env.BASE_URL;
+const termsSchema = createLegalPageSchema({
+  path: '/terms-of-use/',
+  name: 'Terms of Use | ABCO Landscaping & Construction',
+  description: 'Terms of use for abcoguys.com and ABCO Landscaping & Construction.',
+});
 ---
 
 <BaseLayout
   title="Terms of Use | ABCO Landscaping & Construction"
   description="Terms of use for abcoguys.com and ABCO Landscaping & Construction."
-  canonical="/terms-of-use"
+  canonical="/terms-of-use/"
   noindex={true}
+  schemaJson={termsSchema}
 >
 
   <div class="page-header">

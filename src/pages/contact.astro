@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactSection from '../components/ContactSection.astro';
+import { createContactPageSchema } from '../lib/schema';
+
+const contactSchema = createContactPageSchema();
 ---
 
 <BaseLayout
   title="Contact ABCO Landscaping & Construction | Free Estimates in Eagle Lake, PA"
   description="Contact ABCO Landscaping & Construction for landscaping, excavation, and property maintenance estimates in Eagle Lake, Gouldsboro, and Covington Township, PA."
-  canonical="/contact"
+  canonical="/contact/"
+  schemaJson={contactSchema}
 >
 
   <div class="page-header">

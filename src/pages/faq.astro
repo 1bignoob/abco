@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { createFaqPageSchema } from '../lib/schema';
 const base = import.meta.env.BASE_URL;
 const faqs = [
   {
@@ -55,26 +56,15 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.flatMap(cat =>
-    cat.items.map(item => ({
-      "@type": "Question",
-      "name": item.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.a,
-      },
-    }))
-  ),
-};
+const faqSchema = createFaqPageSchema(
+  faqs.flatMap((cat) => cat.items.map((item) => ({ q: item.q, a: item.a })))
+);
 ---
 
 <BaseLayout
   title="Landscaping, Excavation & Property Maintenance FAQs | Eagle Lake, PA"
   description="Read common questions about ABCO Landscaping & Construction services in Eagle Lake, Gouldsboro, and Covington Township, PA."
-  canonical="/faq"
+  canonical="/faq/"
   schemaJson={faqSchema}
 >
 

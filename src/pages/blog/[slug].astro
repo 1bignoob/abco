@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { createBlogPostSchema } from '../../lib/schema';
 
 const base = import.meta.env.BASE_URL;
 
@@ -14,38 +15,27 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const postSchema = createBlogPostSchema({
+  slug: post.id,
+  title: post.data.title,
+  description: post.data.description,
+  pubDateIso: post.data.pubDate.toISOString(),
+  author: post.data.author,
+  tags: post.data.tags,
+});
 
 function formatDate(d: Date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-const blogSchema = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": post.data.title,
-  "description": post.data.description,
-  "datePublished": post.data.pubDate.toISOString(),
-  "author": {
-    "@type": "Organization",
-    "name": post.data.author ?? "ABCO Team",
-    "url": "https://abcoguys.com",
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "ABCO Landscaping & Construction",
-    "url": "https://abcoguys.com",
-  },
-  "url": `https://abcoguys.com/blog/${post.id}`,
-  "mainEntityOfPage": `https://abcoguys.com/blog/${post.id}`,
-};
 ---
 
 <BaseLayout
   title={`${post.data.title} | ABCO Landscaping & Construction`}
   description={post.data.description}
-  canonical={`/blog/${post.id}`}
+  canonical={`/blog/${post.id}/`}
   ogType="article"
-  schemaJson={blogSchema}
+  schemaJson={postSchema}
 >
 
   <article class="blog-post">

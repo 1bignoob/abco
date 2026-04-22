@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
+const excavationSchema = createServicePageSchema({
+  slug: 'excavation',
+  name: 'Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+  description:
+    'Excavation, grading, site clearing, driveway prep, foundation excavation, drainage work, and fill placement for projects in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+  serviceType: 'Excavation',
+});
 ---
 
 <BaseLayout
   title="Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Professional excavation, grading, site clearing, and land prep services in Eagle Lake, Gouldsboro, and Covington Township, PA. Free estimates available."
-  canonical="/services/excavation"
+  canonical="/services/excavation/"
+  schemaJson={excavationSchema}
 >
 
   <div class="page-header">
