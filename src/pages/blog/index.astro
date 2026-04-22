@@ -12,14 +12,14 @@ function formatDate(d: Date) {
 ---
 
 <BaseLayout
-  title="Blog — Landscaping Tips & Local Guides | ABCO"
-  description="Practical landscaping, excavation, and property care guides written for homeowners in Eagle Lake, Gouldsboro, and Covington Township, PA."
+  title="Landscaping & Excavation Blog | Eagle Lake, PA Homeowner Guides"
+  description="Read practical landscaping, excavation, and property care guides for homeowners in Eagle Lake, Gouldsboro, and Covington Township, PA."
   canonical="/blog"
 >
 
   <div class="page-header">
     <div class="container">
-      <h1>ABCO Blog</h1>
+      <h1>Landscaping, Excavation &amp; Property Care Blog</h1>
       <p>Practical guides, seasonal tips, and local know-how for Eagle Lake &amp; Gouldsboro area homeowners.</p>
     </div>
   </div>
@@ -43,10 +43,10 @@ function formatDate(d: Date) {
               ))}
             </div>
             <h2 class="post-title">
-              <a href={`${base}blog/${post.id}`}>{post.data.title}</a>
+              <a href={`${base}blog/${post.id}`} title={`Read blog article: ${post.data.title}`}>{post.data.title}</a>
             </h2>
             <p class="post-desc">{post.data.description}</p>
-            <a href={`${base}blog/${post.id}`} class="post-link" aria-label={`Read: ${post.data.title}`}>
+            <a href={`${base}blog/${post.id}`} class="post-link" aria-label={`Read: ${post.data.title}`} title={`Read full article: ${post.data.title}`}>
               Read Full Article →
             </a>
           </article>

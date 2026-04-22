@@ -11,6 +11,7 @@ const base = import.meta.env.BASE_URL;
     <Image
       src={heroImg}
       alt="Heavy excavation equipment working at sunset in Pennsylvania"
+      title="Landscaping and excavation services in Eagle Lake and Covington Township, PA"
       class="hero-img"
       widths={[768, 1200, 1920]}
       sizes="100vw"
@@ -22,17 +23,22 @@ const base = import.meta.env.BASE_URL;
 
   <div class="hero-content container">
     <h1 class="hero-title">
-      Abco Landscaping<br />&amp; Construction
+      Landscaping &amp; Excavation in Eagle Lake, PA
     </h1>
     <p class="hero-sub">
-      serving Eagle Lake, Gouldsboro, and Covington Township PA. We specialize in landscaping, tree removal and pruning, and property maintenance.
+      ABCO Landscaping &amp; Construction serves Eagle Lake, Gouldsboro, and Covington Township with landscaping, excavation, tree removal, and property maintenance services.
     </p>
     <div class="hero-actions">
-      <a href={`${base}contact`} class="btn btn-primary">Get a Free Estimate</a>
-      <a href="tel:+17188771197" class="btn btn-white-outline">
-        📞 (718) 877-1197
+      <a href={`${base}contact`} class="btn btn-primary" title="Request a free landscaping or excavation estimate">
+        Get a Free Estimate
+      </a>
+      <a href="tel:+17188771197" class="btn btn-white-outline" title="Call ABCO Landscaping and Construction at 718-877-1197">
+        Call (718) 877-1197
       </a>
     </div>
+    <p class="hero-trust" aria-label="Trust signals">
+      Fast response <span aria-hidden="true">•</span> Licensed <span aria-hidden="true">•</span> Fully insured
+    </p>
   </div>
 
 </section>
@@ -101,6 +107,19 @@ const base = import.meta.env.BASE_URL;
     gap: 1rem;
   }
 
+  .hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    color: #d9d1c8;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-top: 1rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+
   .desktop-break { display: none; }
 
   @media (min-width: 640px) {
@@ -109,5 +128,6 @@ const base = import.meta.env.BASE_URL;
 
   @media (max-width: 480px) {
     .hero-actions .btn { width: 100%; justify-content: center; }
+    .hero-trust { font-size: 0.9rem; }
   }
 </style>

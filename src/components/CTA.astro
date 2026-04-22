@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  heading = 'Ready to Get Started?',
-  subtext  = 'Call us today for a free estimate — no pressure, no obligation.',
+  heading = 'Get a Free Landscaping or Excavation Estimate',
+  subtext  = 'Call ABCO today for a free estimate on landscaping, excavation, or property maintenance in Eagle Lake and nearby communities.',
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -19,10 +19,10 @@ const base = import.meta.env.BASE_URL;
       <p>{subtext}</p>
     </div>
     <div class="cta-actions">
-      <a href="tel:+17188771197" class="btn btn-primary cta-phone">
+      <a href="tel:+17188771197" class="btn btn-primary cta-phone" title="Call ABCO Landscaping and Construction">
         📞 (718) 877-1197
       </a>
-      <a href={`${base}contact`} class="btn btn-white-outline">
+      <a href={`${base}contact`} class="btn btn-white-outline" title="Request a free estimate from ABCO Landscaping and Construction">
         Request an Estimate
       </a>
     </div>

@@ -23,13 +23,13 @@ const homeSchema = {
   "@id": "https://abcoguys.com/#website",
   "url": "https://abcoguys.com",
   "name": "ABCO Landscaping & Construction",
-  "description": "Landscaping, excavation, and property maintenance in Eagle Lake and Covington Township, PA.",
+  "description": "Landscaping, excavation, tree removal and pruning, and property maintenance in Eagle Lake and Covington Township, PA.",
 };
 ---
 
 <BaseLayout
-  title="Landscaping & Outdoor Services in Eagle Lake, Covington Township PA | ABCO"
-  description="ABCO Landscaping & Construction serving Eagle Lake, Gouldsboro, and Covington Township PA. We specialize in landscaping, tree removal and pruning, and property maintenance. Call (718) 877-1197."
+  title="Landscaping & Excavation in Eagle Lake, PA | ABCO"
+  description="ABCO Landscaping & Construction provides landscaping, excavation, tree removal and pruning, and property maintenance in Eagle Lake, Gouldsboro, and Covington Township, PA. Call (718) 877-1197."
   schemaJson={homeSchema}
 >
 
@@ -57,7 +57,7 @@ const homeSchema = {
                 <span class="blog-tag">{post.data.tags[0]}</span>
               )}
               <h3 class="blog-card-title">
-                <a href={`${base}blog/${post.id}`}>{post.data.title}</a>
+                <a href={`${base}blog/${post.id}`} title={`Read blog article: ${post.data.title}`}>{post.data.title}</a>
               </h3>
               <p class="blog-card-desc">{post.data.description}</p>
             </div>
@@ -65,7 +65,7 @@ const homeSchema = {
               <time datetime={post.data.pubDate.toISOString()} class="blog-date">
                 {formatDate(post.data.pubDate)}
               </time>
-              <a href={`${base}blog/${post.id}`} class="blog-read-more" aria-label={`Read: ${post.data.title}`}>
+              <a href={`${base}blog/${post.id}`} class="blog-read-more" aria-label={`Read: ${post.data.title}`} title={`Read full article: ${post.data.title}`}>
                 Read Article →
               </a>
             </div>
@@ -74,7 +74,7 @@ const homeSchema = {
       </div>
 
       <div class="blog-home-cta">
-        <a href={`${base}blog`} class="btn btn-outline">View All Articles</a>
+        <a href={`${base}blog`} class="btn btn-outline" title="View all landscaping and excavation articles">View All Articles</a>
       </div>
 
     </div>

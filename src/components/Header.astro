@@ -18,10 +18,11 @@ const { pathname } = Astro.url;
 <header class="site-header" role="banner">
   <div class="header-inner container">
 
-    <a href={base} class="logo-link" aria-label="ABCO Landscaping – Home">
+    <a href={base} class="logo-link" aria-label="ABCO Landscaping – Home" title="ABCO Landscaping and Construction home page">
       <Image
         src={logo}
         alt="ABCO Landscaping & Construction"
+        title="ABCO Landscaping and Construction logo"
         height={64}
         loading="eager"
       />
@@ -46,7 +47,7 @@ const { pathname } = Astro.url;
           <li>
             <a
               href={link.href}
-              title={link.label}
+              title={`${link.label} | ABCO Landscaping and Construction`}
               aria-current={pathname === link.href || (link.href !== base && pathname.startsWith(link.href)) ? 'page' : undefined}
             >
               {link.label}
@@ -54,7 +55,7 @@ const { pathname } = Astro.url;
           </li>
         ))}
       </ul>
-      <a href="tel:+17188771197" class="header-phone" aria-label="Call ABCO at 718-877-1197">
+      <a href="tel:+17188771197" class="header-phone" aria-label="Call ABCO at 718-877-1197" title="Call ABCO Landscaping and Construction">
         📞&nbsp;(718)&nbsp;877-1197
       </a>
     </nav>

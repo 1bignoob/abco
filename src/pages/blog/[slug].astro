@@ -41,7 +41,7 @@ const blogSchema = {
 ---
 
 <BaseLayout
-  title={`${post.data.title} | ABCO Blog`}
+  title={`${post.data.title} | ABCO Landscaping & Construction`}
   description={post.data.description}
   canonical={`/blog/${post.id}`}
   ogType="article"
@@ -85,13 +85,13 @@ const blogSchema = {
           <p>
             <strong>Ready to put this into action?</strong> ABCO Landscaping serves Eagle Lake,
             Gouldsboro, and Covington Township PA.
-            <a href={`${base}contact`}>Contact us for a free estimate.</a>
+            <a href={`${base}contact`} title="Contact ABCO for a free estimate">Contact us for a free estimate.</a>
           </p>
         </aside>
 
         <!-- Nav between posts -->
         <div class="back-link">
-          <a href={`${base}blog`}>← Back to All Articles</a>
+          <a href={`${base}blog`} title="Back to the ABCO blog">← Back to All Articles</a>
         </div>
       </div>
     </div>

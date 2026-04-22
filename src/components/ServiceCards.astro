@@ -29,7 +29,7 @@ const services = [
   <div class="container">
 
     <div class="section-header text-center">
-      <h2 id="services-heading">Our Services</h2>
+      <h2 id="services-heading">Full-Service Landscaping, Excavation &amp; Property Maintenance in Eagle Lake, PA</h2>
       <hr class="orange-line center" aria-hidden="true" />
       <p>
         Residential, commercial, and RV owners throughout Eagle Lake,
@@ -44,7 +44,7 @@ const services = [
           <div class="svc-icon" aria-hidden="true">{s.icon}</div>
           <h3>{s.title}</h3>
           <p>{s.description}</p>
-          <a href={s.href} class="svc-link">
+          <a href={s.href} class="svc-link" title={`Learn more about ${s.title.toLowerCase()} services from ABCO`}>
             Learn More <span aria-hidden="true">→</span>
           </a>
         </article>

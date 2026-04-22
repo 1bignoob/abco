@@ -56,7 +56,7 @@ const isHome = segments.length === 0;
             <li class="crumb-item crumb-current" aria-current="page">{crumb.label}</li>
           ) : (
             <li class="crumb-item">
-              <a href={crumb.href}>{crumb.label}</a>
+              <a href={crumb.href} title={`${crumb.label} page`}>{crumb.label}</a>
               <span class="crumb-sep" aria-hidden="true">/</span>
             </li>
           )
