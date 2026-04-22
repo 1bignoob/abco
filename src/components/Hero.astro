@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import heroImg from '../assets/ABCO-hero.webp';
 
-const base = '/';
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="hero" aria-label="ABCO Landscaping & Construction – Serving Eagle Lake, PA">

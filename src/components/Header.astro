@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/ABCO-logo.webp';
 
-const base = '/';
+const base = import.meta.env.BASE_URL;
 const navLinks = [
   { href: base,                  label: 'Home' },
   { href: `${base}services`,     label: 'Services' },
