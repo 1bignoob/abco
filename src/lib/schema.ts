@@ -36,6 +36,12 @@ const OPENING_HOURS = [
   },
 ];
 
+const CREATOR = {
+  '@type': 'Organization',
+  name: 'GothamWebDev',
+  url: 'https://gothamwebdev.com',
+};
+
 function toAbsoluteUrl(path: string): string {
   if (!path || path === '/') return `${SITE_URL}/`;
   if (path.startsWith('http')) return path;
@@ -101,6 +107,7 @@ function createWebSite(description: string) {
     url: SITE_URL,
     name: 'ABCO Landscaping & Construction',
     description,
+    creator: CREATOR,
   };
 }
 
@@ -124,7 +131,10 @@ function createBaseGraph(webPageEntity: Record<string, unknown>, webSiteDescript
       createWebSite(webSiteDescription),
       createOrganization(),
       createLocalBusiness(),
-      webPageEntity,
+      {
+        ...webPageEntity,
+        creator: CREATOR,
+      },
     ],
   };
 }
