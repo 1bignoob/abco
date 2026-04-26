@@ -1,7 +1,8 @@
 {
+  "id": "/",
   "name": "ABCO Landscaping & Construction",
   "short_name": "ABCO",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#d95210",
