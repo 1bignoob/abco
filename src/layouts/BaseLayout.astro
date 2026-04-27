@@ -88,10 +88,10 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta name="twitter:image"       content={ogImage} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
-    <link rel="icon" type="image/png" sizes="96x96" href={`${import.meta.env.BASE_URL}favicon-96x96.png`} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+    <link rel="icon" type="image/svg+xml" sizes="any" href={`${import.meta.env.BASE_URL}favicon.svg?v=2`} />
+    <link rel="icon" type="image/png" sizes="96x96" href={`${import.meta.env.BASE_URL}favicon-96x96.png?v=2`} />
+    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico?v=2`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}apple-touch-icon.png?v=2`} />
     <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
 
     <!-- Google Font: Montserrat for brand name in nav -->
