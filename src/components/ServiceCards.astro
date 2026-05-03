@@ -79,6 +79,7 @@ const services = [
     border: 1px solid rgba(217, 82, 16, 0.28);
     border-radius: 10px;
     padding: 2rem;
+    cursor: pointer;
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
 
@@ -86,6 +87,10 @@ const services = [
     border-color: #d95210;
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
+  }
+
+  .svc-card:hover h3 {
+    color: #d95210;
   }
 
   .svc-icon {
@@ -112,10 +117,22 @@ const services = [
     font-weight: 700;
     font-size: 1.05rem;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     transition: color 0.2s;
   }
 
   .svc-link:hover { color: #f06520; }
+
+  .svc-link span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .svc-card:hover .svc-link span {
+    transform: translateX(5px);
+  }
 
   /* Stretch the link to cover the whole card */
   .svc-link::after {

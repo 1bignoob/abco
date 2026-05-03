@@ -1,15 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/ABCO-logo.webp';
-
 const base = import.meta.env.BASE_URL;
-const navLinks = [
-  { href: base,                  label: 'Home' },
-  { href: `${base}services`,     label: 'Services' },
-  { href: `${base}blog`,         label: 'Blog' },
-  { href: `${base}about`,        label: 'About' },
-  { href: `${base}faq`,          label: 'FAQ' },
-  { href: `${base}contact`,      label: 'Contact' },
+
+interface NavChild { href: string; label: string; }
+interface NavLink  { href: string; label: string; children?: NavChild[]; }
+
+const navLinks: NavLink[] = [
+  { href: base, label: 'Home' },
+  {
+    href: `${base}services`,
+    label: 'Services',
+    children: [
+      { href: `${base}services/landscaping`,          label: 'Landscaping' },
+      { href: `${base}services/excavation`,           label: 'Excavation' },
+      { href: `${base}services/property-maintenance`, label: 'Property Maintenance' },
+    ],
+  },
+  { href: `${base}blog`,    label: 'Blog' },
+  { href: `${base}about`,   label: 'About' },
+  { href: `${base}faq`,     label: 'FAQ' },
+  { href: `${base}contact`, label: 'Contact' },
 ];
 
 const { pathname } = Astro.url;
@@ -19,11 +28,11 @@ const { pathname } = Astro.url;
   <div class="header-inner container">
 
     <a href={base} class="logo-link" aria-label="ABCO Landscaping – Home" title="ABCO Landscaping and Construction home page">
-      <Image
-        src={logo}
+      <img
+        src="/images/logos/ABCO-logo.webp"
         alt="ABCO Landscaping & Construction"
         title="ABCO Landscaping and Construction logo"
-        height={40}
+        height="40"
         loading="eager"
       />
       <span class="logo-name" aria-hidden="true">ABCO</span>
@@ -44,15 +53,52 @@ const { pathname } = Astro.url;
     <nav id="main-nav" class="main-nav" aria-label="Main navigation">
       <ul role="list">
         {navLinks.map(link => (
-          <li>
-            <a
-              href={link.href}
-              title={`${link.label} | ABCO Landscaping and Construction`}
-              aria-current={pathname === link.href || (link.href !== base && pathname.startsWith(link.href)) ? 'page' : undefined}
-            >
-              {link.label}
-            </a>
-          </li>
+          link.children ? (
+            <li class="nav-item services-item">
+              <a
+                href={link.href}
+                class="nav-a"
+                title={`${link.label} | ABCO Landscaping and Construction`}
+                aria-current={pathname !== base && pathname.startsWith(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+                <span class="svc-chevron" aria-hidden="true">▾</span>
+              </a>
+              <button
+                class="svc-mobile-toggle"
+                aria-expanded="false"
+                aria-controls="services-dropdown-nav"
+                aria-label="Toggle Services submenu"
+              >
+                <span aria-hidden="true">▾</span>
+              </button>
+              <ul class="services-dropdown" id="services-dropdown-nav" role="menu" aria-label="Services pages">
+                {link.children.map(child => (
+                  <li role="none">
+                    <a
+                      href={child.href}
+                      role="menuitem"
+                      class="dropdown-link"
+                      title={`${child.label} | ABCO Landscaping and Construction`}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li class="nav-item">
+              <a
+                href={link.href}
+                class="nav-a"
+                title={`${link.label} | ABCO Landscaping and Construction`}
+                aria-current={pathname === link.href || (link.href !== base && pathname.startsWith(link.href)) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          )
         ))}
       </ul>
       <a href="tel:+17188771197" class="header-phone" aria-label="Call ABCO at 718-877-1197" title="Call ABCO Landscaping and Construction">
@@ -64,36 +110,59 @@ const { pathname } = Astro.url;
 </header>
 
 <script>
-  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
-  const nav    = document.getElementById('main-nav')    as HTMLElement | null;
+  const toggle       = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const nav          = document.getElementById('main-nav')    as HTMLElement | null;
+  const svcMobileBtn = document.querySelector<HTMLButtonElement>('.svc-mobile-toggle');
+  const svcDrop      = document.querySelector<HTMLElement>('.services-dropdown');
 
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('is-open');
-      toggle.classList.toggle('is-active');
-    });
-
-    // Close on outside click
-    document.addEventListener('click', (e) => {
-      if (!toggle.contains(e.target as Node) && !nav.contains(e.target as Node)) {
-        toggle.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('is-open');
-        toggle.classList.remove('is-active');
-      }
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('is-open');
-        toggle.classList.remove('is-active');
-        toggle.focus();
-      }
-    });
+  function closeSvcDropdown() {
+    svcDrop?.classList.remove('is-open');
+    svcMobileBtn?.setAttribute('aria-expanded', 'false');
+    svcMobileBtn?.classList.remove('is-active');
   }
+
+  function closeNav() {
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('is-open');
+    toggle?.classList.remove('is-active');
+    closeSvcDropdown();
+  }
+
+  // Mobile hamburger
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('is-open');
+    toggle.classList.toggle('is-active');
+  });
+
+  // Services mobile chevron toggle
+  svcMobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = svcDrop!.classList.toggle('is-open');
+    svcMobileBtn.setAttribute('aria-expanded', String(isOpen));
+    svcMobileBtn.classList.toggle('is-active', isOpen);
+  });
+
+  // Outside click closes nav (mobile nav AND mobile services dropdown)
+  document.addEventListener('click', (e) => {
+    if (nav && toggle && !toggle.contains(e.target as Node) && !nav.contains(e.target as Node)) {
+      closeNav();
+    }
+  });
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (svcDrop?.classList.contains('is-open')) {
+        closeSvcDropdown();
+      } else if (nav?.classList.contains('is-open')) {
+        closeNav();
+        toggle?.focus();
+      }
+    }
+  });
 </script>
 
 <style>
@@ -114,12 +183,18 @@ const { pathname } = Astro.url;
     gap: 1rem;
   }
 
+  /* ── Logo ── */
   .logo-link {
     display: flex;
     align-items: center;
     gap: 0.65rem;
     flex-shrink: 0;
     text-decoration: none;
+  }
+
+  .logo-link img {
+    height: 40px;
+    width: auto;
   }
 
   .logo-name {
@@ -139,15 +214,18 @@ const { pathname } = Astro.url;
     gap: 0.25rem;
   }
 
-  .main-nav ul {
+  .main-nav > ul {
     display: flex;
     list-style: none;
     gap: 0;
     align-items: center;
   }
 
-  .main-nav ul a {
-    display: block;
+  /* Top-level nav links only (not dropdown links) */
+  .nav-item > .nav-a {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     padding: 0.5rem 0.85rem;
     color: #f0ede8;
     text-decoration: none;
@@ -158,16 +236,97 @@ const { pathname } = Astro.url;
     white-space: nowrap;
   }
 
-  .main-nav ul a:hover,
-  .main-nav ul a:focus {
+  .nav-item > .nav-a:hover,
+  .nav-item > .nav-a:focus {
     color: #d95210;
     background-color: rgba(217, 82, 16, 0.1);
   }
 
-  .main-nav ul a[aria-current='page'] {
+  .nav-item > .nav-a[aria-current='page'] {
     color: #d95210;
   }
 
+  /* ── Services dropdown ── */
+  .services-item {
+    position: relative;
+  }
+
+  /* Inline chevron on the Services link (desktop) */
+  .svc-chevron {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #d8d0c8;
+    display: inline-block;
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+
+  @media (min-width: 861px) {
+    .services-item:hover > .nav-a .svc-chevron {
+      transform: rotate(180deg);
+    }
+  }
+
+  /* Mobile chevron button — hidden on desktop */
+  .svc-mobile-toggle {
+    display: none;
+  }
+
+  .services-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    list-style: none;
+    background: #131313;
+    border: 1px solid #2e2e2e;
+    border-top: 2px solid #d95210;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    /* rollout animation */
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: max-height 0.3s ease, opacity 0.2s ease, transform 0.25s ease;
+  }
+
+  /* Desktop: show on hover — dropdown is a child of li so no gap risk */
+  @media (min-width: 861px) {
+    .services-item:hover > .services-dropdown {
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  /* JS-driven open state (mobile, and keyboard/accessibility) */
+  .services-dropdown.is-open {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: #d0c8c0;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.2s, background-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .dropdown-link:hover,
+  .dropdown-link:focus {
+    color: #d95210;
+    background-color: rgba(217, 82, 16, 0.08);
+  }
+
+  /* ── Phone CTA ── */
   .header-phone {
     margin-left: 1rem;
     padding: 0.6rem 1.25rem;
@@ -220,7 +379,7 @@ const { pathname } = Astro.url;
   .menu-toggle.is-active .ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .menu-toggle.is-active .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── Mobile styles ── */
+  /* ── Mobile ── */
   @media (max-width: 860px) {
     .menu-toggle {
       display: flex;
@@ -244,15 +403,84 @@ const { pathname } = Astro.url;
       display: flex;
     }
 
-    .main-nav ul {
+    .main-nav > ul {
       flex-direction: column;
       align-items: stretch;
       gap: 0;
     }
 
-    .main-nav ul a {
+    .nav-item > .nav-a {
       font-size: 1.2rem;
       padding: 0.9rem 1rem;
+    }
+
+    /* Services item: link + chevron button side-by-side */
+    .services-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .services-item > .nav-a {
+      flex: 1;
+    }
+
+    /* Hide the inline desktop chevron */
+    .svc-chevron {
+      display: none;
+    }
+
+    /* Show the standalone chevron toggle button */
+    .svc-mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      color: #c8c0b8;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.15rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .svc-mobile-toggle:hover {
+      border-color: #d95210;
+      color: #d95210;
+    }
+
+    .svc-mobile-toggle span {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .svc-mobile-toggle.is-active span {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown in mobile: flows inline, no absolute positioning */
+    .services-dropdown {
+      position: static;
+      flex-basis: 100%;
+      min-width: unset;
+      border: none;
+      border-left: 2px solid #d95210;
+      border-radius: 0;
+      background: transparent;
+      padding-left: 0.5rem;
+      margin-top: 0.25rem;
+      transform: none !important;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+    }
+
+    .dropdown-link {
+      padding: 0.7rem 1rem;
+      font-size: 1.1rem;
+      color: #c8c0b8;
     }
 
     .header-phone {

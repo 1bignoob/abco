@@ -1,20 +1,15 @@
 ---
-import { Image } from 'astro:assets';
-import heroImg from '../assets/ABCO-hero.webp';
-
 const base = import.meta.env.BASE_URL;
 ---
 
 <section class="hero" aria-label="ABCO Landscaping & Construction – Serving Eagle Lake, PA">
 
   <div class="hero-media" aria-hidden="true">
-    <Image
-      src={heroImg}
+    <img
+      src="/images/heros/ABCO-hero.webp"
       alt="Heavy excavation equipment working at sunset in Pennsylvania"
       title="Landscaping and excavation services in Eagle Lake and Covington Township, PA"
       class="hero-img"
-      widths={[768, 1200, 1920]}
-      sizes="100vw"
       loading="eager"
       fetchpriority="high"
     />

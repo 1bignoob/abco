@@ -1,5 +1,20 @@
 const SITE_URL = 'https://abcoguys.com';
 
+const IMG = {
+  heroes:    '/images/heros',
+  logos:     '/images/logos',
+  og:        '/images/og',
+  portfolio: '/images/portfolio',
+  schema:    '/images/schema',
+};
+
+const SERVICE_URLS = {
+  landscaping: `${SITE_URL}/services/landscaping/`,
+  excavation: `${SITE_URL}/services/excavation/`,
+  propertyMaintenance: `${SITE_URL}/services/property-maintenance/`,
+  servicesHub: `${SITE_URL}/services/`,
+};
+
 const IDS = {
   website: `${SITE_URL}/#website`,
   webpage: `${SITE_URL}/#webpage`,
@@ -58,8 +73,8 @@ function createOrganization() {
     url: SITE_URL,
     telephone: '+17188771197',
     email: 'sales@abcoguys.com',
-    logo: toAbsoluteUrl('/logo.png'),
-    image: toAbsoluteUrl('/hero.jpg'),
+    logo: toAbsoluteUrl(`${IMG.logos}/ABCO-logo.webp`),
+    image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
     sameAs: ['https://www.facebook.com/yourpage'],
   };
 }
@@ -74,8 +89,8 @@ function createLocalBusiness() {
     url: SITE_URL,
     telephone: '+17188771197',
     email: 'sales@abcoguys.com',
-    logo: toAbsoluteUrl('/logo.png'),
-    image: toAbsoluteUrl('/hero.jpg'),
+    logo: toAbsoluteUrl(`${IMG.logos}/ABCO-logo.webp`),
+    image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
     sameAs: ['https://www.facebook.com/yourpage'],
     priceRange: '$$',
     address: {
@@ -140,64 +155,224 @@ function createBaseGraph(webPageEntity: Record<string, unknown>, webSiteDescript
 }
 
 export function createHomePageSchema() {
-  const webPage = {
-    '@type': 'WebPage',
-    '@id': IDS.webpage,
-    url: `${SITE_URL}/`,
-    name: 'Landscaping & Excavation in Eagle Lake, PA | ABCO Landscaping & Construction',
-    description:
-      'ABCO Landscaping & Construction serves Eagle Lake, Gouldsboro, and Covington Township with landscaping, excavation, tree removal, and property maintenance services.',
-    isPartOf: { '@id': IDS.website },
-    about: { '@id': IDS.business },
-    mainEntity: { '@id': IDS.business },
-  };
-
-  const schema = createBaseGraph(
-    webPage,
-    'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.'
-  );
-
-  const homeFaq = {
-    '@type': 'FAQPage',
-    '@id': `${SITE_URL}/#homepage-faq`,
-    mainEntity: [
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        '@type': 'Question',
-        name: 'What areas do you serve?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'We serve Eagle Lake, Gouldsboro, Covington Township, and surrounding communities in northeastern Pennsylvania (ZIP 18424).',
+        '@type': 'HomeAndConstructionBusiness',
+        '@id': IDS.business,
+        name: 'ABCO Landscaping & Construction',
+        alternateName: 'ABCO Guys',
+        url: `${SITE_URL}/`,
+        telephone: '+1-718-877-1197',
+        email: 'sales@abcoguys.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: toAbsoluteUrl(`${IMG.schema}/schema-logo.png`),
+          width: '500',
+          height: '500',
         },
+        image: [
+          toAbsoluteUrl(`${IMG.schema}/schema-image.webp`),
+          toAbsoluteUrl(`${IMG.portfolio}/schema-image.webp`),
+        ],
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Gouldsboro',
+          addressRegion: 'PA',
+          postalCode: '18424',
+          addressCountry: 'US',
+        },
+        areaServed: [
+          {
+            '@type': 'PostalCode',
+            postalCode: '18424',
+          },
+          {
+            '@type': 'PostalCode',
+            postalCode: '18444',
+          },
+          {
+            '@type': 'City',
+            name: 'Scranton',
+            sameAs: 'https://en.wikipedia.org/wiki/Scranton,_Pennsylvania',
+            postalCode: '18512',
+          },
+          {
+            '@type': 'AdministrativeArea',
+            name: 'Eagle Lake',
+            sameAs: 'https://en.wikipedia.org/wiki/Eagle_Lake,_Pennsylvania',
+          },
+          {
+            '@type': 'City',
+            name: 'Covington Township',
+            sameAs: 'https://en.wikipedia.org/wiki/Covington_Township,_Lackawanna_County,_Pennsylvania',
+          },
+          {
+            '@type': 'AdministrativeArea',
+            name: 'Lackawanna County',
+            sameAs: 'https://en.wikipedia.org/wiki/Lackawanna_County,_Pennsylvania',
+          },
+          {
+            '@type': 'AdministrativeArea',
+            name: 'The Hideout',
+            sameAs: 'https://en.wikipedia.org/wiki/The_Hideout,_Pennsylvania',
+          },
+        ],
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '08:00',
+            closes: '18:00',
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'Saturday',
+            opens: '09:30',
+            closes: '16:30',
+          },
+        ],
+        makesOffer: [
+          { '@id': `${SITE_URL}/#offer-landscaping` },
+          { '@id': `${SITE_URL}/#offer-excavation` },
+          { '@id': `${SITE_URL}/#offer-property-maintenance` },
+          { '@id': `${SITE_URL}/#offer-tree-removal` },
+          { '@id': `${SITE_URL}/#offer-lawn-care` },
+          { '@id': `${SITE_URL}/#offer-seasonal-cleanup` },
+          { '@id': `${SITE_URL}/#offer-gravel` },
+          { '@id': `${SITE_URL}/#offer-winterizing` },
+          { '@id': `${SITE_URL}/#offer-park-model-home-repair` },
+        ],
       },
       {
-        '@type': 'Question',
-        name: 'Do you offer free estimates?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes — we provide free, no-obligation estimates for all landscaping, excavation, and property maintenance projects.',
-        },
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-landscaping`,
+        itemOffered: { '@id': `${SITE_URL}/#service-landscaping` },
       },
       {
-        '@type': 'Question',
-        name: 'What are your business hours?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Monday through Friday 8:00 AM – 6:00 PM, Saturday 9:30 AM – 4:30 PM. We are closed on Sundays.',
-        },
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-excavation`,
+        itemOffered: { '@id': `${SITE_URL}/#service-excavation` },
       },
       {
-        '@type': 'Question',
-        name: 'Do you work with residential and commercial customers?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Absolutely. We take on residential homeowners, commercial property managers, and RV community sites across the Eagle Lake area.',
-        },
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-property-maintenance`,
+        itemOffered: { '@id': `${SITE_URL}/#service-property-maintenance` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-tree-removal`,
+        itemOffered: { '@id': `${SITE_URL}/#service-tree-removal` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-lawn-care`,
+        itemOffered: { '@id': `${SITE_URL}/#service-lawn-care` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-seasonal-cleanup`,
+        itemOffered: { '@id': `${SITE_URL}/#service-seasonal-cleanup` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-gravel`,
+        itemOffered: { '@id': `${SITE_URL}/#service-gravel` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-winterizing`,
+        itemOffered: { '@id': `${SITE_URL}/#service-winterizing` },
+      },
+      {
+        '@type': 'Offer',
+        '@id': `${SITE_URL}/#offer-park-model-home-repair`,
+        itemOffered: { '@id': `${SITE_URL}/#service-park-model-home-repair` },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-landscaping`,
+        name: 'Landscaping',
+        serviceType: 'Landscaping',
+        description: 'Professional landscaping design, installation, and upkeep.',
+        url: SERVICE_URLS.landscaping,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-excavation`,
+        name: 'Excavation',
+        serviceType: 'Excavation',
+        description: 'Professional grading, trenching, and excavation services.',
+        url: SERVICE_URLS.excavation,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-property-maintenance`,
+        name: 'Property Maintenance',
+        serviceType: 'Property Maintenance',
+        description: 'Routine upkeep and maintenance for residential and commercial properties.',
+        url: SERVICE_URLS.propertyMaintenance,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-tree-removal`,
+        name: 'Tree Removal',
+        serviceType: 'Tree Service',
+        description: 'Safe tree felling, branch trimming, and stump grinding.',
+        url: SERVICE_URLS.servicesHub,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-lawn-care`,
+        name: 'Lawn Care',
+        serviceType: 'Lawn Care',
+        description: 'Routine lawn mowing, edging, weed control, and turf care.',
+        url: SERVICE_URLS.propertyMaintenance,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-seasonal-cleanup`,
+        name: 'Seasonal Cleanup',
+        serviceType: 'Seasonal Cleanup',
+        description: 'Spring and Fall property cleanups, including leaf removal and bed clearing.',
+        url: SERVICE_URLS.propertyMaintenance,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-gravel`,
+        name: 'Gravel Delivery and Spreading',
+        serviceType: 'Gravel Installation',
+        description: 'Bulk gravel delivery, grading, and driveway installation.',
+        url: SERVICE_URLS.excavation,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-winterizing`,
+        name: 'Winterizing',
+        serviceType: 'Winterizing',
+        description: 'Property winterization services to protect homes and landscapes from freezing temperatures.',
+        url: SERVICE_URLS.servicesHub,
+        provider: { '@id': IDS.business },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${SITE_URL}/#service-park-model-home-repair`,
+        name: 'Park Model Home Repair',
+        serviceType: 'Home Repair',
+        description: 'Specialized repair and maintenance for park model homes.',
+        url: SERVICE_URLS.servicesHub,
+        provider: { '@id': IDS.business },
       },
     ],
   };
-
-  (schema['@graph'] as Array<Record<string, unknown>>).push(homeFaq);
-  return schema;
 }
 
 export function createServicesHubSchema() {

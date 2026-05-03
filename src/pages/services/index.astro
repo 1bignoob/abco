@@ -40,7 +40,7 @@ const servicesHubSchema = createServicesHubSchema();
             <li>Lawn mowing &amp; edging</li>
             <li>Fertilization &amp; weed control</li>
           </ul>
-          <a href={`${base}services/landscaping`} class="btn btn-outline" title="Learn about landscaping services in Eagle Lake, PA">Learn About Landscaping</a>
+          <a href={`${base}services/landscaping`} class="btn btn-outline hub-link" title="Learn about landscaping services in Eagle Lake, PA">Learn About Landscaping <span aria-hidden="true">→</span></a>
         </article>
 
         <article class="hub-card">
@@ -56,7 +56,7 @@ const servicesHubSchema = createServicesHubSchema();
             <li>Foundation prep</li>
             <li>Drainage solutions</li>
           </ul>
-          <a href={`${base}services/excavation`} class="btn btn-outline" title="Learn about excavation services in Eagle Lake, PA">Learn About Excavation</a>
+          <a href={`${base}services/excavation`} class="btn btn-outline hub-link" title="Learn about excavation services in Eagle Lake, PA">Learn About Excavation <span aria-hidden="true">→</span></a>
         </article>
 
         <article class="hub-card">
@@ -72,7 +72,7 @@ const servicesHubSchema = createServicesHubSchema();
             <li>Deck &amp; patio maintenance</li>
             <li>General property upkeep</li>
           </ul>
-          <a href={`${base}services/property-maintenance`} class="btn btn-outline" title="Learn about property maintenance services in Eagle Lake, PA">Learn About Maintenance</a>
+          <a href={`${base}services/property-maintenance`} class="btn btn-outline hub-link" title="Learn about property maintenance services in Eagle Lake, PA">Learn About Maintenance <span aria-hidden="true">→</span></a>
         </article>
 
       </div>
@@ -120,11 +120,22 @@ const servicesHubSchema = createServicesHubSchema();
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .hub-card:hover {
+    border-color: #d95210;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
   }
 
   .hub-icon { font-size: 2.5rem; line-height: 1; }
 
-  .hub-card h2 { font-size: 1.5rem; margin: 0; }
+  .hub-card h2 { font-size: 1.5rem; margin: 0; transition: color 0.2s; }
+
+  .hub-card:hover h2 { color: #d95210; }
 
   .hub-card p { color: #a09890; font-size: 1.05rem; line-height: 1.7; flex: 1; }
 
@@ -149,6 +160,27 @@ const servicesHubSchema = createServicesHubSchema();
     position: absolute;
     left: 0;
     font-weight: 700;
+  }
+
+  .hub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .hub-link span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .hub-card:hover .hub-link span {
+    transform: translateX(5px);
+  }
+
+  .hub-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
   }
 
   .hub-cta {
