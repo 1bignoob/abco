@@ -15,5 +15,11 @@ const base = normalizeBase(configuredBase ?? defaultBase);
 export default defineConfig({
   site: 'https://abcoguys.com',
   base,
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
 });
