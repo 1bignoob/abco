@@ -1,5 +1,31 @@
 ---
+{/*
+  ServiceCards.astro — Homepage service grid
+  ─────────────────────────────────────────
+  This component renders the row of service cards on the homepage (index.astro).
+  It is NOT the full services page (/services/) — that lives in:
+    src/pages/services/index.astro
+
+  HOW TO ADD OR EDIT A SERVICE CARD:
+  1. Add a new object to the `services` array below.
+  2. Give it: icon (emoji), title, description, and href (the URL to its page).
+  3. Make sure the page exists in src/pages/services/your-slug.astro
+  4. Make sure the service is also listed in src/lib/schema.ts (createHomePageSchema)
+     and in src/components/Header.astro (the navLinks children array).
+
+  Each card automatically gets a hover effect and a full-card clickable link.
+  The arrow (→) at the bottom slides right on hover — that's handled by CSS below.
+*/}
+
 const base = import.meta.env.BASE_URL;
+
+{/* ── SERVICE CARD DATA ─────────────────────────────────────────────────────────
+   Each object = one card. Fields:
+     icon        → emoji shown at the top of the card
+     title       → bold heading on the card
+     description → paragraph text under the heading
+     href        → where clicking the card takes the user
+   ─────────────────────────────────────────────────────────────────────────── */}
 const services = [
   {
     icon: '🌿',
@@ -22,12 +48,60 @@ const services = [
       'Reliable year-round maintenance including lawn mowing, fertilization, weed control, deck and patio upkeep, and seasonal cleanup for homes, businesses, and RV sites.',
     href: `${base}services/property-maintenance`,
   },
+  {
+    icon: '🌳',
+    title: 'Tree Removal',
+    description:
+      'Safe removal of hazardous trees and limbs with full debris cleanup for residential and commercial properties across Eagle Lake and nearby communities.',
+    href: `${base}services/tree-removal`,
+  },
+  {
+    icon: '🌱',
+    title: 'Lawn Care',
+    description:
+      'Recurring lawn care plans including mowing, edging, and seasonal turf management to keep your property clean and consistent throughout the year.',
+    href: `${base}services/lawn-care`,
+  },
+  {
+    icon: '🍂',
+    title: 'Seasonal Cleanup',
+    description:
+      'Spring and fall cleanups that remove debris, refresh planting areas, and prepare your property for weather transitions — including leaf removal and bed clearing.',
+    href: `${base}services/seasonal-cleanup`,
+  },
+  {
+    icon: '🪨',
+    title: 'Gravel Delivery & Spreading',
+    description:
+      'Bulk gravel delivery, base prep, and spreading for driveways and access lanes, with finish grading for proper drainage and long-term durability.',
+    href: `${base}services/gravel`,
+  },
+  {
+    icon: '❄️',
+    title: 'Winterizing',
+    description:
+      'Seasonal exterior preparation to reduce winter weather damage — including drainage checks, debris cleanup, and pre-winter site readiness planning.',
+    href: `${base}services/winterizing`,
+  },
+  {
+    icon: '🏠',
+    title: 'Park Model Home Repair',
+    description:
+      'Specialized repair and exterior maintenance support for park model homes and surrounding site areas, including deck maintenance and site grading corrections.',
+    href: `${base}services/park-model-home-repair`,
+  },
 ];
 ---
 
+{/* ── SECTION WRAPPER ───────────────────────────────────────────────────────────
+   The outer <section> gives screen readers a landmark label via aria-labelledby.
+   The gradient background is defined in the <style> block below — it blends
+   from the warm hero image color into the dark site background.
+*/}
 <section class="services-section" aria-labelledby="services-heading">
   <div class="container">
 
+    {/* Section heading + subtitle */}
     <div class="section-header text-center">
       <h2 id="services-heading">Full-Service Landscaping, Excavation &amp; Property Maintenance in Eagle Lake, PA</h2>
       <hr class="orange-line center" aria-hidden="true" />
@@ -38,12 +112,20 @@ const services = [
       </p>
     </div>
 
+    {/* ── CARD GRID ──────────────────────────────────────────────────────────────
+       services.map() loops over the array above and renders one <article> per
+       entry. The grid layout (columns/spacing) is controlled by .svc-grid in CSS.
+       The full card is clickable because .svc-link::after stretches an invisible
+       overlay across the entire card (see CSS at the bottom of this file).
+    */}
     <div class="svc-grid">
       {services.map(s => (
         <article class="svc-card">
+          {/* aria-hidden="true" hides the emoji from screen readers (decorative) */}
           <div class="svc-icon" aria-hidden="true">{s.icon}</div>
           <h3>{s.title}</h3>
           <p>{s.description}</p>
+          {/* The title attribute adds a browser tooltip on hover */}
           <a href={s.href} class="svc-link" title={`Learn more about ${s.title.toLowerCase()} services from ABCO`}>
             Learn More <span aria-hidden="true">→</span>
           </a>
@@ -55,8 +137,25 @@ const services = [
 </section>
 
 <style>
+  /*
+   * STYLES FOR ServiceCards.astro
+   * ─────────────────────────────────────────────────────────────────────────────
+   * These styles are scoped to this component only — they won't leak to other
+   * pages. The class names here (.svc-card, .svc-grid, etc.) are only meaningful
+   * inside this file.
+   *
+   * QUICK REFERENCE:
+   *   .services-section  → the outer <section> wrapper with the gradient bg
+   *   .svc-grid          → the CSS grid that lays out the cards in columns
+   *   .svc-card          → individual card box (hover lifts it up)
+   *   .svc-icon          → the large emoji at the top of each card
+   *   .svc-link          → the orange "Learn More →" link
+   *   .svc-link::after   → invisible overlay that makes the WHOLE card clickable
+   */
+
   .services-section {
-    /* Gradient that connects the warm hero image to the dark site background */
+    /* Gradient that blends from the warm hero image color into the dark background.
+       Adjust the color stops here if the hero image changes. */
     background: linear-gradient(
       180deg,
       #2e1405 0%,
@@ -69,12 +168,14 @@ const services = [
 
   .svc-grid {
     display: grid;
+    /* auto-fit: fills as many columns as fit; min 300px wide, max 1fr (equal width).
+       On mobile this naturally collapses to a single column. */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 1.5rem;
   }
 
   .svc-card {
-    position: relative;
+    position: relative; /* required so .svc-link::after (the click overlay) is positioned relative to the card */
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(217, 82, 16, 0.28);
     border-radius: 10px;
@@ -83,18 +184,20 @@ const services = [
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
 
+  /* On hover: full orange border, card lifts slightly, orange glow shadow */
   .svc-card:hover {
     border-color: #d95210;
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
   }
 
+  /* Heading turns orange when card is hovered */
   .svc-card:hover h3 {
     color: #d95210;
   }
 
   .svc-icon {
-    font-size: 3rem;
+    font-size: 3rem; /* change this to make the emoji bigger or smaller */
     margin-bottom: 1rem;
     line-height: 1;
   }
@@ -112,6 +215,7 @@ const services = [
     font-size: 1.05rem;
   }
 
+  /* Orange "Learn More →" link at the bottom of each card */
   .svc-link {
     color: #d95210;
     font-weight: 700;
@@ -125,6 +229,7 @@ const services = [
 
   .svc-link:hover { color: #f06520; }
 
+  /* The arrow (→) slides right on card hover */
   .svc-link span {
     display: inline-block;
     transition: transform 0.2s ease;
@@ -134,7 +239,14 @@ const services = [
     transform: translateX(5px);
   }
 
-  /* Stretch the link to cover the whole card */
+  /*
+   * FULL-CARD CLICK TRICK
+   * ::after creates an invisible box that covers the entire card.
+   * This makes clicking anywhere on the card follow the <a> link,
+   * not just the "Learn More" text. z-index: 1 puts it above the card
+   * content so it catches clicks everywhere.
+   * DO NOT remove position: relative from .svc-card or this will break.
+   */
   .svc-link::after {
     content: '';
     position: absolute;

@@ -12,6 +12,12 @@ const SERVICE_URLS = {
   landscaping: `${SITE_URL}/services/landscaping/`,
   excavation: `${SITE_URL}/services/excavation/`,
   propertyMaintenance: `${SITE_URL}/services/property-maintenance/`,
+  treeRemoval: `${SITE_URL}/services/tree-removal/`,
+  lawnCare: `${SITE_URL}/services/lawn-care/`,
+  seasonalCleanup: `${SITE_URL}/services/seasonal-cleanup/`,
+  gravel: `${SITE_URL}/services/gravel/`,
+  winterizing: `${SITE_URL}/services/winterizing/`,
+  parkModelHomeRepair: `${SITE_URL}/services/park-model-home-repair/`,
   servicesHub: `${SITE_URL}/services/`,
 };
 
@@ -64,6 +70,10 @@ function toAbsoluteUrl(path: string): string {
   return `${SITE_URL}${normalized}`;
 }
 
+// ─── createOrganization ───────────────────────────────────────────────────
+// Returns a raw Organization node (@type: Organization).
+// Used as the parent company record across all pages via createBaseGraph().
+// Update: name, url, telephone, email, logo, image, sameAs social links.
 function createOrganization() {
   return {
     '@type': 'Organization',
@@ -79,6 +89,13 @@ function createOrganization() {
   };
 }
 
+// ─── createLocalBusiness ─────────────────────────────────────────────────
+// Returns a raw LocalBusiness node (@type: LocalBusiness).
+// This is the physical business record: address, hours, areaServed, contactPoint.
+// Called ONLY by createBaseGraph() — used on service pages, blog, about, FAQ, etc.
+// NOT used on the homepage (homepage uses createHomePageSchema() which builds its
+// own HomeAndConstructionBusiness node with full service data inline).
+// Update: address, telephone, email, priceRange, openingHoursSpecification, areaServed.
 function createLocalBusiness() {
   return {
     '@type': 'LocalBusiness',
@@ -92,6 +109,7 @@ function createLocalBusiness() {
     logo: toAbsoluteUrl(`${IMG.logos}/ABCO-logo.webp`),
     image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
     sameAs: ['https://www.facebook.com/yourpage'],
+    priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Gouldsboro',
@@ -138,6 +156,12 @@ function createBreadcrumbList(items: Array<{ name: string; url: string }>, idBas
   };
 }
 
+// ─── createBaseGraph ─────────────────────────────────────────────────────
+// Assembles the standard { "@context", "@graph": [...] } used by every page
+// EXCEPT the homepage. Combines: WebSite + Organization + LocalBusiness +
+// a caller-supplied webPageEntity (WebPage, ServicePage, BlogPosting, etc.).
+// Every exported create*Schema() function (except createHomePageSchema) calls this.
+// To add a new graph node to all pages: push it into the @graph array here.
 function createBaseGraph(webPageEntity: Record<string, unknown>, webSiteDescription: string) {
   return {
     '@context': 'https://schema.org',
@@ -153,6 +177,14 @@ function createBaseGraph(webPageEntity: Record<string, unknown>, webSiteDescript
   };
 }
 
+// ─── createHomePageSchema ────────────────────────────────────────────────
+// Standalone homepage schema — does NOT call createBaseGraph() or createLocalBusiness().
+// Builds its own @graph from scratch using @type: HomeAndConstructionBusiness
+// (more specific than LocalBusiness; used for Google rich results on the homepage).
+// Includes: all 9 makesOffer/Service nodes, full areaServed list, contactPoint,
+// priceRange, logo ImageObject, openingHours.
+// Used ONLY in: src/pages/index.astro
+// To add a service: add an Offer node, a Service node, and a makesOffer @id reference.
 export function createHomePageSchema() {
   return {
     '@context': 'https://schema.org',
@@ -165,6 +197,7 @@ export function createHomePageSchema() {
         url: `${SITE_URL}/`,
         telephone: '+1-718-877-1197',
         email: 'sales@abcoguys.com',
+        priceRange: '$$',
         logo: {
           '@type': 'ImageObject',
           url: toAbsoluteUrl(`${IMG.schema}/schema-logo.png`),
@@ -182,6 +215,14 @@ export function createHomePageSchema() {
           postalCode: '18424',
           addressCountry: 'US',
         },
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            telephone: '+17188771197',
+            availableLanguage: 'en',
+          },
+        ],
         areaServed: [
           {
             '@type': 'Place',
@@ -323,7 +364,7 @@ export function createHomePageSchema() {
         name: 'Tree Removal',
         serviceType: 'Tree Service',
         description: 'Safe tree felling, branch trimming, and stump grinding.',
-        url: SERVICE_URLS.servicesHub,
+        url: SERVICE_URLS.treeRemoval,
         provider: { '@id': IDS.business },
       },
       {
@@ -332,7 +373,7 @@ export function createHomePageSchema() {
         name: 'Lawn Care',
         serviceType: 'Lawn Care',
         description: 'Routine lawn mowing, edging, weed control, and turf care.',
-        url: SERVICE_URLS.propertyMaintenance,
+        url: SERVICE_URLS.lawnCare,
         provider: { '@id': IDS.business },
       },
       {
@@ -341,7 +382,7 @@ export function createHomePageSchema() {
         name: 'Seasonal Cleanup',
         serviceType: 'Seasonal Cleanup',
         description: 'Spring and Fall property cleanups, including leaf removal and bed clearing.',
-        url: SERVICE_URLS.propertyMaintenance,
+        url: SERVICE_URLS.seasonalCleanup,
         provider: { '@id': IDS.business },
       },
       {
@@ -350,7 +391,7 @@ export function createHomePageSchema() {
         name: 'Gravel Delivery and Spreading',
         serviceType: 'Gravel Installation',
         description: 'Bulk gravel delivery, grading, and driveway installation.',
-        url: SERVICE_URLS.excavation,
+        url: SERVICE_URLS.gravel,
         provider: { '@id': IDS.business },
       },
       {
@@ -359,7 +400,7 @@ export function createHomePageSchema() {
         name: 'Winterizing',
         serviceType: 'Winterizing',
         description: 'Property winterization services to protect homes and landscapes from freezing temperatures.',
-        url: SERVICE_URLS.servicesHub,
+        url: SERVICE_URLS.winterizing,
         provider: { '@id': IDS.business },
       },
       {
@@ -368,7 +409,7 @@ export function createHomePageSchema() {
         name: 'Park Model Home Repair',
         serviceType: 'Home Repair',
         description: 'Specialized repair and maintenance for park model homes.',
-        url: SERVICE_URLS.servicesHub,
+        url: SERVICE_URLS.parkModelHomeRepair,
         provider: { '@id': IDS.business },
       },
     ],
@@ -398,7 +439,7 @@ export function createServicesHubSchema() {
     '@type': 'ItemList',
     '@id': `${pageUrl}#services-list`,
     itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: 3,
+    numberOfItems: 9,
     itemListElement: [
       {
         '@type': 'ListItem',
@@ -418,6 +459,42 @@ export function createServicesHubSchema() {
         name: 'Property Maintenance Services',
         url: `${SITE_URL}/services/property-maintenance/`,
       },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Tree Removal Services',
+        url: `${SITE_URL}/services/tree-removal/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 5,
+        name: 'Lawn Care Services',
+        url: `${SITE_URL}/services/lawn-care/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 6,
+        name: 'Seasonal Cleanup Services',
+        url: `${SITE_URL}/services/seasonal-cleanup/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 7,
+        name: 'Gravel Delivery and Spreading Services',
+        url: `${SITE_URL}/services/gravel/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 8,
+        name: 'Winterizing Services',
+        url: `${SITE_URL}/services/winterizing/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 9,
+        name: 'Park Model Home Repair Services',
+        url: `${SITE_URL}/services/park-model-home-repair/`,
+      },
     ],
   });
 
@@ -425,7 +502,7 @@ export function createServicesHubSchema() {
 }
 
 export function createServicePageSchema(options: {
-  slug: 'landscaping' | 'excavation' | 'property-maintenance';
+  slug: string;
   name: string;
   description: string;
   serviceType: string;

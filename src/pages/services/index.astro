@@ -1,10 +1,13 @@
 ---
+// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicesHubSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
+// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const servicesHubSchema = createServicesHubSchema();
 ---
 
+{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="Landscaping, Excavation & Property Maintenance Services | Eagle Lake, PA"
   description="Browse ABCO Landscaping & Construction services for Eagle Lake, Gouldsboro, and Covington Township, PA, including landscaping, excavation, and property maintenance."
@@ -12,6 +15,7 @@ const servicesHubSchema = createServicesHubSchema();
   schemaJson={servicesHubSchema}
 >
 
+  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
       <h1>Landscaping, Excavation &amp; Property Maintenance Services in Eagle Lake, PA</h1>
@@ -22,6 +26,7 @@ const servicesHubSchema = createServicesHubSchema();
     </div>
   </div>
 
+  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
   <section class="services-hub section" aria-label="Service areas">
     <div class="container">
 
@@ -73,6 +78,102 @@ const servicesHubSchema = createServicesHubSchema();
             <li>General property upkeep</li>
           </ul>
           <a href={`${base}services/property-maintenance`} class="btn btn-outline hub-link" title="Learn about property maintenance services in Eagle Lake, PA">Learn About Maintenance <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🌲</div>
+          <h2>Tree Removal</h2>
+          <p>
+            Safe tree and hazardous limb removal with cleanup for residential and
+            commercial properties across Eagle Lake and nearby communities.
+          </p>
+          <ul class="hub-list">
+            <li>Hazardous branch removal</li>
+            <li>Storm damage cleanup</li>
+            <li>Stump reduction support</li>
+            <li>Debris haul-off</li>
+          </ul>
+          <a href={`${base}services/tree-removal`} class="btn btn-outline hub-link" title="Learn about tree removal services in Eagle Lake, PA">Learn About Tree Removal <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🍃</div>
+          <h2>Lawn Care</h2>
+          <p>
+            Recurring lawn care plans including mowing, edging, and seasonal turf
+            management to keep your property clean and consistent.
+          </p>
+          <ul class="hub-list">
+            <li>Scheduled mowing and edging</li>
+            <li>Cleanup after each visit</li>
+            <li>Seasonal care options</li>
+            <li>Flexible service plans</li>
+          </ul>
+          <a href={`${base}services/lawn-care`} class="btn btn-outline hub-link" title="Learn about lawn care services in Eagle Lake, PA">Learn About Lawn Care <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🍂</div>
+          <h2>Seasonal Cleanup</h2>
+          <p>
+            Spring and fall cleanup services that remove debris, refresh planting
+            areas, and prepare properties for weather transitions.
+          </p>
+          <ul class="hub-list">
+            <li>Leaf and debris removal</li>
+            <li>Bed and edge cleanup</li>
+            <li>Trimming and haul-off</li>
+            <li>Season transition prep</li>
+          </ul>
+          <a href={`${base}services/seasonal-cleanup`} class="btn btn-outline hub-link" title="Learn about seasonal cleanup services in Eagle Lake, PA">Learn About Seasonal Cleanup <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🪨</div>
+          <h2>Gravel Delivery and Spreading</h2>
+          <p>
+            Gravel delivery, base prep, and spreading for driveways and access lanes,
+            with finish grading for drainage and durability.
+          </p>
+          <ul class="hub-list">
+            <li>New and refreshed gravel surfaces</li>
+            <li>Delivery and placement</li>
+            <li>Compaction and grading</li>
+            <li>Erosion correction</li>
+          </ul>
+          <a href={`${base}services/gravel`} class="btn btn-outline hub-link" title="Learn about gravel delivery and spreading in Eagle Lake, PA">Learn About Gravel Service <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">❄️</div>
+          <h2>Winterizing</h2>
+          <p>
+            Seasonal exterior preparation to reduce winter weather damage and improve
+            cold-season property readiness.
+          </p>
+          <ul class="hub-list">
+            <li>Pre-winter site prep</li>
+            <li>Drainage checks</li>
+            <li>Debris and risk cleanup</li>
+            <li>Property readiness planning</li>
+          </ul>
+          <a href={`${base}services/winterizing`} class="btn btn-outline hub-link" title="Learn about winterizing services in Eagle Lake, PA">Learn About Winterizing <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="hub-card">
+          <div class="hub-icon" aria-hidden="true">🏠</div>
+          <h2>Park Model Home Repair</h2>
+          <p>
+            Specialized repair and exterior maintenance support for park model homes
+            and surrounding site areas.
+          </p>
+          <ul class="hub-list">
+            <li>Exterior repair support</li>
+            <li>Deck and entry area maintenance</li>
+            <li>Site grading corrections</li>
+            <li>Seasonal weather prep</li>
+          </ul>
+          <a href={`${base}services/park-model-home-repair`} class="btn btn-outline hub-link" title="Learn about park model home repair services in Eagle Lake, PA">Learn About Park Model Repair <span aria-hidden="true">→</span></a>
         </article>
 
       </div>

@@ -1,4 +1,5 @@
 ---
+// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCards from '../components/ServiceCards.astro';
@@ -18,9 +19,11 @@ function formatDate(d: Date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const homeSchema = createHomePageSchema();
 ---
 
+{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="Landscaping & Excavation in Eagle Lake, PA | ABCO"
   description="ABCO Landscaping & Construction provides landscaping, excavation, tree removal and pruning, and property maintenance in Eagle Lake, Gouldsboro, and Covington Township, PA. Call (718) 877-1197."
@@ -34,6 +37,7 @@ const homeSchema = createHomePageSchema();
   <ServiceCards />
 
   <!-- Blog highlights — main focus of the site -->
+  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
   <section class="blog-home section" aria-labelledby="blog-home-heading">
     <div class="container">
 

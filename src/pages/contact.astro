@@ -1,11 +1,14 @@
 ---
+// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { createContactPageSchema } from '../lib/schema';
 
+// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const contactSchema = createContactPageSchema();
 ---
 
+{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="Contact ABCO Landscaping & Construction | Free Estimates in Eagle Lake, PA"
   description="Contact ABCO Landscaping & Construction for landscaping, excavation, and property maintenance estimates in Eagle Lake, Gouldsboro, and Covington Township, PA."
@@ -13,6 +16,7 @@ const contactSchema = createContactPageSchema();
   schemaJson={contactSchema}
 >
 
+  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
       <h1>Contact ABCO Landscaping &amp; Construction for a Free Estimate</h1>

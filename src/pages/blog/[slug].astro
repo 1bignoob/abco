@@ -1,4 +1,5 @@
 ---
+// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { createBlogPostSchema } from '../../lib/schema';
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const postSchema = createBlogPostSchema({
   slug: post.id,
   title: post.data.title,
@@ -30,6 +32,7 @@ function formatDate(d: Date) {
 
 ---
 
+{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title={`${post.data.title} | ABCO Landscaping & Construction`}
   description={post.data.description}

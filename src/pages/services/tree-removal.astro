@@ -4,28 +4,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
 // NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
-const excavationSchema = createServicePageSchema({
-  slug: 'excavation',
-  name: 'Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+const treeRemovalSchema = createServicePageSchema({
+  slug: 'tree-removal',
+  name: 'Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA',
   description:
-    'Excavation, grading, site clearing, driveway prep, foundation excavation, drainage work, and fill placement for projects in Eagle Lake, Gouldsboro, and Covington Township, PA.',
-  serviceType: 'Excavation',
+    'Safe tree removal, hazardous limb cleanup, storm damage response, and stump reduction for homes and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+  serviceType: 'Tree Removal',
 });
 ---
 
 {/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
-  title="Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-  description="Professional excavation, grading, site clearing, and land prep services in Eagle Lake, Gouldsboro, and Covington Township, PA. Free estimates available."
-  canonical="/services/excavation/"
-  schemaJson={excavationSchema}
+  title="Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+  description="Safe, reliable tree removal and storm cleanup for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
+  canonical="/services/tree-removal/"
+  schemaJson={treeRemovalSchema}
 >
 
   {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
-      <h1>Excavation Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
-      <p>Covington Township, Eagle Lake &amp; Gouldsboro, PA</p>
+      <h1>Tree Removal Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
+      <p>Eagle Lake, Gouldsboro &amp; Covington Township, PA</p>
     </div>
   </div>
 
@@ -34,51 +34,49 @@ const excavationSchema = createServicePageSchema({
     <div class="container detail-grid">
 
       <div class="detail-content">
-        <h2>What Our Excavation Company Handles</h2>
+        <h2>What Our Tree Removal Team Handles</h2>
         <hr class="orange-line" aria-hidden="true" />
         <p>
-          ABCO handles excavation projects of all sizes — from a single driveway to full site clearing
-          and land prep for construction. We operate in Covington Township, Eagle Lake, Gouldsboro,
-          and the surrounding 18424 area.
+          From one dangerous limb to full tree takedowns, ABCO handles removals with
+          site safety and property protection first. We work on homes, businesses,
+          and managed properties throughout the Eagle Lake area.
         </p>
         <ul class="detail-list">
-          <li>Site clearing and land grading</li>
-          <li>Driveway excavation and preparation</li>
-          <li>Foundation excavation</li>
-          <li>Drainage correction and French drains</li>
-          <li>Topsoil removal and fill placement</li>
-          <li>Stump and root removal</li>
-          <li>Resurfacing and final grading</li>
+          <li>Hazardous tree and limb removal</li>
+          <li>Storm-damaged tree cleanup</li>
+          <li>Low-clearance branch trimming</li>
+          <li>Stump reduction and cleanup</li>
+          <li>Debris hauling and disposal</li>
+          <li>Site-safe cleanup and finish grading</li>
         </ul>
 
-        <h2>Our Excavation Process</h2>
+        <h2>Tree Removal Process</h2>
         <p>
-          Every job starts with a site walk and free estimate. We call 811 before any digging
-          and handle utility marking as standard practice. Read our
-          <a href={`${base}blog/residential-excavation-covington-township`} title="Read our Covington Township excavation project guide">excavation project guide</a>
-          for a step-by-step overview of what to expect.
+          We begin with a site review and clear plan for equipment access and debris
+          handling. You get a straightforward estimate, timeline, and cleanup scope
+          before work begins.
         </p>
 
         <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free excavation estimate">Request a Free Estimate</a>
+          <a href={`${base}contact`} class="btn btn-primary" title="Request a free tree removal estimate">Request a Free Estimate</a>
           <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
         </div>
       </div>
 
       <aside class="detail-sidebar">
         <div class="sidebar-box">
-          <h3>Excavation Service Facts</h3>
+          <h3>Tree Removal Service Facts</h3>
           <ul>
             <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>All sizes welcome</strong></li>
-            <li><strong>Free estimates</strong></li>
-            <li><strong>Mon–Fri 8 AM – 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM – 4:30 PM</strong></li>
+            <li><strong>Storm response available</strong></li>
+            <li><strong>Debris cleanup included</strong></li>
+            <li><strong>Mon-Fri 8 AM - 6 PM</strong></li>
+            <li><strong>Sat 9:30 AM - 4:30 PM</strong></li>
           </ul>
         </div>
         <div class="sidebar-box sidebar-cta">
-          <p>Ready to get started?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">📞 (718) 877-1197</a>
+          <p>Need a dangerous tree removed?</p>
+          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">Call (718) 877-1197</a>
         </div>
         <div class="sidebar-box">
           <h3>Related Outdoor Services</h3>
@@ -103,13 +101,6 @@ const excavationSchema = createServicePageSchema({
   .page-header h1 { margin-bottom: 0.3rem; }
   .page-header p { color: #d95210; font-size: 1.1rem; font-weight: 600; max-width: none; }
 
-  .breadcrumb { margin-bottom: 1rem; }
-  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
-  .breadcrumb a { color: #a09890; text-decoration: none; }
-  .breadcrumb a:hover { color: #d95210; }
-  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
-  .breadcrumb li[aria-hidden="true"] { color: #404040; }
-
   .service-detail { background: #0d0d0d; }
 
   .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
@@ -120,7 +111,7 @@ const excavationSchema = createServicePageSchema({
 
   .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
   .detail-list li { color: #c0b8b0; font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '✓'; color: #d95210; position: absolute; left: 0; font-weight: 700; }
+  .detail-list li::before { content: '+'; color: #d95210; position: absolute; left: 0; font-weight: 700; }
 
   .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
 
