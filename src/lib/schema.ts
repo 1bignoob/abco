@@ -196,7 +196,6 @@ export function createHomePageSchema() {
             '@type': 'City',
             name: 'Scranton',
             sameAs: 'https://en.wikipedia.org/wiki/Scranton,_Pennsylvania',
-            postalCode: '18512',
           },
           {
             '@type': 'AdministrativeArea',
