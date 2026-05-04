@@ -70,6 +70,15 @@ function toAbsoluteUrl(path: string): string {
   return `${SITE_URL}${normalized}`;
 }
 
+function createBusinessLogo() {
+  return {
+    '@type': 'ImageObject',
+    url: toAbsoluteUrl(`${IMG.schema}/schema-logo.png`),
+    width: '500',
+    height: '500',
+  };
+}
+
 // ─── createOrganization ───────────────────────────────────────────────────
 // Returns a raw Organization node (@type: Organization).
 // Used as the parent company record across all pages via createBaseGraph().
@@ -83,7 +92,7 @@ function createOrganization() {
     url: SITE_URL,
     telephone: '+17188771197',
     email: 'sales@abcoguys.com',
-    logo: toAbsoluteUrl(`${IMG.logos}/ABCO-logo.webp`),
+    logo: createBusinessLogo(),
     image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
     sameAs: ['https://www.facebook.com/yourpage'],
   };
@@ -106,8 +115,19 @@ function createLocalBusiness() {
     url: SITE_URL,
     telephone: '+17188771197',
     email: 'sales@abcoguys.com',
-    logo: toAbsoluteUrl(`${IMG.logos}/ABCO-logo.webp`),
-    image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
+    logo: createBusinessLogo(),
+    image: [
+      {
+        '@type': 'ImageObject',
+        url: toAbsoluteUrl(`${IMG.schema}/abco-landscaping-truck-gouldsboro-pa.webp`),
+        caption: 'ABCO Landscaping & Construction branded truck at a landscaping and excavation job site in Gouldsboro, PA 18424',
+      },
+      {
+        '@type': 'ImageObject',
+        url: toAbsoluteUrl(`${IMG.schema}/abco-skid-steer-lot-clearing-gouldsboro-pa.webp`),
+        caption: 'Skid steer performing lot clearing and brush removal at a residential property in Gouldsboro, PA 18424',
+      },
+    ],
     sameAs: ['https://www.facebook.com/yourpage'],
     priceRange: '$$',
     address: {
@@ -198,12 +218,7 @@ export function createHomePageSchema() {
         telephone: '+1-718-877-1197',
         email: 'sales@abcoguys.com',
         priceRange: '$$',
-        logo: {
-          '@type': 'ImageObject',
-          url: toAbsoluteUrl(`${IMG.schema}/schema-logo.png`),
-          width: '500',
-          height: '500',
-        },
+        logo: createBusinessLogo(),
         image: [
           toAbsoluteUrl(`${IMG.schema}/schema-image.webp`),
           toAbsoluteUrl(`${IMG.portfolio}/schema-image.webp`),

@@ -236,6 +236,12 @@ a[href^="tel"] {
 }
 a[href^="tel"]:hover { color: var(--color-orange); }
 
+/* Keep call CTA labels on one line in buttons across all pages. */
+a.btn[href^="tel:"],
+a[href^="tel:"].btn {
+  white-space: nowrap;
+}
+
 /* === Prose (blog posts) === */
 .prose {
   max-width: 72ch;
