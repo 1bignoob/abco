@@ -1,14 +1,11 @@
 ---
-// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTA from '../components/CTA.astro';
 import { createAboutPageSchema } from '../lib/schema';
 const base = import.meta.env.BASE_URL;
-// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const aboutSchema = createAboutPageSchema();
 ---
 
-{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="About ABCO Landscaping & Construction in Eagle Lake, PA"
   description="Learn about ABCO Landscaping & Construction, a local company serving Eagle Lake, Gouldsboro, and Covington Township, PA with landscaping, excavation, and property maintenance."
@@ -16,7 +13,6 @@ const aboutSchema = createAboutPageSchema();
   schemaJson={aboutSchema}
 >
 
-  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
       <h1>About ABCO Landscaping &amp; Construction in Eagle Lake, PA</h1>
@@ -24,7 +20,6 @@ const aboutSchema = createAboutPageSchema();
     </div>
   </div>
 
-  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
   <section class="about-section section">
     <div class="container about-grid">
 

@@ -1,9 +1,7 @@
 ---
-// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
-// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const parkModelRepairSchema = createServicePageSchema({
   slug: 'park-model-home-repair',
   name: 'Park Model Home Repair in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -13,7 +11,6 @@ const parkModelRepairSchema = createServicePageSchema({
 });
 ---
 
-{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="Park Model Home Repair in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Specialized repair and maintenance support for park model homes and surrounding property areas in Eagle Lake, Gouldsboro, and Covington Township, PA."
@@ -21,7 +18,6 @@ const parkModelRepairSchema = createServicePageSchema({
   schemaJson={parkModelRepairSchema}
 >
 
-  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
       <h1>Park Model Home Repair in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
@@ -29,7 +25,6 @@ const parkModelRepairSchema = createServicePageSchema({
     </div>
   </div>
 
-  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
   <section class="service-detail section">
     <div class="container detail-grid">
 

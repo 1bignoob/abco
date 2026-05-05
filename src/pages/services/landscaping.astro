@@ -33,7 +33,7 @@ const landscapingSchema = createServicePageSchema({
     </div>
 
     <div class="container landscape-hero-content">
-      <h1>Landscaping Services in Gouldsboro, PA</h1>
+      <h1>Landscaping Services</h1>
       <p class="hero-intro">
         ABCO Landscaping provides reliable lawn mowing, weed control, mulch installation,
         planting, and basic landscape maintenance for properties in Gouldsboro, Eagle Lake,
@@ -41,8 +41,8 @@ const landscapingSchema = createServicePageSchema({
       </p>
 
       <div class="hero-cta" aria-label="Landscaping service actions">
-        <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO now">Call Now</a>
-        <a href="/contact/" class="btn btn-white-outline" title="Request a landscaping estimate">Request Estimate</a>
+        <a href="/contact/" class="btn btn-primary" title="Request a landscaping estimate">Get a Free Estimate</a>
+        <a href="tel:+17188771197" class="btn btn-white-outline" title="Call ABCO now">Call Us</a>
       </div>
 
       <p class="hero-subtitle" aria-label="Trust signals">
@@ -61,14 +61,14 @@ const landscapingSchema = createServicePageSchema({
 
   <section id="our-services" class="services-content section" aria-labelledby="services-heading">
     <div class="container prose">
-      <h2 id="services-heading">Lawn Care and Landscape Maintenance</h2>
+      <h2 id="services-heading">Lawn Care and Maintenance</h2>
       <p>
         A good-looking property starts with consistent lawn and landscape care. We focus on the
         basics that make the biggest visual impact: clean mowing, neat edges, controlled weeds,
         healthy planting beds, and fresh landscape materials.
       </p>
 
-      <h3>Our Landscaping Services Include</h3>
+      <h3 class="services-list-title">Our Landscaping Services Include</h3>
       <ul>
         <li>Lawn mowing</li>
         <li>Weed control</li>
@@ -221,7 +221,7 @@ const landscapingSchema = createServicePageSchema({
 <style>
   .landscape-hero {
     position: relative;
-    min-height: min(85vh, 650px);
+    min-height: min(88vh, 680px);
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -245,39 +245,49 @@ const landscapingSchema = createServicePageSchema({
     inset: 0;
     background: linear-gradient(
       120deg,
-      rgba(6, 6, 6, 0.84) 0%,
-      rgba(20, 10, 2, 0.58) 55%,
-      rgba(13, 13, 13, 0.28) 100%
+      rgba(5, 5, 5, 0.80) 0%,
+      rgba(20, 10, 2, 0.55) 55%,
+      rgba(13, 13, 13, 0.25) 100%
     );
   }
 
   .landscape-hero-content {
     position: relative;
     z-index: 1;
-    padding-block: 4.6rem;
+    padding-block: 5rem;
     max-width: 760px;
   }
 
   .landscape-hero h1 {
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
     max-width: 18ch;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.25rem;
     text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
   }
 
   .hero-intro {
     color: #ece7df;
-    font-size: 1.15rem;
-    line-height: 1.68;
-    margin-bottom: 1.1rem;
-    max-width: 72ch;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    line-height: 1.65;
+    margin-bottom: 2.25rem;
+    max-width: 52ch;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
 
   .hero-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-bottom: 0.9rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
   }
 
   .hero-subtitle {
@@ -335,10 +345,14 @@ const landscapingSchema = createServicePageSchema({
     position: absolute;
     left: 0;
     bottom: -0.1rem;
-    width: 56%;
-    height: 3px;
-    border-radius: 3px;
-    background: linear-gradient(90deg, #d95210 0%, rgba(217, 82, 16, 0.1) 100%);
+    width: 34px;
+    height: 4px;
+    border-radius: 2px;
+    background: #d95210;
+  }
+
+  .services-content .prose h3.services-list-title::after {
+    content: none;
   }
 
   .services-content .prose ul {
@@ -350,9 +364,10 @@ const landscapingSchema = createServicePageSchema({
   }
 
   .service-note {
-    border: 1px solid rgba(217, 82, 16, 0.45);
+    border: 1px solid #2e2e2e;
+    border-left: 4px solid #d95210;
     border-radius: 8px;
-    background: rgba(217, 82, 16, 0.08);
+    background: #101010;
     padding: 0.9rem 1rem;
     color: #e5dbcf;
   }

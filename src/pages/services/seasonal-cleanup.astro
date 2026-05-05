@@ -1,9 +1,7 @@
 ---
-// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
-// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
 const seasonalCleanupSchema = createServicePageSchema({
   slug: 'seasonal-cleanup',
   name: 'Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -13,7 +11,6 @@ const seasonalCleanupSchema = createServicePageSchema({
 });
 ---
 
-{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
   title="Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Spring and fall cleanup services that keep your property clean, safe, and ready for the next season in Eagle Lake, Gouldsboro, and Covington Township, PA."
@@ -21,7 +18,6 @@ const seasonalCleanupSchema = createServicePageSchema({
   schemaJson={seasonalCleanupSchema}
 >
 
-  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
       <h1>Seasonal Cleanup Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
@@ -29,7 +25,6 @@ const seasonalCleanupSchema = createServicePageSchema({
     </div>
   </div>
 
-  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
   <section class="service-detail section">
     <div class="container detail-grid">
 
