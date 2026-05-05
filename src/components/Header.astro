@@ -14,7 +14,7 @@ const navLinks: NavLink[] = [
       { href: `${base}services/excavation`,              label: 'Excavation' },
       { href: `${base}services/property-maintenance`,    label: 'Property Maintenance' },
       { href: `${base}services/tree-removal`,            label: 'Tree Removal' },
-      { href: `${base}services/lawn-care`,               label: 'Lawn Care' },
+      { href: `${base}services/stump-grinding`,           label: 'Stump Grinding' },
       { href: `${base}services/seasonal-cleanup`,        label: 'Seasonal Cleanup' },
       { href: `${base}services/gravel`,                  label: 'Gravel Delivery' },
       { href: `${base}services/winterizing`,             label: 'Winterizing' },
@@ -300,7 +300,7 @@ const { pathname } = Astro.url;
   /* Desktop: show on hover — dropdown is a child of li so no gap risk */
   @media (min-width: 861px) {
     .services-item:hover > .services-dropdown {
-      max-height: 400px;
+      max-height: 600px;
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
@@ -309,7 +309,7 @@ const { pathname } = Astro.url;
 
   /* JS-driven open state (mobile, and keyboard/accessibility) */
   .services-dropdown.is-open {
-    max-height: 400px;
+    max-height: 600px;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;

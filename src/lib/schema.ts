@@ -13,7 +13,7 @@ const SERVICE_URLS = {
   excavation: `${SITE_URL}/services/excavation/`,
   propertyMaintenance: `${SITE_URL}/services/property-maintenance/`,
   treeRemoval: `${SITE_URL}/services/tree-removal/`,
-  lawnCare: `${SITE_URL}/services/lawn-care/`,
+  stumpGrinding: `${SITE_URL}/services/stump-grinding/`,
   seasonalCleanup: `${SITE_URL}/services/seasonal-cleanup/`,
   gravel: `${SITE_URL}/services/gravel/`,
   winterizing: `${SITE_URL}/services/winterizing/`,
@@ -294,7 +294,7 @@ export function createHomePageSchema() {
           { '@id': `${SITE_URL}/#offer-excavation` },
           { '@id': `${SITE_URL}/#offer-property-maintenance` },
           { '@id': `${SITE_URL}/#offer-tree-removal` },
-          { '@id': `${SITE_URL}/#offer-lawn-care` },
+          { '@id': `${SITE_URL}/#offer-stump-grinding` },
           { '@id': `${SITE_URL}/#offer-seasonal-cleanup` },
           { '@id': `${SITE_URL}/#offer-gravel` },
           { '@id': `${SITE_URL}/#offer-winterizing` },
@@ -323,8 +323,8 @@ export function createHomePageSchema() {
       },
       {
         '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-lawn-care`,
-        itemOffered: { '@id': `${SITE_URL}/#service-lawn-care` },
+        '@id': `${SITE_URL}/#offer-stump-grinding`,
+        itemOffered: { '@id': `${SITE_URL}/#service-stump-grinding` },
       },
       {
         '@type': 'Offer',
@@ -384,11 +384,11 @@ export function createHomePageSchema() {
       },
       {
         '@type': 'Service',
-        '@id': `${SITE_URL}/#service-lawn-care`,
-        name: 'Lawn Care',
-        serviceType: 'Lawn Care',
-        description: 'Routine lawn mowing, edging, weed control, and turf care.',
-        url: SERVICE_URLS.lawnCare,
+        '@id': `${SITE_URL}/#service-stump-grinding`,
+        name: 'Stump Grinding',
+        serviceType: 'Stump Grinding',
+        description: 'Professional stump grinding and removal, ground below grade for replanting or turf.',
+        url: SERVICE_URLS.stumpGrinding,
         provider: { '@id': IDS.business },
       },
       {
@@ -483,8 +483,8 @@ export function createServicesHubSchema() {
       {
         '@type': 'ListItem',
         position: 5,
-        name: 'Lawn Care Services',
-        url: `${SITE_URL}/services/lawn-care/`,
+        name: 'Stump Grinding Services',
+        url: `${SITE_URL}/services/stump-grinding/`,
       },
       {
         '@type': 'ListItem',

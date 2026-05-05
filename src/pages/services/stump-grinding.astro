@@ -4,27 +4,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
 // NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
-const lawnCareSchema = createServicePageSchema({
-  slug: 'lawn-care',
-  name: 'Lawn Care Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+const stumpGrindingSchema = createServicePageSchema({
+  slug: 'stump-grinding',
+  name: 'Stump Grinding Services in Eagle Lake, Gouldsboro & Covington Township, PA',
   description:
-    'Routine lawn mowing, edging, weed control, and seasonal turf care for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA.',
-  serviceType: 'Lawn Care',
+    'Professional stump grinding and stump removal for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+  serviceType: 'Stump Grinding',
 });
 ---
 
 {/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
-  title="Lawn Care Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-  description="Reliable lawn mowing, edging, and turf care plans for properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
-  canonical="/services/lawn-care/"
-  schemaJson={lawnCareSchema}
+  title="Stump Grinding Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+  description="Fast, clean stump grinding and removal for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
+  canonical="/services/stump-grinding/"
+  schemaJson={stumpGrindingSchema}
 >
 
   {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
   <div class="page-header">
     <div class="container">
-      <h1>Lawn Care Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
+      <h1>Stump Grinding Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
       <p>Eagle Lake, Gouldsboro &amp; Covington Township, PA</p>
     </div>
   </div>
@@ -34,54 +34,55 @@ const lawnCareSchema = createServicePageSchema({
     <div class="container detail-grid">
 
       <div class="detail-content">
-        <h2>What Our Lawn Care Program Includes</h2>
+        <h2>What Our Stump Grinding Service Includes</h2>
         <hr class="orange-line" aria-hidden="true" />
         <p>
-          ABCO provides scheduled lawn care for homes, businesses, and managed
-          communities. We focus on consistent curb appeal and healthy growth
-          through the full season.
+          After a tree comes down, the stump is often left behind — an eyesore and a
+          tripping hazard. ABCO grinds stumps below grade so you can reclaim the space
+          for planting, hardscaping, or turf.
         </p>
         <ul class="detail-list">
-          <li>Scheduled mowing and trimming</li>
-          <li>Edging around sidewalks and beds</li>
-          <li>Blowing and cleanup after service</li>
-          <li>Seasonal weed and growth management</li>
-          <li>Lawn condition recommendations</li>
-          <li>Flexible service frequency</li>
+          <li>Single stumps or multiple stump jobs</li>
+          <li>Ground below grade for replanting or turf</li>
+          <li>Chip and debris cleanup included</li>
+          <li>Works alongside tree removal or as a standalone service</li>
+          <li>Residential and commercial properties</li>
+          <li>Tight-access locations handled</li>
         </ul>
 
-        <h2>Simple Maintenance Plans</h2>
+        <h2>Why Remove the Stump?</h2>
         <p>
-          We tailor service schedules to your property type and goals. From weekly
-          care to seasonal support, our team keeps your lawn on track and looking clean.
+          Leftover stumps attract pests, cause tripping hazards, and limit what you can
+          do with your yard. Grinding removes the above-ground stump and grinds the
+          surface root structure so it won't resprout or interfere with mowing.
         </p>
 
         <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free lawn care estimate">Request a Free Estimate</a>
+          <a href={`${base}contact`} class="btn btn-primary" title="Request a free stump grinding estimate">Request a Free Estimate</a>
           <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
         </div>
       </div>
 
       <aside class="detail-sidebar">
         <div class="sidebar-box">
-          <h3>Lawn Care Service Facts</h3>
+          <h3>Stump Grinding Service Facts</h3>
           <ul>
-            <li><strong>Weekly or biweekly options</strong></li>
             <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>Seasonal care available</strong></li>
+            <li><strong>Single or multi-stump jobs</strong></li>
+            <li><strong>Debris cleanup included</strong></li>
             <li><strong>Mon-Fri 8 AM - 6 PM</strong></li>
             <li><strong>Sat 9:30 AM - 4:30 PM</strong></li>
           </ul>
         </div>
         <div class="sidebar-box sidebar-cta">
-          <p>Ready for consistent lawn care?</p>
+          <p>Ready to clear that stump?</p>
           <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">Call (718) 877-1197</a>
         </div>
         <div class="sidebar-box">
           <h3>Related Outdoor Services</h3>
           <ul class="related-list">
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-            <li><a href={`${base}services/seasonal-cleanup`} title="View seasonal cleanup services">Seasonal Cleanup</a></li>
+            <li><a href={`${base}services/tree-removal`} title="View tree removal services">Tree Removal</a></li>
+            <li><a href={`${base}services/landscaping`} title="View landscaping services">Landscaping</a></li>
           </ul>
         </div>
       </aside>
