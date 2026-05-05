@@ -1,180 +1,478 @@
 ---
-// NEWBIE MAP: Frontmatter sets imports, dynamic data, and route-level SEO metadata.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
-// NEWBIE MAP: This schema object is passed to BaseLayout and rendered as JSON-LD for SEO.
+
 const landscapingSchema = createServicePageSchema({
   slug: 'landscaping',
-  name: 'Landscaping Services in Eagle Lake, Gouldsboro & Covington Township, PA',
+  name: 'Landscaping Services in Gouldsboro, PA | Lawn Care, Mulch, Planting & Weed Control',
   description:
-    'Professional landscaping, tree pruning, seasonal planting, lawn care, mulching, and cleanup services for properties in Eagle Lake, Gouldsboro, and Covington Township, PA.',
+    'ABCO Landscaping provides lawn mowing, weed control, mulch installation, planting, and basic landscape maintenance in Gouldsboro, Eagle Lake, and nearby Northeast PA areas.',
   serviceType: 'Landscaping',
 });
 ---
 
-{/* NEWBIE MAP: BaseLayout wraps this page with shared head tags, header, footer, and global styles. */}
 <BaseLayout
-  title="Landscaping Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-  description="Professional landscaping, tree pruning, seasonal planting, and lawn care for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
+  title="Landscaping Services in Gouldsboro, PA | Lawn Care, Mulch, Planting & Weed Control"
+  description="ABCO Landscaping provides lawn mowing, weed control, mulch installation, planting, and basic landscape maintenance in Gouldsboro, Eagle Lake, and nearby Northeast PA areas."
   canonical="/services/landscaping/"
+  image="/images/heros/landscaping-hero.webp"
   schemaJson={landscapingSchema}
 >
-
-  {/* NEWBIE MAP: Page header controls the visible H1 and intro text for this route. */}
-  <div class="page-header">
-    <div class="container">
-      <h1>Landscaping Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
-      <p>Eagle Lake, Gouldsboro &amp; Covington Township, PA</p>
+  <section class="landscape-hero" aria-label="Landscaping Services in Gouldsboro, PA">
+    <div class="landscape-hero-media" aria-hidden="true">
+      <img
+        src="/images/heros/landscaping-hero.webp"
+        alt="ABCO Landscaping truck on a Gouldsboro, PA landscaping property"
+        class="landscape-hero-img"
+        width="1536"
+        height="1024"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="landscape-hero-overlay"></div>
     </div>
-  </div>
 
-  {/* NEWBIE MAP: Main page content starts here; this is where route-specific sections live. */}
-  <section class="service-detail section">
-    <div class="container detail-grid">
+    <div class="container landscape-hero-content">
+      <h1>Landscaping Services in Gouldsboro, PA</h1>
+      <p class="hero-intro">
+        ABCO Landscaping provides reliable lawn mowing, weed control, mulch installation,
+        planting, and basic landscape maintenance for properties in Gouldsboro, Eagle Lake,
+        Covington Township, and nearby Pocono communities.
+      </p>
 
-      <div class="detail-content">
-        <h2>What Our Landscaping Company Does</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          Whether you need a full landscape refresh or just consistent seasonal care, ABCO provides
-          dependable, quality work for residential and commercial properties throughout the Eagle Lake
-          and Gouldsboro area.
-        </p>
-        <ul class="detail-list">
-          <li>Tree pruning, trimming, and safe removal</li>
-          <li>Seasonal planting — shrubs, flowers, ground cover</li>
-          <li>Lawn mowing, edging, and blowing</li>
-          <li>Fertilization and weed control programs</li>
-          <li>Mulching and bed clean-up</li>
-          <li>Stump grinding (available on request)</li>
-        </ul>
-
-        <h2>Landscaping Service Area</h2>
-        <p>
-          We serve Eagle Lake, Gouldsboro, Covington Township, and surrounding communities in
-          Wayne and Lackawanna County, PA (ZIP 18424 and nearby).
-        </p>
-
-        <h2>Lawn Care</h2>
-        <p>
-          Lawn maintenance is part of our landscaping work. We offer scheduled mowing,
-          edging, blowing, and seasonal weed and growth management so your turf stays
-          healthy between larger landscape projects.
-        </p>
-        <ul class="detail-list">
-          <li>Scheduled mowing and trimming</li>
-          <li>Edging around sidewalks and beds</li>
-          <li>Blowing and cleanup after service</li>
-          <li>Seasonal weed and growth management</li>
-          <li>Flexible service frequency</li>
-        </ul>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free landscaping estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
+      <div class="hero-cta" aria-label="Landscaping service actions">
+        <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO now">Call Now</a>
+        <a href="/contact/" class="btn btn-white-outline" title="Request a landscaping estimate">Request Estimate</a>
       </div>
 
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Landscaping Service Facts</h3>
-          <ul>
-            <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>Free estimates</strong></li>
-            <li><strong>Mon–Fri 8 AM – 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM – 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Ready to get started?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">📞 (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-            <li><a href={`${base}services/excavation`} title="View excavation services">Excavation</a></li>
-          </ul>
-        </div>
-      </aside>
+      <p class="hero-subtitle" aria-label="Trust signals">
+        Local service <span aria-hidden="true">•</span> Fast response <span aria-hidden="true">•</span> Fully insured
+      </p>
 
+      <nav class="jump-links" aria-label="Jump to page sections">
+        <a href="#our-services">Our Services</a>
+        <span aria-hidden="true">|</span>
+        <a href="#did-you-know">Did You Know</a>
+        <span aria-hidden="true">|</span>
+        <a href="#faq">FAQ</a>
+      </nav>
     </div>
   </section>
 
+  <section id="our-services" class="services-content section" aria-labelledby="services-heading">
+    <div class="container prose">
+      <h2 id="services-heading">Lawn Care and Landscape Maintenance</h2>
+      <p>
+        A good-looking property starts with consistent lawn and landscape care. We focus on the
+        basics that make the biggest visual impact: clean mowing, neat edges, controlled weeds,
+        healthy planting beds, and fresh landscape materials.
+      </p>
+
+      <h3>Our Landscaping Services Include</h3>
+      <ul>
+        <li>Lawn mowing</li>
+        <li>Weed control</li>
+        <li>Mulch installation</li>
+        <li>Planting</li>
+        <li>Landscape bed refreshes</li>
+        <li>Lawn care materials</li>
+        <li>Stone, soil, and mulch placement</li>
+        <li>Basic property beautification</li>
+      </ul>
+      <p>
+        We can help with one-time upgrades or recurring maintenance based on your property's needs.
+      </p>
+
+      <h3>Lawn Mowing</h3>
+      <p>
+        Regular mowing keeps your property maintained and easier to manage throughout the season.
+        We provide mowing for homes, vacation properties, rentals, and small commercial lots,
+        including trimming around walkways, edges, and structures for a clean finish.
+      </p>
+
+      <h3>Weed Control</h3>
+      <p>
+        Weeds can quickly overtake lawns, beds, and hardscape edges. ABCO helps control weeds in
+        lawn areas, mulch beds, planting beds, walkway edges, and hard-to-maintain zones around
+        structures. For many properties in the Poconos, consistent maintenance is more effective
+        than waiting until weeds are already out of control.
+      </p>
+
+      <h3>Mulching</h3>
+      <p>
+        Fresh mulch is one of the fastest ways to improve curb appeal. We install mulch around
+        trees, shrubs, flower beds, and walkways to create a finished look, reduce weed growth,
+        and help soil retain moisture.
+      </p>
+
+      <h3>Planting</h3>
+      <p>
+        We help with practical planting for front beds, borders, walkways, and entry areas.
+        For Pocono properties, plant choice matters because deer pressure, shade, rocky soil,
+        wet spots, and cold winters all affect long-term success.
+      </p>
+
+      <h3>Lawn Care Materials</h3>
+      <p>
+        We refresh common landscape materials including mulch, topsoil, decorative stone,
+        and planting soil. Using the right material in the right location helps reduce upkeep
+        and keeps your property cleaner between visits.
+      </p>
+
+      <p class="service-note">
+        Need regular upkeep? We can set a practical service rhythm that keeps your property clean
+        and usable without over-maintenance.
+      </p>
+    </div>
+  </section>
+
+  <section id="did-you-know" class="did-you-know section" aria-labelledby="did-you-know-heading">
+    <div class="container">
+      <h2 id="did-you-know-heading">Did You Know</h2>
+      <p class="did-intro">
+        Gouldsboro and nearby Pocono properties face unique landscaping challenges. These quick
+        notes help explain what works better in this region.
+      </p>
+
+      <div class="did-list" role="list">
+        <article class="did-item" role="listitem">
+          <h3>Deer-resistant does not mean deer-proof</h3>
+          <p>
+            Deer resistance depends on pressure, weather, and season. Plants like daffodils,
+            boxwood, bayberry, holly, and juniper are often better choices, but new plantings
+            may still need temporary protection.
+          </p>
+        </article>
+
+        <article class="did-item" role="listitem">
+          <h3>Mulch can be too deep</h3>
+          <p>
+            A clean, even mulch layer looks better and performs better than heavy mounding,
+            especially around trunks and plant stems where trapped moisture can create issues.
+          </p>
+        </article>
+
+        <article class="did-item" role="listitem">
+          <h3>Low-maintenance does not mean no-maintenance</h3>
+          <p>
+            Even simple landscapes still need trimming, weed control, refreshes, and cleanup.
+            Good design and material choices reduce maintenance, but they do not eliminate it.
+          </p>
+        </article>
+
+        <article class="did-item" role="listitem">
+          <h3>Plant choice should match the site</h3>
+          <p>
+            In the Poconos, cold winters, shade pockets, rocky soil, and wet areas can all change
+            what survives. The best results come from matching plants to actual site conditions.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="landscaping-faq section" aria-labelledby="faq-heading">
+    <div class="container">
+      <h2 id="faq-heading">Landscaping FAQ</h2>
+      <dl class="faq-list">
+        <div class="faq-item">
+          <p class="faq-kicker">Quick Answer</p>
+          <dt>What landscaping services do you offer?</dt>
+          <dd>
+            We offer lawn mowing, weed control, planting, mulching, lawn care materials,
+            and basic landscape maintenance for homes, rentals, cabins, lake properties,
+            and small commercial properties.
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-kicker">Scheduling</p>
+          <dt>Do you offer regular lawn mowing?</dt>
+          <dd>
+            Yes. We provide lawn mowing for properties in Gouldsboro, Eagle Lake,
+            and nearby Pocono communities, with scheduling based on property needs
+            and seasonal growth.
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-kicker">Curb Appeal</p>
+          <dt>Can you install mulch?</dt>
+          <dd>
+            Yes. We install mulch in foundation beds, flower beds, around shrubs,
+            and along walkways. Fresh mulch is one of the fastest ways to improve
+            curb appeal and bed definition.
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-kicker">Plant Selection</p>
+          <dt>Can you help choose deer-resistant plants?</dt>
+          <dd>
+            Yes. We can suggest practical options for deer-heavy areas. While no plant is
+            fully deer-proof, some choices are significantly less attractive to deer.
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .page-header {
-    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-    border-bottom: 1px solid #2e2e2e;
-    padding-block: 3rem 2.5rem;
-  }
-  .page-header h1 { margin-bottom: 0.3rem; }
-  .page-header p { color: #d95210; font-size: 1.1rem; font-weight: 600; max-width: none; }
-
-  .breadcrumb { margin-bottom: 1rem; }
-  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
-  .breadcrumb a { color: #a09890; text-decoration: none; }
-  .breadcrumb a:hover { color: #d95210; }
-  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
-  .breadcrumb li[aria-hidden="true"] { color: #404040; }
-
-  .service-detail { background: #0d0d0d; }
-
-  .detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: #a09890; font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-
-  .detail-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .detail-list li {
-    color: #c0b8b0;
-    font-size: 1.1rem;
-    padding-left: 1.5rem;
+  .landscape-hero {
     position: relative;
-    line-height: 1.5;
+    min-height: min(85vh, 650px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
   }
-  .detail-list li::before { content: '✓'; color: #d95210; position: absolute; left: 0; font-weight: 700; }
 
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .landscape-hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
 
-  /* Sidebar */
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+  .landscape-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+  }
 
-  .sidebar-box {
-    background: #1a1a1a;
+  .landscape-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      rgba(6, 6, 6, 0.84) 0%,
+      rgba(20, 10, 2, 0.58) 55%,
+      rgba(13, 13, 13, 0.28) 100%
+    );
+  }
+
+  .landscape-hero-content {
+    position: relative;
+    z-index: 1;
+    padding-block: 4.6rem;
+    max-width: 760px;
+  }
+
+  .landscape-hero h1 {
+    max-width: 18ch;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-intro {
+    color: #ece7df;
+    font-size: 1.15rem;
+    line-height: 1.68;
+    margin-bottom: 1.1rem;
+    max-width: 72ch;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .hero-subtitle {
+    color: #ddd5ca;
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 1.25rem;
+    max-width: none;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  .jump-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+
+  .jump-links a {
+    text-decoration: none;
+    color: #f1ede7;
+    border-bottom: 2px solid rgba(217, 82, 16, 0.7);
+    padding-bottom: 0.1rem;
+  }
+
+  .jump-links a:hover { color: #fff; border-bottom-color: #f06520; }
+
+  .jump-links span {
+    color: #aba39a;
+  }
+
+  .services-content {
+    background: #0d0d0d;
+  }
+
+  .services-content.prose h2,
+  .services-content .prose h2 {
+    margin-top: 0;
+  }
+
+  .services-content .prose h3 {
+    margin-top: 2rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.2rem;
+  }
+
+  .services-content .prose h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.1rem;
+    width: 56%;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #d95210 0%, rgba(217, 82, 16, 0.1) 100%);
+  }
+
+  .services-content .prose ul {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #2e2e2e;
+    border-left: 4px solid #d95210;
+    border-radius: 8px;
+    padding: 1rem 1.4rem 1rem 2.2rem;
+  }
+
+  .service-note {
+    border: 1px solid rgba(217, 82, 16, 0.45);
+    border-radius: 8px;
+    background: rgba(217, 82, 16, 0.08);
+    padding: 0.9rem 1rem;
+    color: #e5dbcf;
+  }
+
+  .did-you-know {
+    background:
+      linear-gradient(180deg, #101010 0%, #0d0d0d 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.015),
+        rgba(255, 255, 255, 0.015) 8px,
+        rgba(255, 255, 255, 0) 8px,
+        rgba(255, 255, 255, 0) 16px
+      );
+    border-block: 1px solid #2e2e2e;
+  }
+
+  .did-you-know h2 {
+    margin-bottom: 0.65rem;
+  }
+
+  .did-intro {
+    color: #b8b0a7;
+    max-width: 70ch;
+    margin-bottom: 1.3rem;
+  }
+
+  .did-list {
+    border-left: 4px solid #d95210;
+    padding-left: 1rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .did-item {
+    padding: 0.9rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid #2e2e2e;
     border-radius: 8px;
-    padding: 1.5rem;
   }
 
-  .sidebar-box h3 { font-size: 1rem; color: #d95210; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
+  .did-item h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.45rem;
+  }
 
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: #c0b8b0; font-size: 1rem; }
+  .did-item p {
+    color: #b8b0a7;
+    max-width: 74ch;
+    margin: 0;
+  }
 
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: #a09890; font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
+  .landscaping-faq {
+    background: #0d0d0d;
+  }
 
-  .related-list li a { color: #d95210; text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: #f06520; }
+  .landscaping-faq h2 {
+    margin-bottom: 1rem;
+  }
+
+  .faq-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .faq-item {
+    padding: 1.15rem 1.2rem 1.2rem;
+    border: 1px solid #2e2e2e;
+    border-left: 4px solid #d95210;
+    border-radius: 10px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%),
+      #121212;
+  }
+
+  .faq-kicker {
+    display: inline-block;
+    color: #ffd9c9;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin: 0 0 0.45rem;
+    max-width: none;
+  }
+
+  .faq-item dt {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+  }
+
+  .faq-item dd {
+    color: #a09890;
+    margin: 0;
+    max-width: 72ch;
+  }
 
   @media (max-width: 800px) {
-    .detail-grid { grid-template-columns: 1fr; }
+    .hero-intro {
+      font-size: 1.05rem;
+    }
+
+    .hero-cta .btn {
+      width: 100%;
+    }
+
+    .jump-links {
+      gap: 0.5rem;
+      font-size: 0.98rem;
+    }
+
+    .faq-list {
+      grid-template-columns: 1fr;
+    }
+
+    .did-item {
+      padding: 0.85rem;
+    }
   }
 </style>
