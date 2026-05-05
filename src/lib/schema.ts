@@ -218,10 +218,25 @@ export function createHomePageSchema() {
         telephone: '+1-718-877-1197',
         email: 'sales@abcoguys.com',
         priceRange: '$$',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: toAbsoluteUrl(`${IMG.portfolio}/abco-landscaping-truck-gouldsboro-pa.webp`),
+          caption: 'ABCO Guys professional landscaping and construction vehicle in Gouldsboro, PA',
+          width: '1200',
+          height: '675',
+        },
         logo: createBusinessLogo(),
         image: [
-          toAbsoluteUrl(`${IMG.schema}/schema-image.webp`),
-          toAbsoluteUrl(`${IMG.portfolio}/schema-image.webp`),
+          {
+            '@type': 'ImageObject',
+            url: toAbsoluteUrl(`${IMG.schema}/abco-landscaping-truck-gouldsboro-pa.webp`),
+            caption: 'ABCO Landscaping & Construction branded truck at a landscaping and excavation job site in Gouldsboro, PA 18424',
+          },
+          {
+            '@type': 'ImageObject',
+            url: toAbsoluteUrl(`${IMG.schema}/abco-skid-steer-lot-clearing-gouldsboro-pa.webp`),
+            caption: 'Skid steer performing lot clearing and brush removal at a residential property in Gouldsboro, PA 18424',
+          },
         ],
         address: {
           '@type': 'PostalAddress',
