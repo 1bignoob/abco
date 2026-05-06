@@ -1,9 +1,21 @@
 ---
+// ─── blog/index.astro ───────────────────────────────────────────────────────
+// Blog listing page — outputs to abcoguys.com/blog/
+//
+// Loads ALL posts from src/content/blog/*.md, sorted newest-first.
+// Each post renders as a .post-row article with title, date, tags, and a link.
+//
+// TO ADD A NEW POST: create a new .md file in src/content/blog/
+//   Required frontmatter: title, description, pubDate
+//   Optional:  author, tags, image, imageAlt
+//   The file name becomes the URL slug (e.g. my-post.md → /blog/my-post)
+// ─────────────────────────────────────────────────────────────────────────────
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { createBlogIndexSchema } from '../../lib/schema';
 
 const base = import.meta.env.BASE_URL;
+// All posts sorted newest-first — no slice, all shown on this page
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 const blogIndexSchema = createBlogIndexSchema(posts);

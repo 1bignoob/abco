@@ -1,4 +1,21 @@
 ---
+// ─── index.astro ────────────────────────────────────────────────────────────────
+// The site homepage — outputs to abcoguys.com/
+//
+// PAGE SECTION ORDER:
+//   1. Hero           → <Hero />               (full-bleed background image + CTAs)
+//   2. Services Grid  → <ServiceCards />        (9 service cards with links)
+//   3. Blog Highlights→ inline section           (latest 3 posts, fetched from collection)
+//   4. Orange CTA     → <CTA />                 (call-to-action banner)
+//   5. FAQ Preview    → <FAQPreview />           (4 teaser Q&As with link to full FAQ)
+//   6. Contact Form   → <ContactSection />       (Web3Forms contact form)
+//
+// BLOG POSTS: fetched at build time via getCollection('blog') from
+//   src/content/blog/*.md — sorted by pubDate, most recent 3 shown.
+//
+// SCHEMA: createHomePageSchema() from src/lib/schema.ts injects
+//   HomeAndConstructionBusiness structured data into <head> via BaseLayout.
+// ─────────────────────────────────────────────────────────────────────────────
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCards from '../components/ServiceCards.astro';
@@ -9,6 +26,7 @@ import { getCollection } from 'astro:content';
 import { createHomePageSchema } from '../lib/schema';
 
 const base = import.meta.env.BASE_URL;
+// Fetch all blog posts, sort newest-first, keep only the 3 most recent for homepage
 const allPosts = await getCollection('blog');
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())

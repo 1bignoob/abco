@@ -1,4 +1,20 @@
 ---
+// ─── ContactSection.astro ────────────────────────────────────────────────────
+// The contact form section — used on the homepage and the /contact page.
+//
+// FORM SUBMISSION: handled by Web3Forms (https://web3forms.com)
+//   • access_key    → the Web3Forms account key (hidden input)
+//   • botcheck      → honeypot field (hidden checkbox to block spam bots)
+//   • redirect      → set to "false" so we handle success in JS (no page reload)
+//
+// ON SUBMIT:
+//   • The form POSTs to Web3Forms via fetch() in the <script> block
+//   • On success: form hides, #cf-thankyou div shows
+//   • On failure: user sees an alert
+//
+// TO CHANGE where emails go: log into web3forms.com and update the access_key.
+// TO ADD FIELDS: add a new <input> with a matching `name` attribute.
+// ─────────────────────────────────────────────────────────────────────────────
 ---
 
 <section class="contact-section section" aria-labelledby="contact-heading" id="contact">

@@ -1,3 +1,29 @@
+// ─── lib/schema.ts ───────────────────────────────────────────────────────────────
+// All Google structured-data (JSON-LD) for the site lives here.
+// Each page imports and calls the matching create*Schema() function,
+// then passes the result to BaseLayout via the `schemaJson` prop.
+//
+// QUICK REFERENCE — which function to call on each page:
+//   index.astro                    → createHomePageSchema()
+//   services/index.astro           → createServicesHubSchema()
+//   services/[any].astro           → createServicePageSchema({ slug, name, description, serviceType })
+//   blog/index.astro               → createBlogIndexSchema(posts)
+//   blog/[slug].astro              → createBlogPostSchema({ slug, title, description, ... })
+//   about.astro                    → createAboutPageSchema()
+//   faq.astro                      → createFaqPageSchema(faqs)
+//   contact.astro                  → createContactPageSchema()
+//   terms-of-use / privacy / disclaimer → createLegalPageSchema({ path, name, description })
+//
+// SHARED CONSTANTS (at top of file):
+//   SITE_URL       → canonical origin, used in every absolute URL
+//   IMG            → shorthand paths to each image folder
+//   SERVICE_URLS   → full URLs for all 9 service pages
+//   IDS            → @id anchors reused across @graph nodes
+//   SERVICE_TYPES  → serviceType array shared by LocalBusiness nodes
+//   AREA_SERVED    → geographic area list shared by service page schemas
+//   OPENING_HOURS  → hours spec reused by LocalBusiness and service pages
+//   CREATOR        → GothamWebDev org node attached to every page WebSite
+// ─────────────────────────────────────────────────────────────────────────────
 const SITE_URL = 'https://abcoguys.com';
 
 const IMG = {
@@ -443,6 +469,10 @@ export function createHomePageSchema() {
   };
 }
 
+// ─── createServicesHubSchema ─────────────────────────────────────────────────────────
+// Schema for the /services/ hub page (CollectionPage + ItemList of 9 services).
+// Used ONLY in: src/pages/services/index.astro
+// To add a service: increment numberOfItems and add a ListItem.
 export function createServicesHubSchema() {
   const pageUrl = `${SITE_URL}/services/`;
   const webPage = {
@@ -528,6 +558,14 @@ export function createServicesHubSchema() {
   return schema;
 }
 
+// ─── createServicePageSchema ────────────────────────────────────────────────────────
+// Schema for individual service pages (WebPage + Service + BreadcrumbList).
+// Used in: every src/pages/services/[name].astro file.
+// Options:
+//   slug        → URL segment (e.g. "landscaping")
+//   name        → human-readable service name (also used as page <title>)
+//   description → service page meta description
+//   serviceType → schema.org serviceType value (e.g. "Landscaping")
 export function createServicePageSchema(options: {
   slug: string;
   name: string;
@@ -575,6 +613,10 @@ export function createServicePageSchema(options: {
   return schema;
 }
 
+// ─── createBlogIndexSchema ─────────────────────────────────────────────────────────
+// Schema for the /blog/ listing page (CollectionPage + Blog + ItemList of all posts).
+// Used ONLY in: src/pages/blog/index.astro
+// The `posts` array is passed in from getCollection('blog') at build time.
 export function createBlogIndexSchema(posts: Array<{ id: string; data: { title: string } }>) {
   const pageUrl = `${SITE_URL}/blog/`;
   const webPage = {
@@ -620,6 +662,10 @@ export function createBlogIndexSchema(posts: Array<{ id: string; data: { title: 
   return schema;
 }
 
+// ─── createBlogPostSchema ──────────────────────────────────────────────────────────
+// Schema for an individual blog post (WebPage + BlogPosting + BreadcrumbList).
+// Used ONLY in: src/pages/blog/[slug].astro
+// Tags from frontmatter are joined into the `keywords` field automatically.
 export function createBlogPostSchema(options: {
   slug: string;
   title: string;
@@ -679,6 +725,9 @@ export function createBlogPostSchema(options: {
   return schema;
 }
 
+// ─── createAboutPageSchema ─────────────────────────────────────────────────────────
+// Schema for the /about/ page (AboutPage + BreadcrumbList).
+// Used ONLY in: src/pages/about.astro
 export function createAboutPageSchema() {
   const pageUrl = `${SITE_URL}/about/`;
   const webPage = {
@@ -711,6 +760,10 @@ export function createAboutPageSchema() {
   return schema;
 }
 
+// ─── createFaqPageSchema ───────────────────────────────────────────────────────────
+// Schema for the /faq/ page (FAQPage with Question/Answer pairs + BreadcrumbList).
+// Used ONLY in: src/pages/faq.astro
+// The `faqs` array is passed in from the page's own data array.
 export function createFaqPageSchema(faqs: Array<{ q: string; a: string }>) {
   const pageUrl = `${SITE_URL}/faq/`;
   const webPage = {
@@ -755,6 +808,9 @@ export function createFaqPageSchema(faqs: Array<{ q: string; a: string }>) {
   return schema;
 }
 
+// ─── createContactPageSchema ────────────────────────────────────────────────────────
+// Schema for the /contact/ page (ContactPage + BreadcrumbList).
+// Used ONLY in: src/pages/contact.astro
 export function createContactPageSchema() {
   const pageUrl = `${SITE_URL}/contact/`;
   const webPage = {
@@ -787,6 +843,10 @@ export function createContactPageSchema() {
   return schema;
 }
 
+// ─── createLegalPageSchema ─────────────────────────────────────────────────────────
+// Schema for the three legal pages: terms-of-use, privacy-policy, disclaimer.
+// Used in: src/pages/terms-of-use.astro, privacy-policy.astro, disclaimer.astro
+// Set pageType to 'PrivacyPolicy' for the privacy page; omit for the others.
 export function createLegalPageSchema(options: {
   path: '/terms-of-use/' | '/privacy-policy/' | '/disclaimer/';
   name: string;

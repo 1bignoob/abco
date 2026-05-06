@@ -1,4 +1,18 @@
 ---
+// ─── CTA.astro ────────────────────────────────────────────────────────────────
+// Reusable full-width orange call-to-action banner.
+// Used on: homepage (index.astro) and can be dropped into any page.
+//
+// Props (both optional — defaults shown below):
+//   heading  → the bold headline text
+//   subtext  → the smaller paragraph below the headline
+//
+// TO CUSTOMIZE per page, pass props when importing:
+//   <CTA heading="Custom Heading" subtext="Custom subtext" />
+//
+// Left side:  heading + subtext
+// Right side: phone button (dark) + estimate link (white outline)
+// ─────────────────────────────────────────────────────────────────────────────
 interface Props {
   heading?: string;
   subtext?: string;
@@ -30,6 +44,7 @@ const base = import.meta.env.BASE_URL;
 </section>
 
 <style>
+  /* ── Orange CTA banner — all styles scoped to this component only */
   .cta-section {
     background-color: #d95210;
     padding-block: 3.5rem;
@@ -72,6 +87,7 @@ const base = import.meta.env.BASE_URL;
     color: #fff;
   }
 
+  /* Local override: on the orange background the white-outline fills white on hover */
   .btn-white-outline {
     background-color: transparent;
     color: #fff;

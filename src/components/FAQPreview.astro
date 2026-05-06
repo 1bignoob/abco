@@ -1,5 +1,14 @@
 ---
+// ─── FAQPreview.astro ────────────────────────────────────────────────────────
+// A short FAQ teaser shown on the homepage — 4 questions max.
+// NOT the full FAQ page (that lives at src/pages/faq.astro).
+//
+// TO EDIT QUESTIONS: update the `faqs` array below.
+// TO ADD MORE: add objects with `q` (question) and `a` (answer) keys.
+// The "View all FAQs" link at the bottom points to /faq.
+// ─────────────────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
+// Edit these 4 Q&As freely — they appear in the same order as the array.
 const faqs = [
   {
     q: 'What areas do you serve?',

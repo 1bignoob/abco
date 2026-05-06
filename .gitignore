@@ -1,11 +1,9 @@
-# build output
-dist/
-
-# generated types
-.astro/
-
 # dependencies
 node_modules/
+
+# build output and local caches
+dist/
+.astro/
 
 # logs
 npm-debug.log*
@@ -17,15 +15,9 @@ pnpm-debug.log*
 .env
 .env.production
 
-# macOS-specific files
+# OS/editor artifacts
 .DS_Store
-
-# jetbrains setting folder
 .idea/
 
-# ABCO instruction/reference files
-ABCO-schema.txt
+# local reference note
 ABCO-accessibility-and-performance.txt
-ABCO-additional-info.txt
-ABCO-master-prompt.txt
-ABCO-design.txt

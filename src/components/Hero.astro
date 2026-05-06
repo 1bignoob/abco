@@ -1,4 +1,18 @@
 ---
+// ─── Hero.astro ───────────────────────────────────────────────────────────────
+// The full-bleed hero section shown at the top of the homepage (index.astro).
+// It is NOT used on service pages — each service page has its own inline hero.
+//
+// STRUCTURE:
+//   .hero-media     → background image + dark overlay gradient
+//   .hero-content   → headline, subtext, CTA buttons, trust bar
+//
+// TO EDIT:
+//   • Change the headline/subtext directly in the <h1> and <p class="hero-sub">
+//   • CTA buttons: update href or label in .hero-actions
+//   • Background image: update src in <img class="hero-img">
+//   • Trust bar text: edit the <p class="hero-trust"> line
+// ─────────────────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -23,7 +37,8 @@ const base = import.meta.env.BASE_URL;
     <p class="hero-sub">
       ABCO Landscaping &amp; Construction serves Eagle Lake, Gouldsboro, and Covington Township with landscaping, excavation, tree removal, and property maintenance services.
     </p>
-    <div class="hero-actions">
+    {/* Primary CTA → contact page; secondary CTA → direct phone call */}
+    <div class="hero-actions cta-equal-width">
       <a href={`${base}contact`} class="btn btn-primary" title="Request a free landscaping or excavation estimate">
         Get a Free Estimate
       </a>
@@ -39,6 +54,7 @@ const base = import.meta.env.BASE_URL;
 </section>
 
 <style>
+  /* ── Hero layout ── full viewport section with stacked image + content */
   .hero {
     position: relative;
     min-height: min(88vh, 680px);
@@ -102,6 +118,7 @@ const base = import.meta.env.BASE_URL;
     gap: 1rem;
   }
 
+
   .hero-trust {
     display: flex;
     flex-wrap: wrap;
@@ -121,6 +138,7 @@ const base = import.meta.env.BASE_URL;
     .desktop-break { display: inline; }
   }
 
+  /* ── Mobile: stack buttons full-width on small screens */
   @media (max-width: 480px) {
     .hero-actions .btn { width: 100%; justify-content: center; }
     .hero-trust { font-size: 0.9rem; }

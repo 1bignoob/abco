@@ -1,4 +1,19 @@
 ---
+// ─── blog/[slug].astro ─────────────────────────────────────────────────────
+// Individual blog post page — outputs to abcoguys.com/blog/[post-filename]/
+//
+// getStaticPaths() runs at build time: it reads every .md file from the
+// blog collection and generates one page per post. The file name (without .md)
+// becomes the URL slug automatically.
+//
+// `render(post)` turns the Markdown body into an Astro <Content /> component
+// which is dropped into the .prose wrapper below.
+//
+// SCHEMA: createBlogPostSchema() generates BlogPosting structured data
+// including author, tags, and publish date.
+//
+// TO ADD A NEW POST: just drop a new .md in src/content/blog/ — no code changes needed.
+// ─────────────────────────────────────────────────────────────────────────────
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { createBlogPostSchema } from '../../lib/schema';

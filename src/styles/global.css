@@ -1,9 +1,27 @@
 /* ============================================================
    ABCO Landscaping & Construction — Global Styles
    abcoguys.com | Large-print, high-contrast, accessible
+
+   HOW THIS FILE IS USED:
+   Imported once in BaseLayout.astro so every page shares these styles.
+   Component-level styles live in each .astro file's own <style> block
+   and are scoped to that component only.
+
+   SECTION MAP (search for === label):
+     === CSS Custom Properties ===  → colours, fonts, spacing tokens
+     === Reset ===                  → box-model reset + reduced-motion
+     === Buttons ===                → .btn, .btn-primary, .btn-outline, .btn-white-outline
+     === Container ===              → .container max-width wrapper
+     === Typography ===             → heading sizes, body, paragraph
+     === Utility ===                → helper classes + .cta-equal-width
+     === Cards ===                  → .card base style
+     === Phone links ===            → tel: link overrides
+     === Prose ===                  → blog post body styles
    ============================================================ */
 
-/* === CSS Custom Properties === */
+/* === CSS Custom Properties ===
+   Edit these tokens to change site-wide colours, sizes, and spacing.
+   Every component uses var(--...) so changing a token here updates the whole site. */
 :root {
   --color-bg:          #0d0d0d;
   --color-surface:     #1a1a1a;
@@ -44,7 +62,9 @@
   --transition: 0.2s ease;
 }
 
-/* === Reset === */
+/* === Reset ===
+   Normalises browser defaults. Don't edit unless you have a specific reason.
+   prefers-reduced-motion block respects OS-level animation preferences. */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -114,7 +134,11 @@ a:hover, a:focus { color: var(--color-orange-hov); }
   border-radius: var(--radius-sm);
 }
 
-/* === Buttons === */
+/* === Buttons ===
+   Base .btn class shared by all buttons.
+   Variants: .btn-primary (orange fill), .btn-outline (orange border),
+             .btn-white-outline (white border — used on dark/orange backgrounds).
+   All buttons are accessible: visible focus ring via :focus-visible above. */
 .btn {
   display: inline-block;
   padding: 0.875rem 2rem;
@@ -161,18 +185,24 @@ a:hover, a:focus { color: var(--color-orange-hov); }
   color: #0d0d0d;
 }
 
-/* === Container === */
+/* === Container ===
+   Centres content and limits max-width. Use class="container" on section inners.
+   Padding-inline keeps content off the screen edges on mobile. */
 .container {
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: 2.25rem;
 }
 
-/* === Sections === */
+/* === Sections ===
+   .section    → standard full-height section padding (4rem block)
+   .section-sm → shorter section padding (2.5rem block) */
 .section    { padding-block: var(--space-xl); }
 .section-sm { padding-block: var(--space-lg); }
 
-/* === Typography === */
+/* === Typography ===
+   Heading sizes are fluid (clamp-based) so they scale with viewport.
+   p max-width: 70ch limits paragraph line length for readability. */
 h1, h2, h3, h4, h5, h6 {
   line-height: var(--line-height-heading);
   font-weight: 700;
@@ -185,11 +215,23 @@ h4 { font-size: var(--font-size-lg); }
 
 p { max-width: 70ch; }
 
-/* === Utility === */
+/* === Utility ===
+   Small single-purpose helper classes. Add new ones here as needed.
+   .cta-equal-width  → makes .btn-primary and .btn-white-outline equal width
+                       inside any CTA wrapper (hero-actions, hero-cta, etc.) */
 .text-center  { text-align: center; }
 .text-orange  { color: var(--color-orange); }
 .text-muted   { color: var(--color-text-muted); }
 .text-white   { color: var(--color-white); }
+
+/* Keep primary and white-outline buttons equal width within CTA groups. */
+.cta-equal-width .btn-primary,
+.cta-equal-width .btn-white-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 220px;
+}
 
 /* === Orange divider line === */
 .orange-line {
@@ -214,7 +256,9 @@ p { max-width: 70ch; }
 }
 .section-header.text-center p { margin-inline: auto; }
 
-/* === Cards === */
+/* === Cards ===
+   Base .card style used by service pages and other card grids.
+   Hover lifts the card and shows an orange border glow. */
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -228,7 +272,9 @@ p { max-width: 70ch; }
   box-shadow: 0 8px 24px rgba(217, 82, 16, 0.15);
 }
 
-/* === Phone links === */
+/* === Phone links ===
+   Strips default link colour/underline from tel: links (they inherit surrounding text).
+   The second rule keeps the call-button label on one line inside .btn elements. */
 a[href^="tel"] {
   color: inherit;
   text-decoration: none;
@@ -242,7 +288,10 @@ a[href^="tel:"].btn {
   white-space: nowrap;
 }
 
-/* === Prose (blog posts) === */
+/* === Prose (blog posts) ===
+   Applied to the <div class="prose"> wrapper in blog/[slug].astro.
+   Styles h2–h4 spacing, paragraphs, lists, blockquotes, and links
+   specifically for long-form reading. Don't use .prose outside blog posts. */
 .prose {
   max-width: 72ch;
 }

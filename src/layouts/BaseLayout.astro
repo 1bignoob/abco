@@ -1,4 +1,28 @@
 ---
+// ─── BaseLayout.astro ─────────────────────────────────────────────────────────
+// The master HTML shell used by EVERY page on the site.
+// It wraps pages with the full <html>…</html> structure including:
+//   • All <head> meta, SEO, OG, and favicon tags
+//   • Global CSS import (src/styles/global.css)
+//   • Google Analytics (gtag.js)
+//   • JSON-LD structured data (passed via `schemaJson` prop)
+//   • <Header />, <Breadcrumb />, <Footer /> on every page
+//
+// HOW PAGES USE IT:
+//   <BaseLayout title="..." description="..." schemaJson={mySchema}>
+//     ... page content goes here via <slot />
+//   </BaseLayout>
+//
+// PROPS:
+//   title       → <title> tag + OG/Twitter title (required)
+//   description → meta description + OG/Twitter description (required)
+//   image       → OG image path (defaults to og-image-home.webp)
+//   canonical   → canonical URL path e.g. "/services/landscaping/"
+//                  (auto-derived from Astro.url.pathname if omitted)
+//   noindex     → set true on legal/utility pages to prevent indexing
+//   schemaJson  → JSON-LD object from src/lib/schema.ts (injected into <head>)
+//   ogType      → Open Graph type (defaults to "website"; use "article" for blog posts)
+// ─────────────────────────────────────────────────────────────────────────────
 interface Props {
   title: string;
   description: string;
@@ -34,6 +58,8 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Analytics — loads async so it doesn't block rendering -->
+    <!-- To disable analytics: remove the two <script> blocks below -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RF80NNQDE5"></script>
     <script
@@ -46,6 +72,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
       `}
     />
 
+    <!-- Primary meta — edit these per-page via props, not here -->
     <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -99,16 +126,20 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
 
-    <!-- Structured Data -->
+    <!-- Structured Data — injected from src/lib/schema.ts via schemaJson prop -->
+    <!-- Each page passes its own schema; this just serializes it to JSON-LD -->
     {schemaJson && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />
     )}
 
   </head>
   <body>
+    <!-- Skip link: lets keyboard/screen-reader users jump past the nav -->
     <a href="#main-content" class="skip-link" title="Skip to main content">Skip to main content</a>
+    <!-- Header and breadcrumb render on every page automatically -->
     <Header />
     <Breadcrumb />
+    <!-- Each page's content is injected here via <slot /> -->
     <main id="main-content">
       <slot />
     </main>

@@ -1,4 +1,21 @@
 ---
+// ─── Footer.astro ─────────────────────────────────────────────────────────────
+// Site-wide footer rendered on every page via BaseLayout.astro.
+//
+// FOUR COLUMN GRID:
+//   1. Brand/Contact → business name, tagline, phone, email, Facebook link
+//   2. Services      → quick links to 3 main services + "All Services"
+//   3. Company       → About, Blog, FAQ, Contact
+//   4. Hours         → operating hours
+//
+// BOTTOM BAR: copyright, site credit, and legal links (Terms, Privacy, Disclaimer)
+//
+// TO UPDATE HOURS: edit the .hours-list <li> items in the HTML
+// TO UPDATE PHONE/EMAIL: change the <a href="tel:"> and <a href="mailto:"> values
+// TO ADD A SERVICE LINK: add a new <li> in the "Services" column
+//
+// Year is auto-calculated via `new Date().getFullYear()`.
+// ─────────────────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 ---
@@ -30,7 +47,7 @@ const year = new Date().getFullYear();
             aria-label="ABCO Landscaping on Facebook (opens in new tab)"
             title="Visit ABCO Landscaping and Construction on Facebook"
           >
-            Facebook 📘
+            Facebook
           </a>
         </div>
       </div>

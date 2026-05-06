@@ -1,9 +1,25 @@
 ---
+// ─── Header.astro ─────────────────────────────────────────────────────────────
+// Sticky site header rendered on every page via BaseLayout.astro.
+//
+// TO ADD A TOP-LEVEL NAV LINK: push a new object into navLinks[]
+// TO ADD A SERVICES DROPDOWN ITEM: add to the `children` array on the Services entry
+// TO RENAME A PAGE: change `label` here AND the page file in src/pages/
+//
+// aria-current="page" is set automatically based on Astro.url.pathname
+// so the active link is highlighted without any extra work.
+//
+// The <script> block below handles:
+//   • Mobile hamburger toggle (opens/closes the nav)
+//   • Services dropdown toggle on mobile
+//   • Click-outside and Escape key to close both
+// ─────────────────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
 
 interface NavChild { href: string; label: string; }
 interface NavLink  { href: string; label: string; children?: NavChild[]; }
 
+// ── NAV LINKS — edit this array to change the top-level navigation ──
 const navLinks: NavLink[] = [
   { href: base, label: 'Home' },
   {
@@ -134,7 +150,7 @@ const { pathname } = Astro.url;
     closeSvcDropdown();
   }
 
-  // Mobile hamburger
+  // ── Mobile hamburger: toggles .is-open on the nav element ──
   toggle?.addEventListener('click', (e) => {
     e.stopPropagation();
     const expanded = toggle.getAttribute('aria-expanded') === 'true';
@@ -143,7 +159,7 @@ const { pathname } = Astro.url;
     toggle.classList.toggle('is-active');
   });
 
-  // Services mobile chevron toggle
+  // ── Services mobile chevron: toggles .is-open on the dropdown only ──
   svcMobileBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = svcDrop!.classList.toggle('is-open');
@@ -151,7 +167,7 @@ const { pathname } = Astro.url;
     svcMobileBtn.classList.toggle('is-active', isOpen);
   });
 
-  // Outside click closes nav (mobile nav AND mobile services dropdown)
+  // ── Close nav when clicking anywhere outside the nav element ──
   document.addEventListener('click', (e) => {
     if (nav && toggle && !toggle.contains(e.target as Node) && !nav.contains(e.target as Node)) {
       closeNav();
