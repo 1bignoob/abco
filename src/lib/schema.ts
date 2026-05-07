@@ -14,13 +14,25 @@
 //   contact.astro                  → createContactPageSchema()
 //   terms-of-use / privacy / disclaimer → createLegalPageSchema({ path, name, description })
 //
+// PAGE ENTITY RULES (Offer/Service scope):
+//   • Homepage: full catalog (all OFFERS + all SERVICES)
+//   • Services hub (/services): full catalog (all OFFERS + all SERVICES)
+//   • Individual service page: ONLY the matching Offer + Service for that slug
+//       Example: /services/excavation/ → offer-excavation + service-excavation
+//   • Blog/About/FAQ/Contact/Legal pages: no Offer/Service catalog entities
+//
+// AREA TYPE CONSISTENCY:
+//   • All pages reuse AREA_SERVED (single source of truth).
+//   • If you change place types (City vs Place vs AdministrativeArea), change it once here.
+//
 // SHARED CONSTANTS (at top of file):
 //   SITE_URL       → canonical origin, used in every absolute URL
 //   IMG            → shorthand paths to each image folder
 //   SERVICE_URLS   → full URLs for all 9 service pages
 //   IDS            → @id anchors reused across @graph nodes
-//   SERVICE_TYPES  → serviceType array shared by LocalBusiness nodes
-//   AREA_SERVED    → geographic area list shared by service page schemas
+//   AREA_SERVED    → 7-entry geographic area list with sameAs links (shared by all pages)
+//   SERVICES       → all 9 Service nodes (single source of truth)
+//   OFFERS         → all 9 Offer nodes with itemOffered references
 //   OPENING_HOURS  → hours spec reused by LocalBusiness and service pages
 //   CREATOR        → GothamWebDev org node attached to every page WebSite
 // ─────────────────────────────────────────────────────────────────────────────
@@ -54,18 +66,15 @@ const IDS = {
   organization: `${SITE_URL}/#organization`,
 };
 
-const SERVICE_TYPES = [
-  'Landscaping',
-  'Excavation',
-  'Tree removal',
-  'Tree pruning',
-  'Property maintenance',
-];
-
+// Detailed area list with sameAs — used by every page including homepage
 const AREA_SERVED = [
-  { '@type': 'Place', name: 'Eagle Lake, PA' },
-  { '@type': 'Place', name: 'Gouldsboro, PA' },
-  { '@type': 'Place', name: 'Covington Township, PA' },
+  { '@type': 'Place',              name: '18424',              sameAs: 'https://en.wikipedia.org/wiki/Gouldsboro,_Pennsylvania' },
+  { '@type': 'Place',              name: '18444',              sameAs: 'https://en.wikipedia.org/wiki/Moscow,_Pennsylvania' },
+  { '@type': 'City',               name: 'Scranton',           sameAs: 'https://en.wikipedia.org/wiki/Scranton,_Pennsylvania' },
+  { '@type': 'AdministrativeArea', name: 'Eagle Lake',         sameAs: 'https://en.wikipedia.org/wiki/Eagle_Lake,_Pennsylvania' },
+  { '@type': 'City',               name: 'Covington Township', sameAs: 'https://en.wikipedia.org/wiki/Covington_Township,_Lackawanna_County,_Pennsylvania' },
+  { '@type': 'AdministrativeArea', name: 'Lackawanna County',  sameAs: 'https://en.wikipedia.org/wiki/Lackawanna_County,_Pennsylvania' },
+  { '@type': 'AdministrativeArea', name: 'The Hideout',        sameAs: 'https://en.wikipedia.org/wiki/The_Hideout,_Pennsylvania' },
 ];
 
 const OPENING_HOURS = [
@@ -88,6 +97,107 @@ const CREATOR = {
   name: 'GothamWebDev',
   url: 'https://gothamwebdev.com',
 };
+
+// All 9 services as schema.org Service nodes — single source of truth.
+// Used by createBaseGraph() (all non-homepage pages) and createHomePageSchema().
+// serviceType is valid here on Service, NOT on LocalBusiness (use makesOffer there instead).
+const SERVICES = [
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-landscaping`,
+    name: 'Landscaping',
+    serviceType: 'Landscaping',
+    description: 'Professional landscaping design, installation, and upkeep.',
+    url: SERVICE_URLS.landscaping,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-excavation`,
+    name: 'Excavation',
+    serviceType: 'Excavation',
+    description: 'Professional grading, trenching, and excavation services.',
+    url: SERVICE_URLS.excavation,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-property-maintenance`,
+    name: 'Property Maintenance',
+    serviceType: 'Property Maintenance',
+    description: 'Routine upkeep and maintenance for residential and commercial properties.',
+    url: SERVICE_URLS.propertyMaintenance,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-tree-removal`,
+    name: 'Tree Removal',
+    serviceType: 'Tree Service',
+    description: 'Safe tree felling, branch trimming, and stump grinding.',
+    url: SERVICE_URLS.treeRemoval,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-stump-grinding`,
+    name: 'Stump Grinding',
+    serviceType: 'Stump Grinding',
+    description: 'Professional stump grinding and removal, ground below grade for replanting or turf.',
+    url: SERVICE_URLS.stumpGrinding,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-seasonal-cleanup`,
+    name: 'Seasonal Cleanup',
+    serviceType: 'Seasonal Cleanup',
+    description: 'Spring and Fall property cleanups, including leaf removal and bed clearing.',
+    url: SERVICE_URLS.seasonalCleanup,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-gravel`,
+    name: 'Gravel Delivery and Spreading',
+    serviceType: 'Gravel Installation',
+    description: 'Bulk gravel delivery, grading, and driveway installation.',
+    url: SERVICE_URLS.gravel,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-winterizing`,
+    name: 'Winterizing',
+    serviceType: 'Winterizing',
+    description: 'Property winterization services to protect homes and landscapes from freezing temperatures.',
+    url: SERVICE_URLS.winterizing,
+    provider: { '@id': IDS.business },
+  },
+  {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-park-model-home-repair`,
+    name: 'Park Model Home Repair',
+    serviceType: 'Home Repair',
+    description: 'Specialized repair and maintenance for park model homes.',
+    url: SERVICE_URLS.parkModelHomeRepair,
+    provider: { '@id': IDS.business },
+  },
+];
+
+// All 9 Offer nodes — one per service.
+// LocalBusiness.makesOffer references these by @id; @graph includes full nodes via spreads.
+const OFFERS = [
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-landscaping`,            itemOffered: { '@id': `${SITE_URL}/#service-landscaping` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-excavation`,             itemOffered: { '@id': `${SITE_URL}/#service-excavation` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-property-maintenance`,   itemOffered: { '@id': `${SITE_URL}/#service-property-maintenance` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-tree-removal`,           itemOffered: { '@id': `${SITE_URL}/#service-tree-removal` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-stump-grinding`,         itemOffered: { '@id': `${SITE_URL}/#service-stump-grinding` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-seasonal-cleanup`,       itemOffered: { '@id': `${SITE_URL}/#service-seasonal-cleanup` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-gravel`,                 itemOffered: { '@id': `${SITE_URL}/#service-gravel` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-winterizing`,            itemOffered: { '@id': `${SITE_URL}/#service-winterizing` } },
+  { '@type': 'Offer', '@id': `${SITE_URL}/#offer-park-model-home-repair`, itemOffered: { '@id': `${SITE_URL}/#service-park-model-home-repair` } },
+];
 
 function toAbsoluteUrl(path: string): string {
   if (!path || path === '/') return `${SITE_URL}/`;
@@ -127,11 +237,16 @@ function createOrganization() {
 // ─── createLocalBusiness ─────────────────────────────────────────────────
 // Returns a raw LocalBusiness node (@type: LocalBusiness).
 // This is the physical business record: address, hours, areaServed, contactPoint.
-// Called ONLY by createBaseGraph() — used on service pages, blog, about, FAQ, etc.
-// NOT used on the homepage (homepage uses createHomePageSchema() which builds its
-// own HomeAndConstructionBusiness node with full service data inline).
+// Called ONLY by createBaseGraph().
+// `offerIds` controls which offers appear on the current page:
+//   • service pages: one offer id (page-specific)
+//   • services hub: all offer ids
+//   • blog/about/contact/legal/faq: none (no service catalog noise)
+// NOT used on the homepage (homepage builds its own HomeAndConstructionBusiness graph).
 // Update: address, telephone, email, priceRange, openingHoursSpecification, areaServed.
-function createLocalBusiness() {
+function createLocalBusiness(options?: { offerIds?: string[] }) {
+  const offerIds = options?.offerIds ?? [];
+
   return {
     '@type': 'LocalBusiness',
     additionalType: 'https://schema.org/LandscapingBusiness',
@@ -171,11 +286,33 @@ function createLocalBusiness() {
         availableLanguage: 'en',
       },
     ],
-    serviceType: SERVICE_TYPES,
+    ...(offerIds.length > 0
+      ? {
+          // LocalBusiness should reference Offer nodes via makesOffer.
+          // Full Offer nodes are injected into @graph per-page in createBaseGraph().
+          makesOffer: offerIds.map((id) => ({ '@id': id })),
+        }
+      : {}),
     areaServed: AREA_SERVED,
     openingHoursSpecification: OPENING_HOURS,
     parentOrganization: { '@id': IDS.organization },
   };
+}
+
+function getServiceIdForSlug(slug: string) {
+  return `${SITE_URL}/#service-${slug}`;
+}
+
+function getOfferIdForSlug(slug: string) {
+  return `${SITE_URL}/#offer-${slug}`;
+}
+
+function findServiceBySlug(slug: string) {
+  return SERVICES.find((service) => service['@id'] === getServiceIdForSlug(slug));
+}
+
+function findOfferBySlug(slug: string) {
+  return OFFERS.find((offer) => offer['@id'] === getOfferIdForSlug(slug));
 }
 
 function createWebSite(description: string) {
@@ -207,14 +344,22 @@ function createBreadcrumbList(items: Array<{ name: string; url: string }>, idBas
 // EXCEPT the homepage. Combines: WebSite + Organization + LocalBusiness +
 // a caller-supplied webPageEntity (WebPage, ServicePage, BlogPosting, etc.).
 // Every exported create*Schema() function (except createHomePageSchema) calls this.
-// To add a new graph node to all pages: push it into the @graph array here.
-function createBaseGraph(webPageEntity: Record<string, unknown>, webSiteDescription: string) {
+// `additionalEntities` allows page-specific Offer/Service/ItemList nodes.
+function createBaseGraph(
+  webPageEntity: Record<string, unknown>,
+  webSiteDescription: string,
+  options?: {
+    localBusinessOfferIds?: string[];
+    additionalEntities?: Array<Record<string, unknown>>;
+  }
+) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
       createWebSite(webSiteDescription),
       createOrganization(),
-      createLocalBusiness(),
+      createLocalBusiness({ offerIds: options?.localBusinessOfferIds }),
+      ...(options?.additionalEntities ?? []),
       {
         ...webPageEntity,
         creator: CREATOR,
@@ -276,195 +421,12 @@ export function createHomePageSchema() {
             availableLanguage: 'en',
           },
         ],
-        areaServed: [
-          {
-            '@type': 'Place',
-            name: '18424',
-            sameAs: 'https://en.wikipedia.org/wiki/Gouldsboro,_Pennsylvania',
-          },
-          {
-            '@type': 'Place',
-            name: '18444',
-            sameAs: 'https://en.wikipedia.org/wiki/Moscow,_Pennsylvania',
-          },
-          {
-            '@type': 'City',
-            name: 'Scranton',
-            sameAs: 'https://en.wikipedia.org/wiki/Scranton,_Pennsylvania',
-          },
-          {
-            '@type': 'AdministrativeArea',
-            name: 'Eagle Lake',
-            sameAs: 'https://en.wikipedia.org/wiki/Eagle_Lake,_Pennsylvania',
-          },
-          {
-            '@type': 'City',
-            name: 'Covington Township',
-            sameAs: 'https://en.wikipedia.org/wiki/Covington_Township,_Lackawanna_County,_Pennsylvania',
-          },
-          {
-            '@type': 'AdministrativeArea',
-            name: 'Lackawanna County',
-            sameAs: 'https://en.wikipedia.org/wiki/Lackawanna_County,_Pennsylvania',
-          },
-          {
-            '@type': 'AdministrativeArea',
-            name: 'The Hideout',
-            sameAs: 'https://en.wikipedia.org/wiki/The_Hideout,_Pennsylvania',
-          },
-        ],
-        openingHoursSpecification: [
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-            opens: '08:00',
-            closes: '18:00',
-          },
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: 'Saturday',
-            opens: '09:30',
-            closes: '16:30',
-          },
-        ],
-        makesOffer: [
-          { '@id': `${SITE_URL}/#offer-landscaping` },
-          { '@id': `${SITE_URL}/#offer-excavation` },
-          { '@id': `${SITE_URL}/#offer-property-maintenance` },
-          { '@id': `${SITE_URL}/#offer-tree-removal` },
-          { '@id': `${SITE_URL}/#offer-stump-grinding` },
-          { '@id': `${SITE_URL}/#offer-seasonal-cleanup` },
-          { '@id': `${SITE_URL}/#offer-gravel` },
-          { '@id': `${SITE_URL}/#offer-winterizing` },
-          { '@id': `${SITE_URL}/#offer-park-model-home-repair` },
-        ],
+        areaServed: AREA_SERVED,
+        openingHoursSpecification: OPENING_HOURS,
+        makesOffer: OFFERS.map(o => ({ '@id': o['@id'] })),
       },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-landscaping`,
-        itemOffered: { '@id': `${SITE_URL}/#service-landscaping` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-excavation`,
-        itemOffered: { '@id': `${SITE_URL}/#service-excavation` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-property-maintenance`,
-        itemOffered: { '@id': `${SITE_URL}/#service-property-maintenance` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-tree-removal`,
-        itemOffered: { '@id': `${SITE_URL}/#service-tree-removal` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-stump-grinding`,
-        itemOffered: { '@id': `${SITE_URL}/#service-stump-grinding` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-seasonal-cleanup`,
-        itemOffered: { '@id': `${SITE_URL}/#service-seasonal-cleanup` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-gravel`,
-        itemOffered: { '@id': `${SITE_URL}/#service-gravel` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-winterizing`,
-        itemOffered: { '@id': `${SITE_URL}/#service-winterizing` },
-      },
-      {
-        '@type': 'Offer',
-        '@id': `${SITE_URL}/#offer-park-model-home-repair`,
-        itemOffered: { '@id': `${SITE_URL}/#service-park-model-home-repair` },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-landscaping`,
-        name: 'Landscaping',
-        serviceType: 'Landscaping',
-        description: 'Professional landscaping design, installation, and upkeep.',
-        url: SERVICE_URLS.landscaping,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-excavation`,
-        name: 'Excavation',
-        serviceType: 'Excavation',
-        description: 'Professional grading, trenching, and excavation services.',
-        url: SERVICE_URLS.excavation,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-property-maintenance`,
-        name: 'Property Maintenance',
-        serviceType: 'Property Maintenance',
-        description: 'Routine upkeep and maintenance for residential and commercial properties.',
-        url: SERVICE_URLS.propertyMaintenance,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-tree-removal`,
-        name: 'Tree Removal',
-        serviceType: 'Tree Service',
-        description: 'Safe tree felling, branch trimming, and stump grinding.',
-        url: SERVICE_URLS.treeRemoval,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-stump-grinding`,
-        name: 'Stump Grinding',
-        serviceType: 'Stump Grinding',
-        description: 'Professional stump grinding and removal, ground below grade for replanting or turf.',
-        url: SERVICE_URLS.stumpGrinding,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-seasonal-cleanup`,
-        name: 'Seasonal Cleanup',
-        serviceType: 'Seasonal Cleanup',
-        description: 'Spring and Fall property cleanups, including leaf removal and bed clearing.',
-        url: SERVICE_URLS.seasonalCleanup,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-gravel`,
-        name: 'Gravel Delivery and Spreading',
-        serviceType: 'Gravel Installation',
-        description: 'Bulk gravel delivery, grading, and driveway installation.',
-        url: SERVICE_URLS.gravel,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-winterizing`,
-        name: 'Winterizing',
-        serviceType: 'Winterizing',
-        description: 'Property winterization services to protect homes and landscapes from freezing temperatures.',
-        url: SERVICE_URLS.winterizing,
-        provider: { '@id': IDS.business },
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}/#service-park-model-home-repair`,
-        name: 'Park Model Home Repair',
-        serviceType: 'Home Repair',
-        description: 'Specialized repair and maintenance for park model homes.',
-        url: SERVICE_URLS.parkModelHomeRepair,
-        provider: { '@id': IDS.business },
-      },
+      ...OFFERS,
+      ...SERVICES,
     ],
   };
 }
@@ -489,7 +451,12 @@ export function createServicesHubSchema() {
 
   const schema = createBaseGraph(
     webPage,
-    'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.'
+    'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.',
+    {
+      // Services hub is the catalog page, so include full offers/services here only.
+      localBusinessOfferIds: OFFERS.map((offer) => offer['@id']),
+      additionalEntities: [...OFFERS, ...SERVICES],
+    }
   );
 
   (schema['@graph'] as Array<Record<string, unknown>>).push({
@@ -573,6 +540,11 @@ export function createServicePageSchema(options: {
   serviceType: string;
 }) {
   const pageUrl = `${SITE_URL}/services/${options.slug}/`;
+  const service = findServiceBySlug(options.slug);
+  const offer = findOfferBySlug(options.slug);
+  const fallbackServiceId = `${pageUrl}#service`;
+  const mainServiceId = service?.['@id'] ?? fallbackServiceId;
+
   const webPage = {
     '@type': 'WebPage',
     '@id': `${pageUrl}#webpage`,
@@ -581,25 +553,41 @@ export function createServicePageSchema(options: {
     description: options.description,
     isPartOf: { '@id': IDS.website },
     about: { '@id': IDS.business },
-    mainEntity: { '@id': `${pageUrl}#service` },
+    // Service pages should point to the one service they are about.
+    mainEntity: { '@id': mainServiceId },
   };
 
-  const schema = createBaseGraph(
-    webPage,
-    'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.'
-  );
+  const pageEntities: Array<Record<string, unknown>> = [];
 
-  (schema['@graph'] as Array<Record<string, unknown>>).push(
-    {
+  if (offer) pageEntities.push(offer);
+
+  if (service) {
+    pageEntities.push(service);
+  } else {
+    // Fallback for any future slug that is not yet in SERVICES.
+    pageEntities.push({
       '@type': 'Service',
-      '@id': `${pageUrl}#service`,
+      '@id': fallbackServiceId,
       name: options.name,
       serviceType: options.serviceType,
       description: options.description,
       provider: { '@id': IDS.business },
       areaServed: AREA_SERVED,
       url: pageUrl,
-    },
+    });
+  }
+
+  const schema = createBaseGraph(
+    webPage,
+    'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.',
+    {
+      // Service pages: only one offer/service pair for the current slug.
+      localBusinessOfferIds: offer ? [offer['@id']] : [],
+      additionalEntities: pageEntities,
+    }
+  );
+
+  (schema['@graph'] as Array<Record<string, unknown>>).push(
     createBreadcrumbList(
       [
         { name: 'Home', url: `${SITE_URL}/` },
