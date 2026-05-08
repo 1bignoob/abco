@@ -284,8 +284,9 @@ p { max-width: 70ch; }
 
 .services-content .prose ul {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid #2e2e2e;
-  border-left: 4px solid #d95210;
+  /*border: 1px solid #2e2e2e;
+  border-left: 4px solid #d95210;*/
+  border: 0.5px solid #d95210;
   border-radius: 8px;
   padding: 1rem 1.4rem 1rem 2.2rem;
 }
