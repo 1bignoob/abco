@@ -59,7 +59,17 @@
 
   --max-width: 1200px;
   --header-height: 72px;
+  --breadcrumb-height: 40px;
   --transition: 0.2s ease;
+
+  /* Shared visual ramp for all /services top sections and heroes. */
+  --service-shared-gradient: linear-gradient(
+    180deg,
+    #2e1405 0%,
+    #1c0e04 18%,
+    #141414 50%,
+    #0d0d0d 100%
+  );
 }
 
 /* === Reset ===
@@ -224,6 +234,11 @@ p { max-width: 70ch; }
 .text-muted   { color: var(--color-text-muted); }
 .text-white   { color: var(--color-white); }
 
+/* Use on top-level sections for all service pages so gradients stay in sync site-wide. */
+.service-shared-gradient {
+  background: var(--service-shared-gradient);
+}
+
 /* Keep primary and white-outline buttons equal width within CTA groups. */
 .cta-equal-width .btn-primary,
 .cta-equal-width .btn-white-outline {
@@ -231,6 +246,163 @@ p { max-width: 70ch; }
   align-items: center;
   justify-content: center;
   flex: 1 1 220px;
+}
+
+/* === Service Rich Content Blocks ===
+   Reusable styles for service pages that follow the landscaping layout pattern:
+   - services-content prose blocks (h3 accents + boxed list)
+   - service note callout
+   - did-you-know cards
+   - two-column local FAQ card grid
+   Reuse by keeping the same section/class structure as landscaping. */
+.services-content.prose h2,
+.services-content .prose h2 {
+  margin-top: 0;
+}
+
+.services-content .prose h3 {
+  margin-top: 2rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+}
+
+.services-content .prose h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.1rem;
+  width: 34px;
+  height: 4px;
+  border-radius: 2px;
+  background: #d95210;
+}
+
+.services-content .prose h3.services-list-title::after {
+  content: none;
+}
+
+.services-content .prose ul {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #2e2e2e;
+  border-left: 4px solid #d95210;
+  border-radius: 8px;
+  padding: 1rem 1.4rem 1rem 2.2rem;
+}
+
+.service-note {
+  border: 1px solid #2e2e2e;
+  border-left: 4px solid #d95210;
+  border-radius: 8px;
+  background: #101010;
+  padding: 0.9rem 1rem;
+  color: #e5dbcf;
+}
+
+.did-you-know {
+  background:
+    linear-gradient(180deg, #101010 0%, #0d0d0d 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.015),
+      rgba(255, 255, 255, 0.015) 8px,
+      rgba(255, 255, 255, 0) 8px,
+      rgba(255, 255, 255, 0) 16px
+    );
+  border-block: 1px solid #2e2e2e;
+}
+
+.did-you-know h2 {
+  margin-bottom: 0.65rem;
+}
+
+.did-intro {
+  color: #b8b0a7;
+  max-width: 70ch;
+  margin-bottom: 1.3rem;
+}
+
+.did-list {
+  border-left: 4px solid #d95210;
+  padding-left: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.did-item {
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+}
+
+.did-item h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.45rem;
+}
+
+.did-item p {
+  color: #b8b0a7;
+  max-width: 74ch;
+  margin: 0;
+}
+
+.landscaping-faq {
+  background: #0d0d0d;
+}
+
+.landscaping-faq h2 {
+  margin-bottom: 1rem;
+}
+
+.landscaping-faq .faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.landscaping-faq .faq-item {
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px solid #2e2e2e;
+  border-left: 4px solid #d95210;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%),
+    #121212;
+}
+
+.landscaping-faq .faq-kicker {
+  display: inline-block;
+  color: #ffd9c9;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin: 0 0 0.45rem;
+  max-width: none;
+}
+
+.landscaping-faq .faq-item dt {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+}
+
+.landscaping-faq .faq-item dd {
+  color: #a09890;
+  margin: 0;
+  max-width: 72ch;
+}
+
+@media (max-width: 800px) {
+  .landscaping-faq .faq-list {
+    grid-template-columns: 1fr;
+  }
+
+  .did-item {
+    padding: 0.85rem;
+  }
 }
 
 /* === Orange divider line === */

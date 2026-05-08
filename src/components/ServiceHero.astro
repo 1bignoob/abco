@@ -1,0 +1,233 @@
+---
+interface Props {
+  title: string;
+  intro: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  ariaLabel?: string;
+  jumpLinks?: Array<{ href: string; label: string }>;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const base = import.meta.env.BASE_URL;
+
+const {
+  title,
+  intro,
+  imageSrc,
+  imageAlt,
+  ariaLabel,
+  jumpLinks = [],
+  primaryHref = `${base}contact`,
+  primaryLabel = 'Get a Free Estimate',
+  secondaryHref = 'tel:+17188771197',
+  secondaryLabel = 'Call (718) 877-1197',
+} = Astro.props;
+
+const hasImage = Boolean(imageSrc);
+---
+
+<section class={`service-hero service-shared-gradient ${hasImage ? 'has-image' : 'no-image'}`} aria-label={ariaLabel ?? title}>
+  {imageSrc && (
+    <div class="service-hero-media" aria-hidden="true">
+      <img
+        src={imageSrc}
+        alt={imageAlt ?? ''}
+        class="service-hero-img"
+        width="1536"
+        height="1024"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="service-hero-overlay"></div>
+    </div>
+  )}
+
+  <div class="container service-hero-content">
+    <h1>{title}</h1>
+    <p class="service-hero-intro">{intro}</p>
+
+    <div class="service-hero-actions cta-equal-width" aria-label="Service page actions">
+      <a href={primaryHref} class="btn btn-primary" title="Request a free estimate from ABCO Landscaping and Construction">
+        {primaryLabel}
+      </a>
+      <a href={secondaryHref} class="btn btn-white-outline" title="Call ABCO Landscaping and Construction at 718-877-1197">
+        {secondaryLabel}
+      </a>
+    </div>
+
+    <p class="service-hero-trust" aria-label="Trust signals">
+      Local service <span aria-hidden="true">•</span> Fast response <span aria-hidden="true">•</span> Fully insured
+    </p>
+
+    {jumpLinks.length > 0 && (
+      <nav class="service-hero-jump-links" aria-label="Jump to page sections">
+        {jumpLinks.map((link, index) => (
+          <>
+            <a href={link.href}>{link.label}</a>
+            {index < jumpLinks.length - 1 && <span aria-hidden="true">|</span>}
+          </>
+        ))}
+      </nav>
+    )}
+  </div>
+</section>
+
+<style>
+  .service-hero {
+    --service-hero-height: calc(100svh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
+    position: relative;
+    min-height: calc(100vh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
+    min-height: var(--service-hero-height);
+    height: calc(100vh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
+    height: var(--service-hero-height);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* No-image service pages: reverse the placeholder ramp (black -> warm/orange). */
+  .service-hero.no-image {
+    background: linear-gradient(
+      180deg,
+      #0d0d0d 0%,
+      #141414 42%,
+      #1c0e04 78%,
+      #2e1405 100%
+    );
+  }
+
+  /* Image-based pages: add a bottom fade so the image transitions into content below. */
+  .service-hero.has-image::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: min(24vh, 220px);
+    background: linear-gradient(
+      180deg,
+      rgba(13, 13, 13, 0) 0%,
+      rgba(13, 13, 13, 0.62) 65%,
+      #0d0d0d 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .service-hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .service-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+  }
+
+  .service-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      rgba(5, 5, 5, 0.8) 0%,
+      rgba(20, 10, 2, 0.55) 55%,
+      rgba(13, 13, 13, 0.25) 100%
+    );
+  }
+
+  .service-hero-content {
+    position: relative;
+    z-index: 2;
+    padding-block: 5rem;
+    max-width: 760px;
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 18ch;
+    margin-bottom: 1.25rem;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  .service-hero-intro {
+    color: #ece7df;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    line-height: 1.65;
+    margin-bottom: 2.25rem;
+    max-width: 52ch;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  }
+
+  .service-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-hero-trust {
+    color: #ddd5ca;
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    max-width: none;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  .service-hero-jump-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+
+  .service-hero-jump-links a {
+    text-decoration: none;
+    color: #f1ede7;
+    border-bottom: 2px solid rgba(217, 82, 16, 0.7);
+    padding-bottom: 0.1rem;
+  }
+
+  .service-hero-jump-links a:hover {
+    color: #fff;
+    border-bottom-color: #f06520;
+  }
+
+  .service-hero-jump-links span {
+    color: #aba39a;
+  }
+
+  @media (max-width: 800px) {
+    .service-hero-intro {
+      font-size: 1.05rem;
+    }
+
+    .service-hero-jump-links {
+      gap: 0.5rem;
+      font-size: 0.98rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .service-hero-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

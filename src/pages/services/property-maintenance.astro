@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
 import { createServicePageSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
 const propertyMaintenanceSchema = createServicePageSchema({
@@ -17,15 +18,12 @@ const propertyMaintenanceSchema = createServicePageSchema({
   canonical="/services/property-maintenance/"
   schemaJson={propertyMaintenanceSchema}
 >
+  <ServiceHero
+    title="Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+    intro="Eagle Lake, Gouldsboro & Covington Township, PA"
+  />
 
-  <div class="page-header">
-    <div class="container">
-      <h1>Property Maintenance Services in Eagle Lake, Gouldsboro &amp; Covington Township, PA</h1>
-      <p>Eagle Lake, Gouldsboro &amp; Covington Township, PA</p>
-    </div>
-  </div>
-
-  <section class="service-detail section">
+  <section class="service-detail section service-shared-gradient">
     <div class="container detail-grid">
 
       <div class="detail-content">
@@ -92,22 +90,12 @@ const propertyMaintenanceSchema = createServicePageSchema({
 </BaseLayout>
 
 <style>
-  .page-header {
-    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-    border-bottom: 1px solid #2e2e2e;
-    padding-block: 3rem 2.5rem;
-  }
-  .page-header h1 { margin-bottom: 0.3rem; }
-  .page-header p { color: #d95210; font-size: 1.1rem; font-weight: 600; max-width: none; }
-
   .breadcrumb { margin-bottom: 1rem; }
   .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
   .breadcrumb a { color: #a09890; text-decoration: none; }
   .breadcrumb a:hover { color: #d95210; }
   .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
   .breadcrumb li[aria-hidden="true"] { color: #404040; }
-
-  .service-detail { background: #0d0d0d; }
 
   .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
 

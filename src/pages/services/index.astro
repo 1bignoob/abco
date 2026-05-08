@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
 import { createServicesHubSchema } from '../../lib/schema';
 const base = import.meta.env.BASE_URL;
 const servicesHubSchema = createServicesHubSchema();
@@ -11,18 +12,12 @@ const servicesHubSchema = createServicesHubSchema();
   canonical="/services/"
   schemaJson={servicesHubSchema}
 >
+  <ServiceHero
+    title="Landscaping, Excavation & Property Maintenance Services in Eagle Lake, PA"
+    intro="ABCO Landscaping & Construction handles everything from lawn care to full excavation projects for residential, commercial, and RV property owners throughout Eagle Lake and Covington Township, PA."
+  />
 
-  <div class="page-header">
-    <div class="container">
-      <h1>Landscaping, Excavation &amp; Property Maintenance Services in Eagle Lake, PA</h1>
-      <p>
-        ABCO Landscaping &amp; Construction handles everything from lawn care to full excavation projects
-        for residential, commercial, and RV property owners throughout Eagle Lake and Covington Township, PA.
-      </p>
-    </div>
-  </div>
-
-  <section class="services-hub section" aria-label="Service areas">
+  <section class="services-hub section service-shared-gradient" aria-label="Service areas">
     <div class="container">
 
       <div class="hub-grid">
@@ -184,22 +179,12 @@ const servicesHubSchema = createServicesHubSchema();
 </BaseLayout>
 
 <style>
-  .page-header {
-    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-    border-bottom: 1px solid #2e2e2e;
-    padding-block: 3rem 2.5rem;
-  }
-  .page-header h1 { margin-bottom: 0.5rem; }
-  .page-header p { color: #a09890; font-size: 1.1rem; max-width: 65ch; }
-
   .breadcrumb { margin-bottom: 1rem; }
   .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
   .breadcrumb a { color: #a09890; text-decoration: none; }
   .breadcrumb a:hover { color: #d95210; }
   .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
   .breadcrumb li[aria-hidden="true"] { color: #404040; }
-
-  .services-hub { background: #0d0d0d; }
 
   .hub-grid {
     display: grid;
