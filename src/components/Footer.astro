@@ -54,7 +54,7 @@ const year = new Date().getFullYear();
 
       <!-- Services -->
       <div class="footer-col">
-        <p>Services</p>
+        <h3>Services</h3>
         <ul>
           <li><a href={`${base}services/landscaping`} title="Landscaping Services">Landscaping</a></li>
           <li><a href={`${base}services/excavation`} title="Excavation Services">Excavation</a></li>
@@ -65,7 +65,7 @@ const year = new Date().getFullYear();
 
       <!-- Company -->
       <div class="footer-col">
-        <p>Company</p>
+        <h3>Company</h3>
         <ul>
           <li><a href={`${base}about`} title="About ABCO Landscaping">About Us</a></li>
           <li><a href={`${base}blog`} title="ABCO Landscaping Blog">Blog</a></li>
@@ -76,7 +76,7 @@ const year = new Date().getFullYear();
 
       <!-- Hours -->
       <div class="footer-col">
-        <p>Hours</p>
+        <h3>Hours</h3>
         <ul class="hours-list">
           <li><span>Mon – Fri</span><span>8:00 AM – 6:00 PM</span></li>
           <li><span>Saturday</span><span>9:30 AM – 4:30 PM</span></li>
@@ -125,7 +125,7 @@ const year = new Date().getFullYear();
     margin-bottom: 0.15rem;
   }
   .footer-tagline {
-    color: #787070;
+    color: #d2cecb;
     font-size: 0.9rem;
     margin-bottom: 0.35rem;
     max-width: 34ch;
@@ -134,7 +134,7 @@ const year = new Date().getFullYear();
     margin-bottom: 0.05rem;
   }
   .footer-contact-row a {
-    color: #c8c0b8;
+    color: #d2cecb;
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 600;
@@ -145,11 +145,11 @@ const year = new Date().getFullYear();
   .footer-social { margin-top: 0.3rem; }
   .footer-social a {
     display: inline-block;
-    padding: 0.24rem 0.72rem;
+    padding: 0.4rem 1rem;
     background: #1a1a1a;
     border: 1px solid #2e2e2e;
     border-radius: 4px;
-    color: #c8c0b8;
+    color: #d2cecb;
     text-decoration: none;
     font-size: 0.95rem;
     transition: border-color 0.2s, color 0.2s;
@@ -157,12 +157,12 @@ const year = new Date().getFullYear();
   .footer-social a:hover { border-color: #d95210; color: #d95210; }
 
   /* Other columns */
-  .footer-col p {
+  .footer-col h3 {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #d95210;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.55rem;
     font-weight: 700;
   }
 
@@ -171,22 +171,13 @@ const year = new Date().getFullYear();
     list-style: none;
     display: flex;
     flex-direction: column;
-  }
-
-  .footer-col ul {
-    gap: 0.12rem;
-  }
-
-  .hours-list {
     gap: 0.25rem;
   }
 
   .footer-col ul a {
-    display: inline-block;
-    color: #908880;
+    color: #d2cecb;
     text-decoration: none;
     font-size: 1rem;
-    line-height: 1.15;
     transition: color 0.2s;
   }
   .footer-col ul a:hover { color: #f0ede8; }
@@ -194,10 +185,10 @@ const year = new Date().getFullYear();
   .hours-list li {
     display: flex;
     justify-content: space-between;
-    gap: 4rem;
+    gap: 0.5rem;
     font-size: 0.9rem;
-    line-height: 1.15;
-    color: #908880;
+    line-height: 1.25;
+    color: #d2cecb;
     white-space: nowrap;
   }
   .hours-list li span:last-child {
@@ -209,23 +200,23 @@ const year = new Date().getFullYear();
   /* Bottom bar */
   .footer-bottom {
     border-top: 1px solid #1a1a1a;
-    padding-block: 0.4rem;
+    padding-block: 0.75rem;
   }
   .footer-bottom-inner {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 0.35rem;
-    font-size: 0.84rem;
-    color: #5a5450;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #d2cecb;
   }
   .footer-copy {
-    color: #5a5450;
+    color: #d2cecb;
     max-width: none;
     justify-self: start;
   }
   .footer-credit {
-    color: #5a5450;
+    color: #d2cecb;
     max-width: none;
     justify-self: center;
     text-align: center;
@@ -239,13 +230,13 @@ const year = new Date().getFullYear();
   .footer-credit a:hover { color: #e2c06a; }
   .footer-legal {
     display: flex;
-    gap: 0.75rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
     justify-self: end;
     justify-content: flex-end;
   }
   .footer-legal a {
-    color: #706860;
+    color: #d2cecb;
     text-decoration: none;
     transition: color 0.2s;
   }
