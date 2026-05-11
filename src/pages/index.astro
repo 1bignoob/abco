@@ -105,8 +105,8 @@ const homeSchema = createHomePageSchema();
 
 <style>
   .blog-home {
-    background-color: #0d0d0d;
-    border-top: 1px solid #1e1e1e;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border-sub);
   }
 
   .blog-grid {
@@ -117,8 +117,8 @@ const homeSchema = createHomePageSchema();
   }
 
   .blog-card {
-    background: #1a1a1a;
-    border: 1px solid #2e2e2e;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -126,7 +126,7 @@ const homeSchema = createHomePageSchema();
   }
 
   .blog-card:hover {
-    border-color: #d95210;
+    border-color: var(--color-orange);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(217, 82, 16, 0.12);
   }
@@ -139,7 +139,7 @@ const homeSchema = createHomePageSchema();
   .blog-tag {
     display: inline-block;
     background: rgba(217, 82, 16, 0.15);
-    color: #d95210;
+    color: var(--color-orange);
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -156,14 +156,14 @@ const homeSchema = createHomePageSchema();
   }
 
   .blog-card-title a {
-    color: #fff;
+    color: var(--color-white);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .blog-card-title a:hover { color: #d95210; }
+  .blog-card-title a:hover { color: var(--color-orange); }
 
   .blog-card-desc {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1rem;
     line-height: 1.65;
     margin-bottom: 1.25rem;
@@ -174,24 +174,24 @@ const homeSchema = createHomePageSchema();
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.75rem 1.5rem;
-    border-top: 1px solid #252525;
+    border-top: 1px solid var(--color-surface-2);
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
   .blog-date {
-    color: #706860;
+    color: var(--color-text-dim);
     font-size: 0.9rem;
   }
 
   .blog-read-more {
-    color: #d95210;
+    color: var(--color-orange);
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .blog-read-more:hover { color: #f06520; }
+  .blog-read-more:hover { color: var(--color-orange-hov); }
 
   .blog-home-cta {
     text-align: center;

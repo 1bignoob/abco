@@ -54,20 +54,20 @@ const faqs = [
 </section>
 
 <style>
-  .faq-preview { background-color: #0d0d0d; }
+  .faq-preview { background-color: var(--color-bg); }
 
   .faq-list {
     display: flex;
     flex-direction: column;
     gap: 0;
-    border: 1px solid #2e2e2e;
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     overflow: hidden;
   }
 
   .faq-item {
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid #2e2e2e;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .faq-item:last-child { border-bottom: none; }
@@ -75,12 +75,12 @@ const faqs = [
   .faq-item dt {
     font-size: 1.15rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--color-white);
     margin-bottom: 0.5rem;
   }
 
   .faq-item dd {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1.05rem;
     line-height: 1.75;
     margin-left: 0;
@@ -95,8 +95,8 @@ const faqs = [
   }
 
   .faq-more a {
-    color: #d95210;
+    color: var(--color-orange);
     text-decoration: none;
   }
-  .faq-more a:hover { color: #f06520; }
+  .faq-more a:hover { color: var(--color-orange-hov); }
 </style>

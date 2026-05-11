@@ -89,24 +89,24 @@ const stumpGrindingSchema = createServicePageSchema({
   .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
 
   .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: #a09890; font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
+  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
 
   .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: #c0b8b0; font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '+'; color: #d95210; position: absolute; left: 0; font-weight: 700; }
+  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
+  .detail-list li::before { content: '+'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
 
   .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
 
   .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: #d95210; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
+  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
+  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
   .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: #c0b8b0; font-size: 1rem; }
+  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
   .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: #a09890; font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
+  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
   .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: #d95210; text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: #f06520; }
+  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
+  .related-list li a:hover { color: var(--color-orange-hov); }
 
   @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
 </style>

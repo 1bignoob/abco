@@ -153,15 +153,7 @@ const services = [
    */
 
   .services-section {
-    /* Gradient that blends from the warm hero image color into the dark background.
-       Adjust the color stops here if the hero image changes. */
-    background: linear-gradient(
-      180deg,
-      #2e1405 0%,
-      #1c0e04 18%,
-      #141414 50%,
-      #0d0d0d 100%
-    );
+    background: var(--service-shared-gradient);
     padding-block: 5rem;
   }
 
@@ -185,14 +177,13 @@ const services = [
 
   /* On hover: full orange border, card lifts slightly, orange glow shadow */
   .svc-card:hover {
-    border-color: #d95210;
+    border-color: var(--color-orange);
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
   }
 
-  /* Heading turns orange when card is hovered */
   .svc-card:hover h3 {
-    color: #d95210;
+    color: var(--color-orange);
   }
 
   .svc-icon {
@@ -204,11 +195,11 @@ const services = [
   .svc-card h3 {
     font-size: 1.4rem;
     margin-bottom: 0.75rem;
-    color: #fff;
+    color: var(--color-white);
   }
 
   .svc-card p {
-    color: #b0a8a0;
+    color: var(--color-text-muted);
     line-height: 1.75;
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
@@ -216,7 +207,7 @@ const services = [
 
   /* Orange "Learn More →" link at the bottom of each card */
   .svc-link {
-    color: #d95210;
+    color: var(--color-orange);
     font-weight: 700;
     font-size: 1.05rem;
     text-decoration: none;
@@ -226,7 +217,7 @@ const services = [
     transition: color 0.2s;
   }
 
-  .svc-link:hover { color: #f06520; }
+  .svc-link:hover { color: var(--color-orange-hov); }
 
   /* The arrow (→) slides right on card hover */
   .svc-link span {

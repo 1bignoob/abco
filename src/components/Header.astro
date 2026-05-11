@@ -192,8 +192,8 @@ const { pathname } = Astro.url;
     position: sticky;
     top: 0;
     z-index: 200;
-    background-color: #0d0d0d;
-    border-bottom: 1px solid #2e2e2e;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   }
 
@@ -224,7 +224,7 @@ const { pathname } = Astro.url;
     font-weight: 800;
     font-size: 1rem;
     line-height: 1.2;
-    color: #ffffff;
+    color: var(--color-white);
     letter-spacing: 0.01em;
     text-transform: uppercase;
   }
@@ -249,7 +249,7 @@ const { pathname } = Astro.url;
     align-items: center;
     gap: 0.25rem;
     padding: 0.5rem 0.85rem;
-    color: #f0ede8;
+    color: var(--color-text);
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 600;
@@ -260,12 +260,12 @@ const { pathname } = Astro.url;
 
   .nav-item > .nav-a:hover,
   .nav-item > .nav-a:focus {
-    color: #d95210;
+    color: var(--color-orange);
     background-color: rgba(217, 82, 16, 0.1);
   }
 
   .nav-item > .nav-a[aria-current='page'] {
-    color: #d95210;
+    color: var(--color-orange);
   }
 
   /* ── Services dropdown ── */
@@ -277,7 +277,7 @@ const { pathname } = Astro.url;
   .svc-chevron {
     font-size: 1.05rem;
     font-weight: 900;
-    color: #d8d0c8;
+    color: var(--color-text-mid);
     display: inline-block;
     transition: transform 0.2s ease;
     line-height: 1;
@@ -300,9 +300,9 @@ const { pathname } = Astro.url;
     left: 0;
     min-width: 230px;
     list-style: none;
-    background: #131313;
-    border: 1px solid #2e2e2e;
-    border-top: 2px solid #d95210;
+    background: var(--color-surface-dark);
+    border: 1px solid var(--color-border);
+    border-top: 2px solid var(--color-orange);
     border-radius: 0 0 8px 8px;
     overflow: hidden;
     /* rollout animation */
@@ -334,7 +334,7 @@ const { pathname } = Astro.url;
   .dropdown-link {
     display: block;
     padding: 0.75rem 1.25rem;
-    color: #d0c8c0;
+    color: var(--color-text-mid);
     text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
@@ -344,7 +344,7 @@ const { pathname } = Astro.url;
 
   .dropdown-link:hover,
   .dropdown-link:focus {
-    color: #d95210;
+    color: var(--color-orange);
     background-color: rgba(217, 82, 16, 0.08);
   }
 
@@ -352,8 +352,8 @@ const { pathname } = Astro.url;
   .header-phone {
     margin-left: 1rem;
     padding: 0.6rem 1.25rem;
-    background-color: #d95210;
-    color: #fff !important;
+    background-color: var(--color-orange);
+    color: var(--color-white) !important;
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
@@ -365,8 +365,8 @@ const { pathname } = Astro.url;
 
   .header-phone:hover,
   .header-phone:focus {
-    background-color: #f06520;
-    color: #fff !important;
+    background-color: var(--color-orange-hov);
+    color: var(--color-white) !important;
   }
 
   /* ── Hamburger button ── */
@@ -379,7 +379,7 @@ const { pathname } = Astro.url;
     width: 48px;
     height: 48px;
     background: none;
-    border: 2px solid #f0ede8;
+    border: 2px solid var(--color-text);
     border-radius: 4px;
     cursor: pointer;
     padding: 10px;
@@ -390,7 +390,7 @@ const { pathname } = Astro.url;
     display: block;
     width: 22px;
     height: 2px;
-    background-color: #f0ede8;
+    background-color: var(--color-text);
     border-radius: 2px;
     transition: transform 0.25s, opacity 0.25s;
     transform-origin: center;
@@ -413,9 +413,9 @@ const { pathname } = Astro.url;
       top: 72px;
       left: 0;
       right: 0;
-      background-color: #111111;
-      border-top: 1px solid #2e2e2e;
-      border-bottom: 3px solid #d95210;
+      background-color: var(--color-surface-dark);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 3px solid var(--color-orange);
       padding: 1rem 1.5rem 1.5rem;
       flex-direction: column;
       align-items: stretch;
@@ -458,9 +458,9 @@ const { pathname } = Astro.url;
       align-items: center;
       justify-content: center;
       background: none;
-      border: 1px solid #3a3a3a;
+      border: 1px solid var(--color-border-input);
       border-radius: 4px;
-      color: #c8c0b8;
+      color: var(--color-text-light);
       width: 40px;
       height: 40px;
       cursor: pointer;
@@ -471,8 +471,8 @@ const { pathname } = Astro.url;
     }
 
     .svc-mobile-toggle:hover {
-      border-color: #d95210;
-      color: #d95210;
+      border-color: var(--color-orange);
+      color: var(--color-orange);
     }
 
     .svc-mobile-toggle span {
@@ -490,7 +490,7 @@ const { pathname } = Astro.url;
       flex-basis: 100%;
       min-width: unset;
       border: none;
-      border-left: 2px solid #d95210;
+      border-left: 2px solid var(--color-orange);
       border-radius: 0;
       background: transparent;
       padding-left: 0.5rem;
@@ -502,7 +502,7 @@ const { pathname } = Astro.url;
     .dropdown-link {
       padding: 0.7rem 1rem;
       font-size: 1.1rem;
-      color: #c8c0b8;
+      color: var(--color-text-light);
     }
 
     .header-phone {

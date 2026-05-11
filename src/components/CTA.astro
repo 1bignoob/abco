@@ -46,7 +46,7 @@ const base = import.meta.env.BASE_URL;
 <style>
   /* ── Orange CTA banner — all styles scoped to this component only */
   .cta-section {
-    background-color: #d95210;
+    background-color: var(--color-orange);
     padding-block: 3.5rem;
   }
 
@@ -60,7 +60,7 @@ const base = import.meta.env.BASE_URL;
 
   .cta-text h2 {
     font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    color: #fff;
+    color: var(--color-white);
     margin-bottom: 0.4rem;
   }
 
@@ -78,25 +78,25 @@ const base = import.meta.env.BASE_URL;
   }
 
   .cta-phone {
-    background-color: #0d0d0d;
-    color: #fff;
+    background-color: var(--color-bg);
+    color: var(--color-white);
   }
   .cta-phone:hover,
   .cta-phone:focus {
-    background-color: #1a1a1a;
-    color: #fff;
+    background-color: var(--color-surface);
+    color: var(--color-white);
   }
 
   /* Local override: on the orange background the white-outline fills white on hover */
   .btn-white-outline {
     background-color: transparent;
-    color: #fff;
-    border-color: #fff;
+    color: var(--color-white);
+    border-color: var(--color-white);
   }
   .btn-white-outline:hover,
   .btn-white-outline:focus {
-    background-color: #fff;
-    color: #d95210;
+    background-color: var(--color-white);
+    color: var(--color-orange);
   }
 
   @media (max-width: 720px) {

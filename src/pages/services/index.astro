@@ -181,10 +181,10 @@ const servicesHubSchema = createServicesHubSchema();
 <style>
   .breadcrumb { margin-bottom: 1rem; }
   .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
-  .breadcrumb a { color: #a09890; text-decoration: none; }
-  .breadcrumb a:hover { color: #d95210; }
-  .breadcrumb li[aria-current="page"] { color: #d95210; font-weight: 600; }
-  .breadcrumb li[aria-hidden="true"] { color: #404040; }
+  .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--color-orange); }
+  .breadcrumb li[aria-current="page"] { color: var(--color-orange); font-weight: 600; }
+  .breadcrumb li[aria-hidden="true"] { color: var(--color-border-input); }
 
   .hub-grid {
     display: grid;
@@ -194,8 +194,8 @@ const servicesHubSchema = createServicesHubSchema();
   }
 
   .hub-card {
-    background: #1a1a1a;
-    border: 1px solid #2e2e2e;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     padding: 2rem;
     display: flex;
@@ -207,7 +207,7 @@ const servicesHubSchema = createServicesHubSchema();
   }
 
   .hub-card:hover {
-    border-color: #d95210;
+    border-color: var(--color-orange);
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(217, 82, 16, 0.15);
   }
@@ -219,9 +219,9 @@ const servicesHubSchema = createServicesHubSchema();
 
   .hub-card h2 { font-size: 1.5rem; margin: 0; transition: color 0.2s; }
 
-  .hub-card:hover h2 { color: #d95210; }
+  .hub-card:hover h2 { color: var(--color-orange); }
 
-  .hub-card p { color: #a09890; font-size: 1.05rem; line-height: 1.7; flex: 1; }
+  .hub-card p { color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.7; flex: 1; }
 
   .hub-list {
     list-style: none;
@@ -232,7 +232,7 @@ const servicesHubSchema = createServicesHubSchema();
   }
 
   .hub-list li {
-    color: #c0b8b0;
+    color: var(--color-text-light);
     font-size: 1rem;
     padding-left: 1.2rem;
     position: relative;
@@ -240,7 +240,7 @@ const servicesHubSchema = createServicesHubSchema();
 
   .hub-list li::before {
     content: '✓';
-    color: #d95210;
+    color: var(--color-orange);
     position: absolute;
     left: 0;
     font-weight: 700;
@@ -270,8 +270,8 @@ const servicesHubSchema = createServicesHubSchema();
   .hub-cta {
     text-align: center;
     padding: 2.5rem;
-    background: #1a1a1a;
-    border: 1px solid #2e2e2e;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -279,6 +279,6 @@ const servicesHubSchema = createServicesHubSchema();
     gap: 1.25rem;
   }
 
-  .hub-cta p { color: #a09890; font-size: 1.1rem; max-width: 50ch; text-align: center; }
-  .hub-cta a:not(.btn) { color: #d95210; }
+  .hub-cta p { color: var(--color-text-muted); font-size: 1.1rem; max-width: 50ch; text-align: center; }
+  .hub-cta a:not(.btn) { color: var(--color-orange); }
 </style>

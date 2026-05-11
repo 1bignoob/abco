@@ -122,34 +122,34 @@ const faqSchema = createFaqPageSchema(
 
 <style>
   .page-header {
-    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-    border-bottom: 1px solid #2e2e2e;
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border-bottom: 1px solid var(--color-border);
     padding-block: 3rem 2.5rem;
   }
   .page-header h1 { margin-bottom: 0.4rem; }
-  .page-header p { color: #a09890; font-size: 1.1rem; max-width: 65ch; }
+  .page-header p { color: var(--color-text-muted); font-size: 1.1rem; max-width: 65ch; }
 
-  .faq-page { background: #0d0d0d; }
+  .faq-page { background: var(--color-bg); }
 
   .faq-layout { display: grid; grid-template-columns: 1fr 280px; gap: 3rem; align-items: start; }
 
   .faq-category { margin-bottom: 3rem; }
-  .faq-category h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; color: #d95210; margin-bottom: 1.25rem; }
+  .faq-category h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-orange); margin-bottom: 1.25rem; }
 
-  .faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid #2e2e2e; border-radius: 8px; overflow: hidden; }
+  .faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; }
 
-  .faq-item { padding: 1.5rem 1.75rem; border-bottom: 1px solid #2e2e2e; }
+  .faq-item { padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--color-border); }
   .faq-item:last-child { border-bottom: none; }
-  .faq-item dt { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-  .faq-item dd { margin-left: 0; color: #a09890; font-size: 1.05rem; line-height: 1.75; max-width: 70ch; }
+  .faq-item dt { font-size: 1.1rem; font-weight: 700; color: var(--color-white); margin-bottom: 0.5rem; }
+  .faq-item dd { margin-left: 0; color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.75; max-width: 70ch; }
 
   .faq-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: #1a1a1a; border: 1px solid #2e2e2e; border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .sidebar-box h3 { font-size: 1rem; color: #d95210; text-transform: uppercase; letter-spacing: 0.07em; }
-  .sidebar-box p { color: #a09890; font-size: 0.95rem; max-width: none; }
+  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; }
+  .sidebar-box p { color: var(--color-text-muted); font-size: 0.95rem; max-width: none; }
   .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul a { color: #c0b8b0; text-decoration: none; font-size: 1rem; transition: color 0.2s; }
-  .sidebar-box ul a:hover { color: #d95210; }
+  .sidebar-box ul a { color: var(--color-text-light); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
+  .sidebar-box ul a:hover { color: var(--color-orange); }
 
   @media (max-width: 800px) { .faq-layout { grid-template-columns: 1fr; } }
 </style>

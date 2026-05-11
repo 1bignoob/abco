@@ -75,8 +75,8 @@ function formatDate(d: Date) {
 
 <style>
   .page-header {
-    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-    border-bottom: 1px solid #2e2e2e;
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border-bottom: 1px solid var(--color-border);
     padding-block: 3.5rem 2.5rem;
   }
 
@@ -86,14 +86,14 @@ function formatDate(d: Date) {
   }
 
   .page-header p {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1.15rem;
     max-width: 60ch;
   }
 
-  .blog-listing { background: #0d0d0d; }
+  .blog-listing { background: var(--color-bg); }
 
-  .no-posts { color: #a09890; font-size: 1.1rem; }
+  .no-posts { color: var(--color-text-muted); font-size: 1.1rem; }
 
   .post-list {
     display: flex;
@@ -103,7 +103,7 @@ function formatDate(d: Date) {
 
   .post-row {
     padding-block: 2.5rem;
-    border-bottom: 1px solid #1e1e1e;
+    border-bottom: 1px solid var(--color-border-sub);
   }
 
   .post-row:last-child { border-bottom: none; }
@@ -117,13 +117,13 @@ function formatDate(d: Date) {
   }
 
   .post-date {
-    color: #706860;
+    color: var(--color-text-dim);
     font-size: 0.95rem;
   }
 
   .tag {
     background: rgba(217, 82, 16, 0.12);
-    color: #d95210;
+    color: var(--color-orange);
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -139,14 +139,14 @@ function formatDate(d: Date) {
   }
 
   .post-title a {
-    color: #fff;
+    color: var(--color-white);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .post-title a:hover { color: #d95210; }
+  .post-title a:hover { color: var(--color-orange); }
 
   .post-desc {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 1rem;
@@ -154,11 +154,11 @@ function formatDate(d: Date) {
   }
 
   .post-link {
-    color: #d95210;
+    color: var(--color-orange);
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .post-link:hover { color: #f06520; }
+  .post-link:hover { color: var(--color-orange-hov); }
 </style>

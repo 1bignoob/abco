@@ -127,8 +127,8 @@
       <div id="cf-thankyou" class="cf-thankyou" aria-live="polite" hidden>
         <div class="ty-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <circle cx="26" cy="26" r="25" stroke="#d95210" stroke-width="2"/>
-            <path d="M14 27l9 9 15-18" stroke="#d95210" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="26" cy="26" r="25" stroke="currentColor" stroke-width="2"/>
+            <path d="M14 27l9 9 15-18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3>Message Received!</h3>
@@ -183,7 +183,7 @@
 </script>
 
 <style>
-  .contact-section { background-color: #111111; }
+  .contact-section { background-color: var(--color-surface-dark); }
 
   .contact-grid {
     display: grid;
@@ -193,7 +193,7 @@
   }
 
   .contact-text p {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1.1rem;
     margin-bottom: 2rem;
   }
@@ -213,17 +213,17 @@
   }
 
   .contact-details a {
-    color: #f0ede8;
+    color: var(--color-text);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s;
   }
-  .contact-details a:hover { color: #d95210; }
+  .contact-details a:hover { color: var(--color-orange); }
 
   /* Form */
   .contact-form-wrap {
-    background: #1a1a1a;
-    border: 1px solid #2e2e2e;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     padding: 2.5rem;
   }
@@ -249,20 +249,20 @@
   label {
     font-size: 1rem;
     font-weight: 600;
-    color: #d0c8c0;
+    color: var(--color-text-mid);
   }
 
-  .required { color: #d95210; }
+  .required { color: var(--color-orange); }
 
   input[type="text"],
   input[type="tel"],
   input[type="email"],
   select,
   textarea {
-    background: #111111;
-    border: 1px solid #383838;
+    background: var(--color-surface-dark);
+    border: 1px solid var(--color-border-input);
     border-radius: 4px;
-    color: #f0ede8;
+    color: var(--color-text);
     font-family: inherit;
     font-size: 1.05rem;
     padding: 0.75rem 1rem;
@@ -273,14 +273,14 @@
   input:focus,
   select:focus,
   textarea:focus {
-    border-color: #d95210;
+    border-color: var(--color-orange);
     outline: none;
     box-shadow: 0 0 0 3px rgba(217, 82, 16, 0.25);
   }
 
   textarea { resize: vertical; min-height: 130px; }
 
-  select option { background: #1a1a1a; }
+  select option { background: var(--color-surface); }
 
   .contact-form .btn {
     align-self: flex-start;
@@ -289,9 +289,9 @@
   }
 
   .contact-form .btn-sent {
-    background: #444 !important;
-    color: #888 !important;
-    border-color: #444 !important;
+    background: var(--color-disabled) !important;
+    color: var(--color-disabled-text) !important;
+    border-color: var(--color-disabled) !important;
     cursor: default;
   }
 
@@ -304,6 +304,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
+    color: var(--color-orange);
   }
 
   .ty-icon svg {
@@ -313,12 +314,12 @@
 
   .cf-thankyou h3 {
     font-size: 1.6rem;
-    color: #fff;
+    color: var(--color-white);
     margin-bottom: 0.75rem;
   }
 
   .cf-thankyou p {
-    color: #a09890;
+    color: var(--color-text-muted);
     font-size: 1.05rem;
   }
 

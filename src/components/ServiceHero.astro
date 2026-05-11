@@ -160,7 +160,7 @@ const hasImage = Boolean(imageSrc);
   }
 
   .service-hero-intro {
-    color: #ece7df;
+    color: var(--color-text);
     font-size: clamp(1.1rem, 2.5vw, 1.35rem);
     line-height: 1.65;
     margin-bottom: 2.25rem;
@@ -176,7 +176,7 @@ const hasImage = Boolean(imageSrc);
   }
 
   .service-hero-trust {
-    color: #ddd5ca;
+    color: var(--color-text-warm);
     display: flex;
     gap: 0.45rem;
     flex-wrap: wrap;
@@ -199,18 +199,18 @@ const hasImage = Boolean(imageSrc);
 
   .service-hero-jump-links a {
     text-decoration: none;
-    color: #f1ede7;
+    color: var(--color-text);
     border-bottom: 2px solid rgba(217, 82, 16, 0.7);
     padding-bottom: 0.1rem;
   }
 
   .service-hero-jump-links a:hover {
-    color: #fff;
-    border-bottom-color: #f06520;
+    color: var(--color-white);
+    border-bottom-color: var(--color-orange-hov);
   }
 
   .service-hero-jump-links span {
-    color: #aba39a;
+    color: var(--color-text-muted);
   }
 
   @media (max-width: 800px) {

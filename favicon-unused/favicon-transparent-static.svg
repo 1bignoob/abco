@@ -14,31 +14,6 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
-  <style>
-    #logo {
-      fill: #f06520;
-    }
-
-    #outer-border {
-      fill: none;
-      stroke: #f06520;
-      stroke-width: 9.38645;
-      stroke-dasharray: none;
-      stroke-opacity: 1;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      #outer-border {
-        display: none;
-      }
-
-      #logo {
-        fill: #f06520;
-      }
-    }
-  </style>
-
   <sodipodi:namedview
      id="namedview1"
      pagecolor="#ffffff"
@@ -58,26 +33,23 @@
        margin="0"
        bleed="0" />
   </sodipodi:namedview>
-
-  <defs id="defs1" />
-
+  <defs
+     id="defs1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-8.0810671,-7.213582)">
-
     <path
        id="logo"
-       style="font-weight:bold;font-stretch:condensed;font-size:202.427px;font-family:'Arial Narrow';-inkscape-font-specification:'Arial Narrow Bold Condensed';stroke-width:8.16678"
+       style="font-weight:bold;font-stretch:condensed;font-size:202.427px;font-family:'Arial Narrow';-inkscape-font-specification:'Arial Narrow Bold Condensed';fill:#f06520;stroke-width:8.16678"
        d="m 99.653523,24.18479 -55.39868,151.30607 h 30.540488 l 11.25485,-33.00824 -0.06289,-0.002 13.036832,-37.76416 15.544317,-45.233572 0.0356,0.101896 12.22057,-35.399724 z m 31.612407,3.164419 -13.85902,40.291879 16.69335,47.987592 h -33.19982 l -8.76933,25.49324 h 51.20235 l 12.4288,34.36894 h 31.25057 z" />
-
     <ellipse
+       style="fill:none;fill-opacity:1;stroke:#f06520;stroke-width:9.38645;stroke-dasharray:none;stroke-opacity:1"
        id="outer-border"
        cx="115.72662"
        cy="112.56564"
        rx="102.95233"
        ry="100.65884" />
-
   </g>
 </svg>

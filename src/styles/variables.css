@@ -1,0 +1,125 @@
+/* ============================================================
+   ABCO Site — Design Tokens
+   abcoguys.com
+
+   Single source of truth for ALL colors, typography, spacing,
+   and layout tokens used across the project.
+
+   Imported by src/styles/global.css — available site-wide.
+   Components and pages use var(--token-name) everywhere.
+
+   TOKEN MAP (search for === label):
+     === Backgrounds    ===  dark surface hierarchy
+     === Borders        ===  border / divider weights
+     === Orange brand   ===  primary accent palette
+     === Text           ===  text hierarchy (lightest → dimmest)
+     === Accents        ===  gold, warm, disabled states
+     === Typography     ===  font family + size scale
+     === Spacing        ===  space scale
+     === Radii          ===  border-radius values
+     === Layout         ===  breakpoints, heights, transitions
+     === Gradients      ===  shared multi-stop gradients
+   ============================================================ */
+
+:root {
+  /* === Backgrounds ===
+     Deep dark theme — lightest value wins when consolidating near-twins.
+     #101010, #111111, #121212, #131313  → --color-surface-dark (#111111)
+     #0a0a0a                             → --color-bg-footer  */
+  --color-bg:           #0d0d0d;  /* Page body / main background             */
+  --color-bg-footer:    #0a0a0a;  /* Footer (slightly deeper black)          */
+  --color-surface-dark: #111111;  /* Breadcrumb bar, contact section, mobile nav,
+                                     service notes, dropdown bg              */
+  --color-surface:      #1a1a1a;  /* Cards, sidebar boxes, form wrappers     */
+  --color-surface-2:    #252525;  /* Secondary surface (blog card dividers)  */
+
+  /* === Borders ===
+     Three weights from subtle to prominent. */
+  --color-border-sub:   #1e1e1e;  /* Hairline dividers (blog rows, back-link) */
+  --color-border:       #2e2e2e;  /* Standard borders everywhere             */
+  --color-border-input: #383838;  /* Form inputs, mobile toggle              */
+
+  /* === Orange brand ===
+     #b03f08  pressed/dark
+     #d95210  primary
+     #f06520  hover/lighter */
+  --color-orange:       #d95210;
+  --color-orange-hov:   #f06520;
+  --color-orange-dark:  #b03f08;
+
+  /* === Text ===
+     Hierarchy from lightest → most muted:
+       white → text → text-warm → text-mid → text-light → text-muted → text-dim
+
+     Consolidation (lighter shade used):
+       #908880, #aba39a, #b0a8a0, #b8b0a7  → --color-text-muted (#a09890)
+       #c8c0b8                             → --color-text-light  (#c0b8b0)
+       #d0c8c0, #d8d0c8                   → --color-text-mid    (#d2cecb)
+       #d9d1c8                            → --color-text-warm   (#ddd5ca)
+       #e5dbcf, #eae5de, #ece7df, #f1ede7 → --color-text        (#f0ede8)  */
+  --color-white:        #ffffff;  /* Pure white                               */
+  --color-text:         #f0ede8;  /* Primary body text                        */
+  --color-text-warm:    #ddd5ca;  /* Hero trust bar, service hero trust       */
+  --color-text-mid:     #d2cecb;  /* Footer contact / legal, dropdown links,
+                                     form labels, chevron color               */
+  --color-text-light:   #c0b8b0;  /* About lists, sidebar links, post-cta    */
+  --color-text-muted:   #a09890;  /* Muted paragraphs, descriptions, dd      */
+  --color-text-dim:     #706860;  /* Dates, metadata, byline, breadcrumb     */
+
+  /* === Accents ===
+     Gold pair for the footer site-credit link.
+     Warm blush for the landscaping FAQ kicker label.
+     Disabled pair for the "sent" form button state. */
+  --color-gold:          #c9a84c;
+  --color-gold-hov:      #e2c06a;
+  --color-accent-warm:   #ffd9c9;  /* FAQ kicker label warm blush             */
+  --color-disabled:      #444444;  /* Sent/disabled button background         */
+  --color-disabled-text: #888888;  /* Sent/disabled button text               */
+
+  /* === Typography ===
+     Base stack uses system UI fonts for performance + legibility. */
+  --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-size-base: 1.125rem;   /* 18px — easier for older demographics      */
+  --font-size-sm:   1rem;
+  --font-size-lg:   1.25rem;
+  --font-size-xl:   1.5rem;
+  --font-size-2xl:  2rem;
+  --font-size-3xl:  2.75rem;
+  --font-size-4xl:  3.5rem;
+
+  /* === Line heights === */
+  --line-height-body:    1.75;
+  --line-height-heading: 1.2;
+
+  /* === Spacing ===
+     Scale used for padding/gap/margin throughout the site. */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+
+  /* === Radii === */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* === Layout === */
+  --max-width:         1200px;
+  --header-height:     72px;
+  --breadcrumb-height: 40px;
+  --transition:        0.2s ease;
+
+  /* === Gradients ===
+     Warm dark ramp shared by the services section background and all
+     service-page hero backgrounds. Keep gradient stops inline (literal
+     values) because CSS cannot interpolate mid-stop colours via variables. */
+  --service-shared-gradient: linear-gradient(
+    180deg,
+    #2e1405 0%,
+    #1c0e04 18%,
+    #141414 50%,
+    #0d0d0d 100%
+  );
+}
