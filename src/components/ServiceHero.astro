@@ -80,10 +80,12 @@ const hasImage = Boolean(imageSrc);
 <style>
   .service-hero {
     --service-hero-height: calc(100svh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
+    --service-title-lines: 5;
     position: relative;
     min-height: calc(100vh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
     min-height: var(--service-hero-height);
-    height: auto;
+    height: calc(100vh - (var(--header-height, 72px) + var(--breadcrumb-height, 40px)));
+    height: var(--service-hero-height);
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -145,24 +147,29 @@ const hasImage = Boolean(imageSrc);
   .service-hero-content {
     position: relative;
     z-index: 2;
-    padding-block: 5rem;
-    max-width: 760px;
+    padding-block: clamp(1.25rem, 3.2svh, 3.25rem);
+    max-width: 980px;
   }
 
   .service-hero h1 {
-    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    font-size: clamp(2rem, 5.2vw, 4.2rem);
     font-weight: 800;
-    line-height: 1.1;
-    max-width: 18ch;
-    margin-bottom: 1.25rem;
+    line-height: 1.05;
+    max-width: 22ch;
+    max-height: calc(var(--service-title-lines) * 1.05em);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--service-title-lines);
+    margin-bottom: 0.95rem;
     text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
   }
 
   .service-hero-intro {
     color: var(--color-text);
-    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-    line-height: 1.65;
-    margin-bottom: 2.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
     max-width: 52ch;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
@@ -171,7 +178,7 @@ const hasImage = Boolean(imageSrc);
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .service-hero-trust {
@@ -190,10 +197,11 @@ const hasImage = Boolean(imageSrc);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.65rem;
-    margin-top: 1.25rem;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
     margin-bottom: 0;
     font-weight: 700;
+    font-size: 0.95rem;
   }
 
   .service-hero-jump-links a {
@@ -213,6 +221,14 @@ const hasImage = Boolean(imageSrc);
   }
 
   @media (max-width: 800px) {
+    .service-hero-content {
+      max-width: 760px;
+    }
+
+    .service-hero h1 {
+      max-width: 18ch;
+    }
+
     .service-hero-intro {
       font-size: 1.05rem;
     }
@@ -227,6 +243,40 @@ const hasImage = Boolean(imageSrc);
     .service-hero-actions .btn {
       width: 100%;
       justify-content: center;
+    }
+  }
+
+  @media (max-height: 860px) {
+    .service-hero {
+      --service-title-lines: 4;
+    }
+
+    .service-hero-content {
+      padding-block: 1.1rem;
+    }
+
+    .service-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+      margin-bottom: 0.7rem;
+    }
+
+    .service-hero-intro {
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .service-hero-actions {
+      margin-bottom: 0.55rem;
+    }
+
+    .service-hero-trust {
+      font-size: 0.9rem;
+    }
+
+    .service-hero-jump-links {
+      margin-top: 0.65rem;
+      font-size: 0.9rem;
     }
   }
 </style>
