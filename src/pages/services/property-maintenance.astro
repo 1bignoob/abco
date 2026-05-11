@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
+
 const propertyMaintenanceSchema = createServicePageSchema({
   slug: 'property-maintenance',
   name: 'Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -16,109 +16,77 @@ const propertyMaintenanceSchema = createServicePageSchema({
   title="Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Year-round property maintenance for homes, businesses, and managed communities in Eagle Lake, Gouldsboro, and Covington Township, PA."
   canonical="/services/property-maintenance/"
+  image="/images/heros/landscaping-hero.webp"
+  imageAlt="ABCO Landscaping maintained property in Gouldsboro and Eagle Lake, PA"
   schemaJson={propertyMaintenanceSchema}
 >
-  <ServiceHero
-    title="Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-    intro="Eagle Lake, Gouldsboro & Covington Township, PA"
+  <ServiceDetailTemplate
+    heroTitle="Property Maintenance Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroIntro="Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroImageSrc="/images/heros/landscaping-hero.webp"
+    heroImageAlt="ABCO Landscaping maintained property in Gouldsboro and Eagle Lake, PA"
+    servicesHeading="What Our Property Maintenance Team Does"
+    servicesIntro="Keeping a property looking its best year-round takes consistency. ABCO provides reliable maintenance programs for residential, commercial, and managed community properties."
+    servicesOffered={[
+      'Regular lawn mowing, edging, and blowing',
+      'Fertilization, weed control, and overseeding',
+      'Spring and fall seasonal cleanup',
+      'Leaf removal and debris hauling',
+      'Deck and patio cleaning prep',
+      'General property upkeep and walkthroughs',
+    ]}
+    secondaryHeading="Maintenance for Managed and Multi-Site Properties"
+    secondaryParagraphs={[
+      'We support RV park owners, associations, and property managers with repeatable maintenance routines.',
+      'Service plans can be adapted by site count, occupancy, and seasonal intensity.',
+    ]}
+    factsHeading="Property Maintenance Facts"
+    facts={[
+      'Residential, commercial, and RV',
+      'Seasonal programs available',
+      'Free estimates',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Ready to get started?"
+    sidebarCtaLabel="Call (718) 877-1197"
+    relatedServices={[
+      { slug: 'landscaping', label: 'Landscaping', title: 'View landscaping services' },
+      { slug: 'excavation', label: 'Excavation', title: 'View excavation services' },
+    ]}
+    didYouKnowIntro="Consistent maintenance schedules usually cost less over time than reactive one-off cleanup work."
+    didYouKnowItems={[
+      {
+        title: 'Routine service protects curb appeal',
+        body: 'Steady mowing, cleanup, and upkeep help properties stay presentable through the full season.',
+      },
+      {
+        title: 'Preventive work lowers surprise costs',
+        body: 'Addressing minor issues early can prevent larger cleanup and repair bills later.',
+      },
+      {
+        title: 'Multi-site consistency matters',
+        body: 'Standardized service plans make it easier for managers to maintain quality across locations.',
+      },
+    ]}
+    faqHeading="Property Maintenance FAQ"
+    faqItems={[
+      {
+        kicker: 'Programs',
+        question: 'Do you offer recurring maintenance plans?',
+        answer: 'Yes. We offer recurring schedules tailored to residential, commercial, and managed properties.',
+      },
+      {
+        kicker: 'Service Area',
+        question: 'Do you work with managed communities?',
+        answer: 'Yes. We work with property managers and managed community sites in the service area.',
+      },
+      {
+        kicker: 'Flexibility',
+        question: 'Can services be adjusted seasonally?',
+        answer: 'Yes. Plans can be adjusted by season, growth, and weather-driven needs.',
+      },
+    ]}
+    listMarker="check"
   />
-
-  <section class="service-detail section service-shared-gradient">
-    <div class="container detail-grid">
-
-      <div class="detail-content">
-        <h2>What Our Property Maintenance Team Does</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          Keeping a property looking its best year-round takes consistent effort. ABCO Landscaping
-          provides reliable maintenance programs for residential homeowners, commercial property
-          managers, and RV community sites throughout the Eagle Lake and Gouldsboro PA area.
-        </p>
-        <ul class="detail-list">
-          <li>Regular lawn mowing, edging, and blowing</li>
-          <li>Fertilization, weed control, and overseeding</li>
-          <li>Spring and fall seasonal cleanup</li>
-          <li>Leaf removal and debris hauling</li>
-          <li>Deck and patio cleaning, repair prep</li>
-          <li>General property upkeep and walkthrough</li>
-        </ul>
-
-        <h2>Maintenance for Managed Communities and Multi-Site Properties</h2>
-        <p>
-          We have experience working with RV park owners and community associations near Eagle Lake.
-          If you manage multiple sites, ask us about our commercial property maintenance packages.
-        </p>
-
-        <p>
-          For seasonal lawn care tips specific to our area, check out our
-          <a href={`${base}blog/year-round-lawn-care-gouldsboro-pa`} title="Read our year-round lawn care guide for Gouldsboro homeowners">year-round lawn care guide for Gouldsboro PA homeowners</a>.
-        </p>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free property maintenance estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
-      </div>
-
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Property Maintenance Facts</h3>
-          <ul>
-            <li><strong>Residential, commercial &amp; RV</strong></li>
-            <li><strong>Seasonal programs available</strong></li>
-            <li><strong>Free estimates</strong></li>
-            <li><strong>Mon–Fri 8 AM – 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM – 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Ready to get started?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">📞 (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/landscaping`} title="View landscaping services">Landscaping</a></li>
-            <li><a href={`${base}services/excavation`} title="View excavation services">Excavation</a></li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
 </BaseLayout>
-
-<style>
-  .breadcrumb { margin-bottom: 1rem; }
-  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
-  .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--color-orange); }
-  .breadcrumb li[aria-current="page"] { color: var(--color-orange); font-weight: 600; }
-  .breadcrumb li[aria-hidden="true"] { color: var(--color-border-input); }
-
-  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-  .detail-content a:not(.btn) { color: var(--color-orange); }
-
-  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '✓'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
-
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: var(--color-orange-hov); }
-
-  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
-</style>

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
+
 const seasonalCleanupSchema = createServicePageSchema({
   slug: 'seasonal-cleanup',
   name: 'Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -16,96 +16,75 @@ const seasonalCleanupSchema = createServicePageSchema({
   title="Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Spring and fall cleanup services that keep your property clean, safe, and ready for the next season in Eagle Lake, Gouldsboro, and Covington Township, PA."
   canonical="/services/seasonal-cleanup/"
+  image="/images/heros/landscaping-hero.webp"
+  imageAlt="ABCO Landscaping maintained property in Gouldsboro and Eagle Lake, PA"
   schemaJson={seasonalCleanupSchema}
 >
-  <ServiceHero
-    title="Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-    intro="Eagle Lake, Gouldsboro & Covington Township, PA"
+  <ServiceDetailTemplate
+    heroTitle="Seasonal Cleanup Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroIntro="Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroImageSrc="/images/heros/landscaping-hero.webp"
+    heroImageAlt="ABCO Landscaping maintained property in Gouldsboro and Eagle Lake, PA"
+    servicesHeading="What Is Included in Seasonal Cleanup"
+    servicesIntro="ABCO handles spring and fall cleanup work that restores curb appeal and helps prevent weather-related issues before each season shift."
+    servicesOffered={[
+      'Leaf and debris removal',
+      'Flower bed and edge cleanup',
+      'Shrub and branch trimming',
+      'Yard waste hauling',
+      'Storm cleanup support',
+      'Season transition prep',
+    ]}
+    secondaryHeading="Spring and Fall Planning"
+    secondaryParagraphs={[
+      'We can schedule one-time cleanup visits or recurring annual seasonal service based on your property needs.',
+      'Advance scheduling helps ensure your site is ready before major weather changes.',
+    ]}
+    factsHeading="Seasonal Cleanup Facts"
+    facts={[
+      'Spring and fall scheduling',
+      'Debris hauling included',
+      'Residential and commercial',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Need seasonal cleanup support?"
+    relatedServices={[
+      { slug: 'landscaping', label: 'Landscaping', title: 'View landscaping services' },
+      { slug: 'property-maintenance', label: 'Property Maintenance', title: 'View property maintenance services' },
+    ]}
+    didYouKnowIntro="Seasonal cleanup is one of the easiest ways to protect curb appeal and avoid deferred maintenance issues."
+    didYouKnowItems={[
+      {
+        title: 'Fall cleanup reduces spring backlog',
+        body: 'Clearing leaves and debris before winter helps properties dry out and green up faster in spring.',
+      },
+      {
+        title: 'Bed cleanup supports healthier growth',
+        body: 'Removing dead material and buildup helps air flow and makes seasonal planting easier.',
+      },
+      {
+        title: 'Timing improves results',
+        body: 'Cleanup done at the right point in the season is more effective than waiting for weather extremes.',
+      },
+    ]}
+    faqHeading="Seasonal Cleanup FAQ"
+    faqItems={[
+      {
+        kicker: 'Scheduling',
+        question: 'Do you offer spring and fall cleanup?',
+        answer: 'Yes. We provide both spring and fall cleanup scheduling for homes and commercial sites.',
+      },
+      {
+        kicker: 'Scope',
+        question: 'Is debris hauling included?',
+        answer: 'Yes. Debris and yard-waste hauling are included in the cleanup scope.',
+      },
+      {
+        kicker: 'Service Type',
+        question: 'Can this be one-time or recurring?',
+        answer: 'Both. We can schedule one-time cleanup or recurring seasonal visits each year.',
+      },
+    ]}
   />
-
-  <section class="service-detail section service-shared-gradient">
-    <div class="container detail-grid">
-
-      <div class="detail-content">
-        <h2>What Is Included in Seasonal Cleanup</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          ABCO handles spring and fall cleanup work that restores curb appeal and
-          prevents property issues before weather shifts. We tailor cleanup scope
-          to your lot and landscaping layout.
-        </p>
-        <ul class="detail-list">
-          <li>Leaf and debris removal</li>
-          <li>Flower bed and edge cleanup</li>
-          <li>Shrub and branch trimming</li>
-          <li>Yard waste hauling</li>
-          <li>Storm cleanup support</li>
-          <li>Season transition prep</li>
-        </ul>
-
-        <h2>Spring and Fall Planning</h2>
-        <p>
-          We can schedule one-time seasonal visits or recurring annual cleanup so your
-          property is ready before each weather change.
-        </p>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free seasonal cleanup estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
-      </div>
-
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Seasonal Cleanup Facts</h3>
-          <ul>
-            <li><strong>Spring and fall scheduling</strong></li>
-            <li><strong>Debris hauling included</strong></li>
-            <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>Mon-Fri 8 AM - 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM - 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Need seasonal cleanup support?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">Call (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/landscaping`} title="View landscaping services">Landscaping</a></li>
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
 </BaseLayout>
-
-<style>
-  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-
-  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '+'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
-
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: var(--color-orange-hov); }
-
-  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
-</style>

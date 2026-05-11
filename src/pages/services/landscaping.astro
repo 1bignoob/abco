@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
 
 const landscapingSchema = createServicePageSchema({
@@ -20,174 +20,95 @@ const landscapingSchema = createServicePageSchema({
   imageAlt="ABCO Landscaping displaying a well maintained landscaping property in Gouldsboro, PA"
   schemaJson={landscapingSchema}
 >
-  <ServiceHero
-    title="Landscaping Services in Gouldsboro, PA"
-    intro="ABCO Landscaping provides reliable lawn mowing, weed control, mulch installation, planting, and basic landscape maintenance for properties in Gouldsboro, Eagle Lake, Covington Township, and nearby Pocono communities."
-    imageSrc="/images/heros/landscaping-hero.webp"
-    imageAlt="ABCO Landscaping displaying a well maintained landscaping property in Gouldsboro, PA"
-    jumpLinks={[
-      { href: '#our-services', label: 'Our Services' },
-      { href: '#did-you-know', label: 'Did You Know' },
-      { href: '#faq', label: 'FAQ' },
+  <ServiceDetailTemplate
+    heroTitle="Landscaping Services in Gouldsboro, PA"
+    heroIntro="ABCO Landscaping provides reliable lawn mowing, weed control, mulch installation, planting, and landscape maintenance for properties in Gouldsboro, Eagle Lake, Covington Township, and nearby Pocono communities."
+    heroImageSrc="/images/heros/landscaping-hero.webp"
+    heroImageAlt="ABCO Landscaping displaying a well maintained landscaping property in Gouldsboro, PA"
+    servicesHeading="Lawn Care and Maintenance"
+    servicesIntro="A great-looking property starts with consistent lawn and landscape care. We focus on clean mowing, neat edges, controlled weeds, healthy beds, and refreshed materials."
+    servicesOffered={[
+      'Lawn mowing',
+      'Weed control',
+      'Mulch installation',
+      'Planting',
+      'Landscape bed refreshes',
+      'Lawn care materials',
+      'Decorative stone, soil, and mulch placement',
+      'Basic property beautification',
+    ]}
+    secondaryHeading="Practical Landscaping for Pocono Conditions"
+    secondaryParagraphs={[
+      'Plant choice and maintenance plans should reflect deer pressure, shade, rocky soil, wet spots, and winter cycles common in Northeast PA.',
+      'We can support one-time upgrades or recurring maintenance based on your property priorities.',
+    ]}
+    richHtmlBlocks={[
+      {
+        heading: 'Lawn Mowing',
+        html: '<p>Regular mowing keeps your property maintained and easier to manage throughout the season. We provide mowing for homes, vacation properties, rentals, and small commercial lots, including trimming around walkways, edges, and structures for a clean finish.</p>',
+      },
+      {
+        heading: 'Weed Control',
+        html: '<p>Weeds can quickly overtake lawns, beds, and hardscape edges. ABCO helps control weeds in lawn areas, mulch beds, planting beds, walkway edges, and hard-to-maintain zones around structures. For many properties in the Poconos, consistent maintenance is more effective than waiting until weeds are already out of control.</p>',
+      },
+      {
+        heading: 'Mulching',
+        html: '<p>Fresh mulch is one of the fastest ways to improve curb appeal. We install mulch around trees, shrubs, flower beds, and walkways to create a finished look, reduce weed growth, and help soil retain moisture.</p>',
+      },
+      {
+        heading: 'Planting',
+        html: '<p>We help with practical planting for front beds, borders, walkways, and entry areas. For Pocono properties, plant choice matters because deer pressure, shade, rocky soil, wet spots, and cold winters all affect long-term success.</p>',
+      },
+      {
+        heading: 'Lawn Care Materials',
+        html: '<p>We refresh common landscape materials including mulch, topsoil, decorative stone, and planting soil. Using the right material in the right location helps reduce upkeep and keeps your property cleaner between visits.</p><p>Need regular upkeep? We can set a practical service rhythm that keeps your property clean and usable without over-maintenance.</p>',
+      },
+    ]}
+    factsHeading="Landscaping Service Facts"
+    facts={[
+      'Residential and small commercial',
+      'Recurring and one-time options',
+      'Mulch, planting, and lawn care',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Need landscaping help this season?"
+    relatedServices={[
+      { slug: 'property-maintenance', label: 'Property Maintenance', title: 'View property maintenance services' },
+      { slug: 'seasonal-cleanup', label: 'Seasonal Cleanup', title: 'View seasonal cleanup services' },
+    ]}
+    didYouKnowIntro="Gouldsboro and nearby Pocono properties often need landscaping plans tailored to climate and site pressure."
+    didYouKnowItems={[
+      {
+        title: 'Deer-resistant is not deer-proof',
+        body: 'Plant performance can change by season and browsing pressure, so protection may still be needed.',
+      },
+      {
+        title: 'Mulch depth affects plant health',
+        body: 'Even, moderate mulch layers generally perform better than heavy mounds around stems and trunks.',
+      },
+      {
+        title: 'Low-maintenance still needs maintenance',
+        body: 'Good material choices reduce upkeep, but trimming, cleanup, and refreshes are still required.',
+      },
+    ]}
+    faqHeading="Landscaping FAQ"
+    faqItems={[
+      {
+        kicker: 'Services',
+        question: 'What landscaping services do you offer?',
+        answer: 'We offer mowing, weed control, planting, mulch, and basic landscape maintenance for multiple property types.',
+      },
+      {
+        kicker: 'Scheduling',
+        question: 'Do you offer recurring lawn mowing?',
+        answer: 'Yes. We offer recurring mowing and maintenance schedules based on property and seasonal needs.',
+      },
+      {
+        kicker: 'Planting',
+        question: 'Can you help with practical plant selection?',
+        answer: 'Yes. We can suggest options based on local site conditions and maintenance goals.',
+      },
     ]}
   />
-
-  <section id="our-services" class="services-content section service-shared-gradient" aria-labelledby="services-heading">
-    <div class="container prose">
-      <h2 id="services-heading">Lawn Care and Maintenance</h2>
-      <p>
-        A good-looking property starts with consistent lawn and landscape care. We focus on the
-        basics that make the biggest visual impact: clean mowing, neat edges, controlled weeds,
-        healthy planting beds, and fresh landscape materials.
-      </p>
-
-      <h3 class="services-list-title">Our Landscaping Services Include</h3>
-      <ul>
-        <li>Lawn mowing</li>
-        <li>Weed control</li>
-        <li>Mulch installation</li>
-        <li>Planting</li>
-        <li>Landscape bed refreshes</li>
-        <li>Lawn care materials</li>
-        <li>Decorative stone, soil, and mulch placement</li>
-        <li>Basic property beautification</li>
-      </ul>
-      <p>
-        We can help with one-time upgrades or recurring maintenance based on your property's needs.
-      </p>
-
-      <h3>Lawn Mowing</h3>
-      <p>
-        Regular mowing keeps your property maintained and easier to manage throughout the season.
-        We provide mowing for homes, vacation properties, rentals, and small commercial lots,
-        including trimming around walkways, edges, and structures for a clean finish.
-      </p>
-
-      <h3>Weed Control</h3>
-      <p>
-        Weeds can quickly overtake lawns, beds, and hardscape edges. ABCO helps control weeds in
-        lawn areas, mulch beds, planting beds, walkway edges, and hard-to-maintain zones around
-        structures. For many properties in the Poconos, consistent maintenance is more effective
-        than waiting until weeds are already out of control.
-      </p>
-
-      <h3>Mulching</h3>
-      <p>
-        Fresh mulch is one of the fastest ways to improve curb appeal. We install mulch around
-        trees, shrubs, flower beds, and walkways to create a finished look, reduce weed growth,
-        and help soil retain moisture.
-      </p>
-
-      <h3>Planting</h3>
-      <p>
-        We help with practical planting for front beds, borders, walkways, and entry areas.
-        For Pocono properties, plant choice matters because deer pressure, shade, rocky soil,
-        wet spots, and cold winters all affect long-term success.
-      </p>
-
-      <h3>Lawn Care Materials</h3>
-      <p>
-        We refresh common landscape materials including mulch, topsoil, decorative stone,
-        and planting soil. Using the right material in the right location helps reduce upkeep
-        and keeps your property cleaner between visits.
-      </p>
-
-      <p class="service-note">
-        Need regular upkeep? We can set a practical service rhythm that keeps your property clean
-        and usable without over-maintenance.
-      </p>
-    </div>
-  </section>
-
-  <section id="did-you-know" class="did-you-know section" aria-labelledby="did-you-know-heading">
-    <div class="container">
-      <h2 id="did-you-know-heading">Did You Know</h2>
-      <p class="did-intro">
-        Gouldsboro and nearby Pocono properties face unique landscaping challenges. Here are some key points to consider.
-      </p>
-
-      <div class="did-list" role="list">
-        <article class="did-item" role="listitem">
-          <h3>Deer-resistant does not mean deer-proof</h3>
-          <p>
-            Deer resistance depends on local concentration of deer, weather and season. Plants like daffodils,
-            boxwood, bayberry, holly, and juniper are often decent choices, but new plantings
-            may still need temporary protection. Specifically in the Northeast PA region, areas that are in close proximity to heavily wooded areas.
-          </p>
-        </article>
-
-        <article class="did-item" role="listitem">
-          <h3>Mulch can be too deep</h3>
-          <p>
-            A clean, even mulch layer looks better and performs better than heavy mounding,
-            especially around trunks and plant stems where trapped moisture can create issues.
-          </p>
-        </article>
-
-        <article class="did-item" role="listitem">
-          <h3>Low-maintenance does not mean no-maintenance</h3>
-          <p>
-            Even simple landscapes still need trimming, weed control, refreshes, and cleanup.
-            Good design and material choices reduce maintenance, but they do not eliminate it.
-          </p>
-        </article>
-
-        <article class="did-item" role="listitem">
-          <h3>Plant choice should match the site</h3>
-          <p>
-            In the Poconos, cold winters, shade pockets, rocky soil, and wet areas can all change
-            what survives. The best results come from matching plants to actual site conditions.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="landscaping-faq section" aria-labelledby="faq-heading">
-    <div class="container">
-      <h2 id="faq-heading">Landscaping FAQ</h2>
-      <dl class="faq-list">
-        <div class="faq-item">
-          <p class="faq-kicker">Quick Answer</p>
-          <dt>What landscaping services do you offer?</dt>
-          <dd>
-            We offer lawn mowing, weed control, planting, mulching, lawn care materials,
-            and basic landscape maintenance for homes, rentals, cabins, lake properties,
-            and small commercial properties.
-          </dd>
-        </div>
-
-        <div class="faq-item">
-          <p class="faq-kicker">Scheduling</p>
-          <dt>Do you offer regular lawn mowing?</dt>
-          <dd>
-            Yes. We provide lawn mowing for properties in Gouldsboro, Eagle Lake,
-            and nearby Pocono communities, with scheduling based on property needs
-            and seasonal growth.
-          </dd>
-        </div>
-
-        <div class="faq-item">
-          <p class="faq-kicker">Curb Appeal</p>
-          <dt>Can you install mulch?</dt>
-          <dd>
-            Yes. We install mulch in foundation beds, flower beds, around shrubs,
-            and along walkways. Fresh mulch is one of the fastest ways to improve
-            curb appeal and bed definition.
-          </dd>
-        </div>
-
-        <div class="faq-item">
-          <p class="faq-kicker">Plant Selection</p>
-          <dt>Can you help choose deer-resistant plants?</dt>
-          <dd>
-            Yes. We can suggest practical options for deer-heavy areas. While no plant is
-            fully deer-proof, some choices are significantly less attractive to deer.
-          </dd>
-        </div>
-      </dl>
-    </div>
-  </section>
 </BaseLayout>
-
-

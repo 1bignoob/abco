@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
+
 const treeRemovalSchema = createServicePageSchema({
   slug: 'tree-removal',
   name: 'Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -16,98 +16,75 @@ const treeRemovalSchema = createServicePageSchema({
   title="Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Safe, reliable tree removal and storm cleanup for residential and commercial properties in Eagle Lake, Gouldsboro, and Covington Township, PA."
   canonical="/services/tree-removal/"
+  image="/images/heros/ABCO-hero.webp"
+  imageAlt="ABCO Landscaping and Construction equipment on a project site near Eagle Lake, PA"
   schemaJson={treeRemovalSchema}
 >
-  <ServiceHero
-    title="Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-    intro="Eagle Lake, Gouldsboro & Covington Township, PA"
+  <ServiceDetailTemplate
+    heroTitle="Tree Removal Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroIntro="Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroImageSrc="/images/heros/ABCO-hero.webp"
+    heroImageAlt="ABCO Landscaping and Construction equipment on a project site near Eagle Lake, PA"
+    servicesHeading="What Our Tree Removal Team Handles"
+    servicesIntro="From one dangerous limb to full tree takedowns, ABCO handles removals with site safety and property protection first for homes, businesses, and managed properties."
+    servicesOffered={[
+      'Hazardous tree and limb removal',
+      'Storm-damaged tree cleanup',
+      'Low-clearance branch trimming',
+      'Stump reduction and cleanup',
+      'Debris hauling and disposal',
+      'Site-safe cleanup and finish grading',
+    ]}
+    secondaryHeading="Tree Removal Process"
+    secondaryParagraphs={[
+      'We begin with a site review and a clear access and cleanup plan before work begins.',
+      'You get a straightforward estimate, timeline, and cleanup scope before we start.',
+    ]}
+    factsHeading="Tree Removal Service Facts"
+    facts={[
+      'Residential and commercial',
+      'Storm response available',
+      'Debris cleanup included',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Need a dangerous tree removed?"
+    relatedServices={[
+      { slug: 'landscaping', label: 'Landscaping', title: 'View landscaping services' },
+      { slug: 'property-maintenance', label: 'Property Maintenance', title: 'View property maintenance services' },
+    ]}
+    didYouKnowIntro="Tree removal is safer, cleaner, and faster when access, drop zones, and debris handling are planned up front."
+    didYouKnowItems={[
+      {
+        title: 'Access planning protects your property',
+        body: 'Planning equipment paths and work zones helps reduce turf and hardscape damage during removal.',
+      },
+      {
+        title: 'Storm damage can hide internal risk',
+        body: 'Cracked limbs and split trunks are not always obvious from the ground and should be assessed carefully.',
+      },
+      {
+        title: 'Cleanup scope should be defined early',
+        body: 'Knowing what gets hauled away and what remains keeps the final result predictable and clean.',
+      },
+    ]}
+    faqHeading="Tree Removal FAQ"
+    faqItems={[
+      {
+        kicker: 'Safety',
+        question: 'Do you remove hazardous limbs near structures?',
+        answer: 'Yes. We handle hazardous limbs and removals with a controlled approach and site protection in mind.',
+      },
+      {
+        kicker: 'Storm Work',
+        question: 'Can you help after storm damage?',
+        answer: 'Yes. We provide storm-damage cleanup and tree removal support for affected properties.',
+      },
+      {
+        kicker: 'Cleanup',
+        question: 'Is debris hauling included?',
+        answer: 'Yes. Debris hauling and cleanup are included in the project scope.',
+      },
+    ]}
   />
-
-  <section class="service-detail section service-shared-gradient">
-    <div class="container detail-grid">
-
-      <div class="detail-content">
-        <h2>What Our Tree Removal Team Handles</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          From one dangerous limb to full tree takedowns, ABCO handles removals with
-          site safety and property protection first. We work on homes, businesses,
-          and managed properties throughout the Eagle Lake area.
-        </p>
-        <ul class="detail-list">
-          <li>Hazardous tree and limb removal</li>
-          <li>Storm-damaged tree cleanup</li>
-          <li>Low-clearance branch trimming</li>
-          <li>Stump reduction and cleanup</li>
-          <li>Debris hauling and disposal</li>
-          <li>Site-safe cleanup and finish grading</li>
-        </ul>
-
-        <h2>Tree Removal Process</h2>
-        <p>
-          We begin with a site review and clear plan for equipment access and debris
-          handling. You get a straightforward estimate, timeline, and cleanup scope
-          before work begins.
-        </p>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free tree removal estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
-      </div>
-
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Tree Removal Service Facts</h3>
-          <ul>
-            <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>Storm response available</strong></li>
-            <li><strong>Debris cleanup included</strong></li>
-            <li><strong>Mon-Fri 8 AM - 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM - 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Need a dangerous tree removed?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">Call (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/landscaping`} title="View landscaping services">Landscaping</a></li>
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
 </BaseLayout>
-
-<style>
-  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-  .detail-content a:not(.btn) { color: var(--color-orange); }
-
-  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '+'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
-
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: var(--color-orange-hov); }
-
-  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
-</style>

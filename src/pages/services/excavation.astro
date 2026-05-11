@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
+
 const excavationSchema = createServicePageSchema({
   slug: 'excavation',
   name: 'Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -16,107 +16,78 @@ const excavationSchema = createServicePageSchema({
   title="Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Professional excavation, grading, site clearing, and land prep services in Eagle Lake, Gouldsboro, and Covington Township, PA. Free estimates available."
   canonical="/services/excavation/"
+  image="/images/heros/excavation-hero.webp"
+  imageAlt="ABCO excavation equipment on a jobsite near Gouldsboro and Eagle Lake, PA"
   schemaJson={excavationSchema}
 >
-  <ServiceHero
-    title="Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA"
-    intro="Covington Township, Eagle Lake & Gouldsboro, PA"
+  <ServiceDetailTemplate
+    heroTitle="Excavation Services in Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroIntro="Covington Township, Eagle Lake & Gouldsboro, PA"
+    heroImageSrc="/images/heros/excavation-hero.webp"
+    heroImageAlt="ABCO excavation equipment on a jobsite near Gouldsboro and Eagle Lake, PA"
+    servicesHeading="What Our Excavation Company Handles"
+    servicesIntro="ABCO handles excavation projects of all sizes, from a single driveway to full site clearing and land prep for construction in Covington Township, Eagle Lake, Gouldsboro, and nearby areas."
+    servicesOffered={[
+      'Site clearing and land grading',
+      'Driveway excavation and preparation',
+      'Foundation excavation',
+      'Drainage correction and French drains',
+      'Topsoil removal and fill placement',
+      'Stump and root removal',
+      'Resurfacing and final grading',
+    ]}
+    secondaryHeading="Our Excavation Process"
+    secondaryParagraphs={[
+      'Every job starts with a site walk and a free estimate. We call 811 before digging and plan around utility marking and safe equipment access.',
+      'You get a clear work scope, schedule, and cleanup plan before any excavation starts.',
+    ]}
+    factsHeading="Excavation Service Facts"
+    facts={[
+      'Residential and commercial',
+      'All project sizes welcome',
+      'Free estimates',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Ready to get started?"
+    sidebarCtaLabel="Call (718) 877-1197"
+    relatedServices={[
+      { slug: 'landscaping', label: 'Landscaping', title: 'View landscaping services' },
+      { slug: 'property-maintenance', label: 'Property Maintenance', title: 'View property maintenance services' },
+    ]}
+    didYouKnowIntro="Excavation quality depends on planning and site conditions before the first bucket hits the ground."
+    didYouKnowItems={[
+      {
+        title: 'Utility marking is non-negotiable',
+        body: 'Safe excavation begins with underground utility identification and equipment routing before work starts.',
+      },
+      {
+        title: 'Drainage drives long-term performance',
+        body: 'Grading and runoff direction are just as important as digging depth for long-lasting results.',
+      },
+      {
+        title: 'Compaction matters after placement',
+        body: 'Fill and base materials need proper placement and compaction to avoid settling and rework.',
+      },
+    ]}
+    faqHeading="Excavation FAQ"
+    faqItems={[
+      {
+        kicker: 'Scope',
+        question: 'Do you handle small excavation jobs?',
+        answer: 'Yes. We handle both small and large excavation work, including driveway prep and localized grading corrections.',
+      },
+      {
+        kicker: 'Safety',
+        question: 'Do you coordinate utility marking?',
+        answer: 'Yes. We follow utility-marking requirements before excavation so the work can be done safely.',
+      },
+      {
+        kicker: 'Scheduling',
+        question: 'Can I get a free estimate first?',
+        answer: 'Yes. Every project starts with a site review and a free estimate with clear scope and timeline.',
+      },
+    ]}
+    listMarker="check"
   />
-
-  <section class="service-detail section service-shared-gradient">
-    <div class="container detail-grid">
-
-      <div class="detail-content">
-        <h2>What Our Excavation Company Handles</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          ABCO handles excavation projects of all sizes — from a single driveway to full site clearing
-          and land prep for construction. We operate in Covington Township, Eagle Lake, Gouldsboro,
-          and the surrounding 18424 area.
-        </p>
-        <ul class="detail-list">
-          <li>Site clearing and land grading</li>
-          <li>Driveway excavation and preparation</li>
-          <li>Foundation excavation</li>
-          <li>Drainage correction and French drains</li>
-          <li>Topsoil removal and fill placement</li>
-          <li>Stump and root removal</li>
-          <li>Resurfacing and final grading</li>
-        </ul>
-
-        <h2>Our Excavation Process</h2>
-        <p>
-          Every job starts with a site walk and free estimate. We call 811 before any digging
-          and handle utility marking as standard practice. Read our
-          <a href={`${base}blog/residential-excavation-covington-township`} title="Read our Covington Township excavation project guide">excavation project guide</a>
-          for a step-by-step overview of what to expect.
-        </p>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free excavation estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
-      </div>
-
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Excavation Service Facts</h3>
-          <ul>
-            <li><strong>Residential &amp; commercial</strong></li>
-            <li><strong>All sizes welcome</strong></li>
-            <li><strong>Free estimates</strong></li>
-            <li><strong>Mon–Fri 8 AM – 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM – 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Ready to get started?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">📞 (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/landscaping`} title="View landscaping services">Landscaping</a></li>
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
 </BaseLayout>
-
-<style>
-  .breadcrumb { margin-bottom: 1rem; }
-  .breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.9rem; }
-  .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--color-orange); }
-  .breadcrumb li[aria-current="page"] { color: var(--color-orange); font-weight: 600; }
-  .breadcrumb li[aria-hidden="true"] { color: var(--color-border-input); }
-
-  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-  .detail-content a:not(.btn) { color: var(--color-orange); }
-
-  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '✓'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
-
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: var(--color-orange-hov); }
-
-  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
-</style>

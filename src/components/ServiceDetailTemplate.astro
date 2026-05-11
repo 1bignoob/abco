@@ -1,0 +1,310 @@
+---
+import ServiceHero from './ServiceHero.astro';
+
+interface RelatedService {
+  slug: string;
+  label: string;
+  title: string;
+}
+
+interface DidYouKnowItem {
+  title: string;
+  body: string;
+}
+
+interface FaqItem {
+  kicker: string;
+  question: string;
+  answer: string;
+}
+
+interface RichHtmlBlock {
+  heading?: string;
+  html: string;
+}
+
+interface Props {
+  heroTitle: string;
+  heroIntro: string;
+  heroImageSrc?: string;
+  heroImageAlt?: string;
+  servicesHeading: string;
+  servicesIntro: string;
+  servicesOffered: string[];
+  secondaryHeading: string;
+  secondaryParagraphs: string[];
+  factsHeading: string;
+  facts: string[];
+  sidebarCtaPrompt: string;
+  sidebarCtaLabel?: string;
+  relatedServices: RelatedService[];
+  didYouKnowIntro: string;
+  didYouKnowItems: DidYouKnowItem[];
+  faqHeading?: string;
+  faqItems?: FaqItem[];
+  richHtmlBlocks?: RichHtmlBlock[];
+  listMarker?: 'plus' | 'check';
+}
+
+const base = import.meta.env.BASE_URL;
+
+const {
+  heroTitle,
+  heroIntro,
+  heroImageSrc,
+  heroImageAlt,
+  servicesHeading,
+  servicesIntro,
+  servicesOffered,
+  secondaryHeading,
+  secondaryParagraphs,
+  factsHeading,
+  facts,
+  sidebarCtaPrompt,
+  sidebarCtaLabel = 'Call (718) 877-1197',
+  relatedServices,
+  didYouKnowIntro,
+  didYouKnowItems,
+  faqHeading = 'Service FAQ',
+  faqItems = [],
+  richHtmlBlocks = [],
+  listMarker = 'plus',
+} = Astro.props;
+
+const jumpLinks = [
+  { href: '#our-services', label: 'Services Offered' },
+  { href: '#did-you-know', label: 'Did You Know' },
+  ...(faqItems.length > 0 ? [{ href: '#faq', label: 'FAQ' }] : []),
+];
+
+const listMarkerClass = listMarker === 'check' ? 'detail-list marker-check' : 'detail-list marker-plus';
+---
+
+<ServiceHero
+  title={heroTitle}
+  intro={heroIntro}
+  imageSrc={heroImageSrc}
+  imageAlt={heroImageAlt}
+  jumpLinks={jumpLinks}
+/>
+
+<section id="our-services" class="service-detail section service-shared-gradient">
+  <div class="container detail-grid">
+    <div class="detail-content">
+      <h2>{servicesHeading}</h2>
+      <hr class="orange-line" aria-hidden="true" />
+      <p>{servicesIntro}</p>
+
+      <ul class={listMarkerClass}>
+        {servicesOffered.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>{secondaryHeading}</h2>
+      {secondaryParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+      {richHtmlBlocks.map((block) => (
+        <div class="detail-rich-block">
+          {block.heading && <h3>{block.heading}</h3>}
+          <div class="detail-rich-html" set:html={block.html}></div>
+        </div>
+      ))}
+
+      <div class="detail-cta">
+        <a href={`${base}contact`} class="btn btn-primary" title="Request a free estimate">Request a Free Estimate</a>
+        <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
+      </div>
+    </div>
+
+    <aside class="detail-sidebar">
+      <div class="sidebar-box">
+        <h3>{factsHeading}</h3>
+        <ul>
+          {facts.map((fact) => <li><strong>{fact}</strong></li>)}
+        </ul>
+      </div>
+
+      <div class="sidebar-box sidebar-cta">
+        <p>{sidebarCtaPrompt}</p>
+        <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">{sidebarCtaLabel}</a>
+      </div>
+
+      <div class="sidebar-box">
+        <h3>Related Outdoor Services</h3>
+        <ul class="related-list">
+          {relatedServices.map((service) => (
+            <li>
+              <a href={`${base}services/${service.slug}`} title={service.title}>{service.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="did-you-know" class="did-you-know section" aria-labelledby="did-you-know-heading">
+  <div class="container">
+    <h2 id="did-you-know-heading">Did You Know</h2>
+    <p class="did-intro">{didYouKnowIntro}</p>
+
+    <div class="did-list" role="list">
+      {didYouKnowItems.map((item) => (
+        <article class="did-item" role="listitem">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+{faqItems.length > 0 && (
+  <section id="faq" class="service-faq section" aria-labelledby="faq-heading">
+    <div class="container">
+      <h2 id="faq-heading">{faqHeading}</h2>
+      <dl class="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item">
+            <p class="faq-kicker">{item.kicker}</p>
+            <dt>{item.question}</dt>
+            <dd>{item.answer}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+)}
+
+<style>
+  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
+
+  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
+
+  .detail-rich-block { margin-bottom: 1.5rem; }
+  .detail-rich-block h3 {
+    font-size: 1.22rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.55rem;
+  }
+
+  .detail-rich-html :global(p) {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .detail-rich-html :global(ul),
+  .detail-rich-html :global(ol) {
+    margin: 0 0 1.25rem;
+    padding-left: 1.1rem;
+    color: var(--color-text-light);
+    line-height: 1.65;
+  }
+
+  .detail-rich-html :global(li) {
+    margin-bottom: 0.4rem;
+  }
+
+  .detail-rich-html :global(a) {
+    color: var(--color-orange);
+  }
+
+  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
+  .detail-list.marker-plus li::before { content: '+'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
+  .detail-list.marker-check li::before { content: '✓'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
+
+  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+
+  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
+  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
+  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
+  .sidebar-cta { text-align: center; }
+  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
+  .sidebar-cta .btn { width: 100%; }
+  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
+  .related-list li a:hover { color: var(--color-orange-hov); }
+
+  .did-you-know {
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .did-intro {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    max-width: 70ch;
+  }
+
+  .did-list {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1rem;
+  }
+
+  .did-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .did-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-text-light);
+  }
+
+  .did-item p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .service-faq .faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .service-faq .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .service-faq .faq-kicker {
+    color: var(--color-orange);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+  }
+
+  .service-faq dt {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 0.55rem;
+  }
+
+  .service-faq dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 800px) {
+    .detail-grid { grid-template-columns: 1fr; }
+  }
+</style>

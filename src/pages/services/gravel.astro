@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
-const base = import.meta.env.BASE_URL;
+
 const gravelSchema = createServicePageSchema({
   slug: 'gravel',
   name: 'Gravel Delivery and Spreading in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -16,96 +16,75 @@ const gravelSchema = createServicePageSchema({
   title="Gravel Delivery and Spreading in Eagle Lake, Gouldsboro & Covington Township, PA"
   description="Gravel delivery and site prep for driveways, access roads, and pad areas in Eagle Lake, Gouldsboro, and Covington Township, PA."
   canonical="/services/gravel/"
+  image="/images/heros/excavation-hero.webp"
+  imageAlt="ABCO excavation equipment on a gravel preparation project near Gouldsboro and Eagle Lake, PA"
   schemaJson={gravelSchema}
 >
-  <ServiceHero
-    title="Gravel Delivery and Spreading in Eagle Lake, Gouldsboro & Covington Township, PA"
-    intro="Eagle Lake, Gouldsboro & Covington Township, PA"
+  <ServiceDetailTemplate
+    heroTitle="Gravel Delivery and Spreading in Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroIntro="Eagle Lake, Gouldsboro & Covington Township, PA"
+    heroImageSrc="/images/heros/excavation-hero.webp"
+    heroImageAlt="ABCO excavation equipment on a gravel preparation project near Gouldsboro and Eagle Lake, PA"
+    servicesHeading="What Our Gravel Service Covers"
+    servicesIntro="ABCO delivers and spreads gravel for driveways, parking areas, access lanes, and utility pads, with base prep and grading for proper drainage and durability."
+    servicesOffered={[
+      'Driveway gravel refresh and new installs',
+      'Base preparation and compaction',
+      'Delivery and spreading',
+      'Final grading and crown shaping',
+      'Erosion and washout correction',
+      'Residential and commercial service',
+    ]}
+    secondaryHeading="Proper Base and Drainage"
+    secondaryParagraphs={[
+      'A durable gravel surface starts with the right base and grade. We evaluate slope, runoff, and usage before recommending material depth.',
+      'Final shaping and compaction help keep the surface stable and easier to maintain over time.',
+    ]}
+    factsHeading="Gravel Service Facts"
+    facts={[
+      'Delivery and spreading',
+      'Grading included',
+      'Driveways and access roads',
+      'Mon-Fri 8 AM - 6 PM',
+      'Sat 9:30 AM - 4:30 PM',
+    ]}
+    sidebarCtaPrompt="Need driveway gravel work?"
+    relatedServices={[
+      { slug: 'excavation', label: 'Excavation', title: 'View excavation services' },
+      { slug: 'property-maintenance', label: 'Property Maintenance', title: 'View property maintenance services' },
+    ]}
+    didYouKnowIntro="Most gravel surface failures are caused by poor base prep and drainage, not just material quality."
+    didYouKnowItems={[
+      {
+        title: 'Crown and runoff direction matter',
+        body: 'A properly shaped surface helps move water off the drive and reduces washouts and rutting.',
+      },
+      {
+        title: 'Compaction extends surface life',
+        body: 'Layer placement and compaction are key to limiting settling and reducing future maintenance.',
+      },
+      {
+        title: 'Material depth should match usage',
+        body: 'Vehicle type, traffic frequency, and slope all influence how much base and top material is needed.',
+      },
+    ]}
+    faqHeading="Gravel Service FAQ"
+    faqItems={[
+      {
+        kicker: 'Coverage',
+        question: 'Do you handle new gravel installs and refreshes?',
+        answer: 'Yes. We handle both new installations and gravel surface refresh projects.',
+      },
+      {
+        kicker: 'Prep',
+        question: 'Do you prep the base before spreading gravel?',
+        answer: 'Yes. Base preparation and grading are included to help with drainage and longevity.',
+      },
+      {
+        kicker: 'Use Cases',
+        question: 'Can you service access roads and pads too?',
+        answer: 'Yes. We work on driveways, access lanes, parking areas, and utility pad spaces.',
+      },
+    ]}
   />
-
-  <section class="service-detail section service-shared-gradient">
-    <div class="container detail-grid">
-
-      <div class="detail-content">
-        <h2>What Our Gravel Service Covers</h2>
-        <hr class="orange-line" aria-hidden="true" />
-        <p>
-          ABCO delivers and spreads gravel for driveways, parking areas, access lanes,
-          and utility pads. We prep the base and grade for proper drainage and longer
-          surface life.
-        </p>
-        <ul class="detail-list">
-          <li>Driveway gravel refresh and new installs</li>
-          <li>Base preparation and compaction</li>
-          <li>Delivery and spreading</li>
-          <li>Final grading and crown shaping</li>
-          <li>Erosion and washout correction</li>
-          <li>Residential and commercial service</li>
-        </ul>
-
-        <h2>Proper Base and Drainage</h2>
-        <p>
-          A durable gravel surface starts with the right base and grade. Our team
-          evaluates slope, runoff, and usage before recommending material depth.
-        </p>
-
-        <div class="detail-cta">
-          <a href={`${base}contact`} class="btn btn-primary" title="Request a free gravel service estimate">Request a Free Estimate</a>
-          <a href={`${base}services`} class="btn btn-outline" title="View all ABCO services">All Services</a>
-        </div>
-      </div>
-
-      <aside class="detail-sidebar">
-        <div class="sidebar-box">
-          <h3>Gravel Service Facts</h3>
-          <ul>
-            <li><strong>Delivery and spreading</strong></li>
-            <li><strong>Grading included</strong></li>
-            <li><strong>Driveways and access roads</strong></li>
-            <li><strong>Mon-Fri 8 AM - 6 PM</strong></li>
-            <li><strong>Sat 9:30 AM - 4:30 PM</strong></li>
-          </ul>
-        </div>
-        <div class="sidebar-box sidebar-cta">
-          <p>Need driveway gravel work?</p>
-          <a href="tel:+17188771197" class="btn btn-primary" title="Call ABCO Landscaping and Construction">Call (718) 877-1197</a>
-        </div>
-        <div class="sidebar-box">
-          <h3>Related Outdoor Services</h3>
-          <ul class="related-list">
-            <li><a href={`${base}services/excavation`} title="View excavation services">Excavation</a></li>
-            <li><a href={`${base}services/property-maintenance`} title="View property maintenance services">Property Maintenance</a></li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
 </BaseLayout>
-
-<style>
-  .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; }
-
-  .detail-content h2 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-  .detail-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-
-  .detail-list { list-style: none; padding: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .detail-list li { color: var(--color-text-light); font-size: 1.1rem; padding-left: 1.5rem; position: relative; line-height: 1.5; }
-  .detail-list li::before { content: '+'; color: var(--color-orange); position: absolute; left: 0; font-weight: 700; }
-
-  .detail-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-  .detail-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; }
-  .sidebar-box h3 { font-size: 1rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1rem; }
-  .sidebar-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-box ul li { color: var(--color-text-light); font-size: 1rem; }
-  .sidebar-cta { text-align: center; }
-  .sidebar-cta p { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 0.75rem; max-width: none; }
-  .sidebar-cta .btn { width: 100%; }
-  .related-list li a { color: var(--color-orange); text-decoration: none; font-weight: 600; }
-  .related-list li a:hover { color: var(--color-orange-hov); }
-
-  @media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
-</style>
