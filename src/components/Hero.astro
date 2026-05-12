@@ -20,9 +20,9 @@ const base = import.meta.env.BASE_URL;
 
   <div class="hero-media" aria-hidden="true">
     <picture>
-      <source media="(max-width: 800px)" srcset="/images/heros/hero-mobile.webp" />
+      <source media="(max-width: 800px)" srcset={`${base}images/heros/hero-mobile.webp`} />
       <img
-        src="/images/heros/ABCO-hero.webp"
+        src={`${base}images/heros/ABCO-hero.webp`}
         alt="Heavy excavation equipment working at sunset in Pennsylvania"
         title="Landscaping and excavation services in Eagle Lake and Covington Township, PA"
         class="hero-img"

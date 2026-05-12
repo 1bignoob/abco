@@ -31,6 +31,9 @@ const {
   secondaryLabel = 'Call (718) 877-1197',
 } = Astro.props;
 
+const prefix = base.endsWith('/') ? base.slice(0, -1) : base;
+const resolvedImageSrc = imageSrc?.startsWith('/') ? `${prefix}${imageSrc}` : imageSrc;
+const resolvedImageMobileSrc = imageMobileSrc?.startsWith('/') ? `${prefix}${imageMobileSrc}` : imageMobileSrc;
 const hasImage = Boolean(imageSrc);
 ---
 
@@ -38,9 +41,9 @@ const hasImage = Boolean(imageSrc);
   {imageSrc && (
     <div class="service-hero-media" aria-hidden="true">
       <picture>
-        {imageMobileSrc && <source media="(max-width: 800px)" srcset={imageMobileSrc} />}
+        {resolvedImageMobileSrc && <source media="(max-width: 800px)" srcset={resolvedImageMobileSrc} />}
         <img
-          src={imageSrc}
+          src={resolvedImageSrc}
           alt={imageAlt ?? ''}
           class="service-hero-img"
           style={`object-position: ${imageObjectPosition}`}
