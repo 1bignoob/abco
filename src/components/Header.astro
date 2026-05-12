@@ -15,6 +15,8 @@
 //   • Click-outside and Escape key to close both
 // ─────────────────────────────────────────────────────────────────────────────
 const base = import.meta.env.BASE_URL;
+const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+const logoSrc = `${normalizedBase}images/logos/ABCO-logo.svg`;
 
 interface NavChild { href: string; label: string; }
 interface NavLink  { href: string; label: string; children?: NavChild[]; }
@@ -51,7 +53,7 @@ const { pathname } = Astro.url;
 
     <a href={base} class="logo-link" aria-label="ABCO Landscaping – Home" title="ABCO Landscaping and Construction home page">
       <img
-        src="/images/logos/ABCO-logo.svg"
+        src={logoSrc}
         alt="ABCO Landscaping & Construction"
         title="ABCO Landscaping and Construction logo"
         height="40"
