@@ -3,6 +3,7 @@ interface Props {
   title: string;
   intro: string;
   imageSrc?: string;
+  imageMobileSrc?: string;
   imageAlt?: string;
   ariaLabel?: string;
   jumpLinks?: Array<{ href: string; label: string }>;
@@ -18,6 +19,7 @@ const {
   title,
   intro,
   imageSrc,
+  imageMobileSrc,
   imageAlt,
   ariaLabel,
   jumpLinks = [],
@@ -33,16 +35,19 @@ const hasImage = Boolean(imageSrc);
 <section class={`service-hero service-shared-gradient ${hasImage ? 'has-image' : 'no-image'}`} aria-label={ariaLabel ?? title}>
   {imageSrc && (
     <div class="service-hero-media" aria-hidden="true">
-      <img
-        src={imageSrc}
-        alt={imageAlt ?? ''}
-        class="service-hero-img"
-        width="1536"
-        height="1024"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
+      <picture>
+        {imageMobileSrc && <source media="(max-width: 800px)" srcset={imageMobileSrc} />}
+        <img
+          src={imageSrc}
+          alt={imageAlt ?? ''}
+          class="service-hero-img"
+          width="1536"
+          height="1024"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
       <div class="service-hero-overlay"></div>
     </div>
   )}
