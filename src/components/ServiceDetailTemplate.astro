@@ -28,6 +28,7 @@ interface Props {
   heroIntro: string;
   heroImageSrc?: string;
   heroImageMobileSrc?: string;
+  heroImageObjectPosition?: string;
   heroImageAlt?: string;
   servicesHeading: string;
   servicesIntro: string;
@@ -54,6 +55,7 @@ const {
   heroIntro,
   heroImageSrc,
   heroImageMobileSrc,
+  heroImageObjectPosition,
   heroImageAlt,
   servicesHeading,
   servicesIntro,
@@ -87,6 +89,7 @@ const listMarkerClass = listMarker === 'check' ? 'detail-list marker-check' : 'd
   intro={heroIntro}
   imageSrc={heroImageSrc}
   imageMobileSrc={heroImageMobileSrc}
+  imageObjectPosition={heroImageObjectPosition}
   imageAlt={heroImageAlt}
   jumpLinks={jumpLinks}
 />

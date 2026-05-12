@@ -4,6 +4,7 @@ interface Props {
   intro: string;
   imageSrc?: string;
   imageMobileSrc?: string;
+  imageObjectPosition?: string;
   imageAlt?: string;
   ariaLabel?: string;
   jumpLinks?: Array<{ href: string; label: string }>;
@@ -20,6 +21,7 @@ const {
   intro,
   imageSrc,
   imageMobileSrc,
+  imageObjectPosition = 'center 38%',
   imageAlt,
   ariaLabel,
   jumpLinks = [],
@@ -41,6 +43,7 @@ const hasImage = Boolean(imageSrc);
           src={imageSrc}
           alt={imageAlt ?? ''}
           class="service-hero-img"
+          style={`object-position: ${imageObjectPosition}`}
           width="1536"
           height="1024"
           loading="eager"
@@ -282,6 +285,44 @@ const hasImage = Boolean(imageSrc);
     .service-hero-jump-links {
       margin-top: 0.65rem;
       font-size: 0.9rem;
+    }
+  }
+
+  @media (max-height: 700px) and (orientation: landscape) {
+    .service-hero {
+      align-items: flex-start;
+      --service-title-lines: 3;
+    }
+
+    .service-hero-content {
+      padding-block: 1rem 1.35rem;
+    }
+
+    .service-hero h1 {
+      font-size: clamp(1.75rem, 3.6vw, 2.8rem);
+      line-height: 1.02;
+      margin-bottom: 0.55rem;
+    }
+
+    .service-hero-intro {
+      font-size: 0.96rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+    }
+
+    .service-hero-actions {
+      gap: 0.75rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .service-hero-trust {
+      margin-top: 0.55rem;
+      font-size: 0.88rem;
+    }
+
+    .service-hero-jump-links {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
     }
   }
 </style>
