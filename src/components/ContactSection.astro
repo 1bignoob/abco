@@ -59,6 +59,10 @@
         <!-- Honeypot spam protection -->
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true" />
 
+        <div id="cf-error-summary" class="form-error-summary" role="alert" tabindex="-1" hidden>
+          <p id="cf-error-summary-text"></p>
+        </div>
+
         <div class="form-row">
           <div class="form-field">
             <label for="cf-name">Your Name <span aria-hidden="true" class="required">*</span></label>
@@ -69,8 +73,10 @@
               autocomplete="name"
               required
               aria-required="true"
+              aria-describedby="cf-name-error"
               placeholder="Jane Smith"
             />
+            <p id="cf-name-error" class="field-error" hidden>Enter your name.</p>
           </div>
           <div class="form-field">
             <label for="cf-phone">Phone Number</label>
@@ -79,22 +85,25 @@
               id="cf-phone"
               name="phone"
               autocomplete="tel"
+              aria-describedby="cf-contact-hint cf-contact-error"
               placeholder="(555) 000-0000"
             />
           </div>
         </div>
 
         <div class="form-field">
-          <label for="cf-email">Email Address <span aria-hidden="true" class="required">*</span></label>
+          <label for="cf-email">Email Address</label>
           <input
             type="email"
             id="cf-email"
             name="email"
             autocomplete="email"
-            required
-            aria-required="true"
+            aria-describedby="cf-contact-hint cf-contact-error cf-email-error"
             placeholder="you@example.com"
           />
+          <p id="cf-contact-hint" class="field-hint">Provide at least one: phone number or email address.</p>
+          <p id="cf-contact-error" class="field-error" hidden>Enter a phone number or email address.</p>
+          <p id="cf-email-error" class="field-error" hidden>Enter a valid email address, such as name@example.com.</p>
         </div>
 
         <div class="form-field">
@@ -116,8 +125,10 @@
             rows="5"
             required
             aria-required="true"
+            aria-describedby="cf-message-error"
             placeholder="Describe what you need..."
           ></textarea>
+          <p id="cf-message-error" class="field-error" hidden>Enter a message.</p>
         </div>
 
         <button type="submit" class="btn btn-primary" id="cf-submit">Send Message</button>
@@ -143,18 +154,128 @@
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const thankyou = document.getElementById('cf-thankyou') as HTMLElement | null;
   const nameInput = document.getElementById('cf-name') as HTMLInputElement | null;
+  const phoneInput = document.getElementById('cf-phone') as HTMLInputElement | null;
+  const emailInput = document.getElementById('cf-email') as HTMLInputElement | null;
+  const messageInput = document.getElementById('cf-message') as HTMLTextAreaElement | null;
   const subjectInput = document.getElementById('cf-subject') as HTMLInputElement | null;
+  const errorSummary = document.getElementById('cf-error-summary') as HTMLElement | null;
+  const errorSummaryText = document.getElementById('cf-error-summary-text') as HTMLParagraphElement | null;
+  const nameError = document.getElementById('cf-name-error') as HTMLElement | null;
+  const contactError = document.getElementById('cf-contact-error') as HTMLElement | null;
+  const emailError = document.getElementById('cf-email-error') as HTMLElement | null;
+  const messageError = document.getElementById('cf-message-error') as HTMLElement | null;
+
+  type FormControl = HTMLInputElement | HTMLTextAreaElement;
+
+  const setFieldError = (control: FormControl | null, error: HTMLElement | null, show: boolean) => {
+    if (control) {
+      if (show) control.setAttribute('aria-invalid', 'true');
+      else control.removeAttribute('aria-invalid');
+    }
+    if (error) error.hidden = !show;
+  };
+
+  const syncContactInvalidState = () => {
+    const contactIsShown = Boolean(contactError && !contactError.hidden);
+    const emailIsShown = Boolean(emailError && !emailError.hidden);
+    if (phoneInput) {
+      if (contactIsShown) phoneInput.setAttribute('aria-invalid', 'true');
+      else phoneInput.removeAttribute('aria-invalid');
+    }
+    if (emailInput) {
+      if (contactIsShown || emailIsShown) emailInput.setAttribute('aria-invalid', 'true');
+      else emailInput.removeAttribute('aria-invalid');
+    }
+  };
+
+  const syncErrorSummary = () => {
+    if (!errorSummary || !errorSummaryText || errorSummary.hidden) return;
+    const count = [nameError, contactError, emailError, messageError]
+      .filter((error) => error && !error.hidden).length;
+
+    if (count === 0) {
+      errorSummary.hidden = true;
+      return;
+    }
+
+    errorSummaryText.textContent = `Please correct ${count} ${count === 1 ? 'error' : 'errors'} in the form.`;
+  };
+
+  const clearContactErrorIfValid = () => {
+    if (phoneInput?.value.trim() || emailInput?.value.trim()) {
+      if (contactError) contactError.hidden = true;
+      syncContactInvalidState();
+    }
+  };
 
   // Keep subject in sync with name field
   nameInput?.addEventListener('input', () => {
     if (subjectInput && nameInput.value.trim()) {
       subjectInput.value = `${nameInput.value.trim()} sent a message through abcoguys.com`;
     }
+    if (nameInput.value.trim()) setFieldError(nameInput, nameError, false);
+    syncErrorSummary();
+  });
+
+  phoneInput?.addEventListener('input', () => {
+    clearContactErrorIfValid();
+    syncErrorSummary();
+  });
+
+  emailInput?.addEventListener('input', () => {
+    clearContactErrorIfValid();
+    if (!emailInput.value.trim() || !emailInput.validity.typeMismatch) {
+      if (emailError) emailError.hidden = true;
+      syncContactInvalidState();
+    }
+    syncErrorSummary();
+  });
+
+  messageInput?.addEventListener('input', () => {
+    if (messageInput.value.trim()) setFieldError(messageInput, messageError, false);
+    syncErrorSummary();
   });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
+
+    const nameIsInvalid = !nameInput?.value.trim();
+    const phone = phoneInput?.value.trim() ?? '';
+    const email = emailInput?.value.trim() ?? '';
+    const contactIsInvalid = !phone && !email;
+    const emailIsInvalid = Boolean(email && emailInput?.validity.typeMismatch);
+    const messageIsInvalid = !messageInput?.value.trim();
+
+    setFieldError(nameInput, nameError, nameIsInvalid);
+    if (contactError) contactError.hidden = !contactIsInvalid;
+    if (emailError) emailError.hidden = !emailIsInvalid;
+    syncContactInvalidState();
+    setFieldError(messageInput, messageError, messageIsInvalid);
+
+    const firstInvalid = [
+      nameIsInvalid ? nameInput : null,
+      contactIsInvalid ? phoneInput : null,
+      emailIsInvalid ? emailInput : null,
+      messageIsInvalid ? messageInput : null,
+    ].find((control): control is FormControl => control !== null);
+
+    if (firstInvalid) {
+      if (errorSummary && errorSummaryText) {
+        errorSummary.hidden = false;
+        const errorCount = [nameIsInvalid, contactIsInvalid, emailIsInvalid, messageIsInvalid]
+          .filter(Boolean).length;
+        errorSummaryText.textContent = `Please correct ${errorCount} ${errorCount === 1 ? 'error' : 'errors'} in the form.`;
+      }
+      firstInvalid.focus();
+      return;
+    }
+
+    if (errorSummary) errorSummary.hidden = true;
+    if (nameInput) nameInput.value = nameInput.value.trim();
+    if (phoneInput) phoneInput.value = phone;
+    if (emailInput) emailInput.value = email;
+    if (messageInput) messageInput.value = messageInput.value.trim();
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
 
     try {
@@ -254,6 +375,30 @@
 
   .required { color: var(--color-orange); }
 
+  .field-hint,
+  .field-error {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .field-hint { color: var(--color-text-muted); }
+
+  .field-error {
+    color: var(--color-orange-hov);
+    font-weight: 600;
+  }
+
+  .form-error-summary {
+    background: rgba(217, 82, 16, 0.12);
+    border: 1px solid var(--color-orange);
+    border-radius: 4px;
+    color: var(--color-text);
+    padding: 0.85rem 1rem;
+  }
+
+  .form-error-summary p { margin: 0; }
+
   input[type="text"],
   input[type="tel"],
   input[type="email"],
@@ -276,6 +421,11 @@
     border-color: var(--color-orange);
     outline: none;
     box-shadow: 0 0 0 3px rgba(217, 82, 16, 0.25);
+  }
+
+  input[aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    border-color: var(--color-orange-hov);
   }
 
   textarea { resize: vertical; min-height: 130px; }
