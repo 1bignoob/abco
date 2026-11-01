@@ -72,11 +72,12 @@
               name="name"
               autocomplete="name"
               required
+              minlength="2"
               aria-required="true"
               aria-describedby="cf-name-error"
               placeholder="Jane Smith"
             />
-            <p id="cf-name-error" class="field-error" hidden>Enter your name.</p>
+            <p id="cf-name-error" class="field-error" hidden>Enter at least 2 characters for your name.</p>
           </div>
           <div class="form-field">
             <label for="cf-phone">Phone Number</label>
@@ -85,9 +86,12 @@
               id="cf-phone"
               name="phone"
               autocomplete="tel"
-              aria-describedby="cf-contact-hint cf-contact-error"
+              inputmode="tel"
+              aria-describedby="cf-phone-hint cf-contact-hint cf-contact-error cf-phone-error"
               placeholder="(555) 000-0000"
             />
+            <p id="cf-phone-hint" class="field-hint">US numbers only: 10 digits, or 11 digits starting with 1. Spaces, parentheses, hyphens, and a leading + are allowed.</p>
+            <p id="cf-phone-error" class="field-error" hidden>Enter a valid US phone number with 10 digits, or 11 digits starting with 1.</p>
           </div>
         </div>
 
@@ -162,10 +166,21 @@
   const errorSummaryText = document.getElementById('cf-error-summary-text') as HTMLParagraphElement | null;
   const nameError = document.getElementById('cf-name-error') as HTMLElement | null;
   const contactError = document.getElementById('cf-contact-error') as HTMLElement | null;
+  const phoneError = document.getElementById('cf-phone-error') as HTMLElement | null;
   const emailError = document.getElementById('cf-email-error') as HTMLElement | null;
   const messageError = document.getElementById('cf-message-error') as HTMLElement | null;
 
   type FormControl = HTMLInputElement | HTMLTextAreaElement;
+
+  const isPhoneValid = (phone: string) => {
+    if (!phone) return true;
+
+    const phoneBody = phone.startsWith('+') ? phone.slice(1) : phone;
+    if (!phoneBody || /[^0-9 ()-]/.test(phoneBody)) return false;
+
+    const digits = phoneBody.replace(/[^0-9]/g, '');
+    return digits.length === 10 || (digits.length === 11 && digits.startsWith('1'));
+  };
 
   const setFieldError = (control: FormControl | null, error: HTMLElement | null, show: boolean) => {
     if (control) {
@@ -177,9 +192,10 @@
 
   const syncContactInvalidState = () => {
     const contactIsShown = Boolean(contactError && !contactError.hidden);
+    const phoneIsShown = Boolean(phoneError && !phoneError.hidden);
     const emailIsShown = Boolean(emailError && !emailError.hidden);
     if (phoneInput) {
-      if (contactIsShown) phoneInput.setAttribute('aria-invalid', 'true');
+      if (contactIsShown || phoneIsShown) phoneInput.setAttribute('aria-invalid', 'true');
       else phoneInput.removeAttribute('aria-invalid');
     }
     if (emailInput) {
@@ -190,7 +206,7 @@
 
   const syncErrorSummary = () => {
     if (!errorSummary || !errorSummaryText || errorSummary.hidden) return;
-    const count = [nameError, contactError, emailError, messageError]
+    const count = [nameError, contactError, phoneError, emailError, messageError]
       .filter((error) => error && !error.hidden).length;
 
     if (count === 0) {
@@ -213,12 +229,17 @@
     if (subjectInput && nameInput.value.trim()) {
       subjectInput.value = `${nameInput.value.trim()} sent a message through abcoguys.com`;
     }
-    if (nameInput.value.trim()) setFieldError(nameInput, nameError, false);
+    if (nameInput.value.trim().length >= 2) setFieldError(nameInput, nameError, false);
     syncErrorSummary();
   });
 
   phoneInput?.addEventListener('input', () => {
     clearContactErrorIfValid();
+    const phone = phoneInput.value.trim();
+    if (!phone || isPhoneValid(phone)) {
+      if (phoneError) phoneError.hidden = true;
+      syncContactInvalidState();
+    }
     syncErrorSummary();
   });
 
@@ -240,15 +261,17 @@
     e.preventDefault();
     const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
 
-    const nameIsInvalid = !nameInput?.value.trim();
+    const nameIsInvalid = (nameInput?.value.trim().length ?? 0) < 2;
     const phone = phoneInput?.value.trim() ?? '';
     const email = emailInput?.value.trim() ?? '';
     const contactIsInvalid = !phone && !email;
+    const phoneIsInvalid = Boolean(phone && !isPhoneValid(phone));
     const emailIsInvalid = Boolean(email && emailInput?.validity.typeMismatch);
     const messageIsInvalid = !messageInput?.value.trim();
 
     setFieldError(nameInput, nameError, nameIsInvalid);
     if (contactError) contactError.hidden = !contactIsInvalid;
+    if (phoneError) phoneError.hidden = !phoneIsInvalid;
     if (emailError) emailError.hidden = !emailIsInvalid;
     syncContactInvalidState();
     setFieldError(messageInput, messageError, messageIsInvalid);
@@ -256,6 +279,7 @@
     const firstInvalid = [
       nameIsInvalid ? nameInput : null,
       contactIsInvalid ? phoneInput : null,
+      phoneIsInvalid ? phoneInput : null,
       emailIsInvalid ? emailInput : null,
       messageIsInvalid ? messageInput : null,
     ].find((control): control is FormControl => control !== null);
@@ -263,7 +287,7 @@
     if (firstInvalid) {
       if (errorSummary && errorSummaryText) {
         errorSummary.hidden = false;
-        const errorCount = [nameIsInvalid, contactIsInvalid, emailIsInvalid, messageIsInvalid]
+        const errorCount = [nameIsInvalid, contactIsInvalid, phoneIsInvalid, emailIsInvalid, messageIsInvalid]
           .filter(Boolean).length;
         errorSummaryText.textContent = `Please correct ${errorCount} ${errorCount === 1 ? 'error' : 'errors'} in the form.`;
       }
