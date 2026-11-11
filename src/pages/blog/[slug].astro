@@ -271,10 +271,20 @@ function formatDate(d: Date) {
   }
 
   @media print {
-    @page { margin: 16mm; }
-    .site-header, .breadcrumb-bar, .post-header, .post-cta, .back-link, .site-footer, .skip-link { display: none !important; }
+    body:has(.winterizing-article) .site-header,
+    body:has(.winterizing-article) .breadcrumb-bar,
+    body:has(.winterizing-article) .post-header,
+    body:has(.winterizing-article) .post-cta,
+    body:has(.winterizing-article) .back-link,
+    body:has(.winterizing-article) .site-footer,
+    body:has(.winterizing-article) .skip-link { display: none !important; }
     .winterizing-article > :not(.seasonal-checklist) { display: none !important; }
-    body, .post-body, .post-body .container, .post-body .prose, .winterizing-article, .seasonal-checklist {
+    body:has(.winterizing-article),
+    body:has(.winterizing-article) .post-body,
+    body:has(.winterizing-article) .post-body .container,
+    body:has(.winterizing-article) .post-body .prose,
+    .winterizing-article,
+    .winterizing-article .seasonal-checklist {
       display: block;
       max-width: none;
       margin: 0;
@@ -283,10 +293,13 @@ function formatDate(d: Date) {
       background: white;
       color: black;
     }
-    .seasonal-checklist h2, .seasonal-checklist legend, .seasonal-checklist p,
-    .seasonal-checklist strong, .seasonal-checklist span { color: black !important; }
-    .seasonal-checklist label { font-size: 10pt; }
-    .seasonal-checklist fieldset { break-inside: avoid; }
-    .seasonal-checklist legend { font-size: 11pt; }
+    .winterizing-article .seasonal-checklist h2,
+    .winterizing-article .seasonal-checklist legend,
+    .winterizing-article .seasonal-checklist p,
+    .winterizing-article .seasonal-checklist strong,
+    .winterizing-article .seasonal-checklist span { color: black !important; }
+    .winterizing-article .seasonal-checklist label { font-size: 10pt; }
+    .winterizing-article .seasonal-checklist fieldset { break-inside: avoid; }
+    .winterizing-article .seasonal-checklist legend { font-size: 11pt; }
   }
 </style>
