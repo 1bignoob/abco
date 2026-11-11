@@ -10,6 +10,7 @@
 //   pubDate      → date    (used for sorting; e.g. 2025-04-15)
 //
 // OPTIONAL FRONTMATTER:
+//   seoTitle     → string  (optional search/social title; falls back to title)
 //   author       → string  (defaults to "ABCO Team" if omitted)
 //   tags         → string[] (displayed as label chips on cards)
 //   image        → string  (path to hero image, not yet used in templates)
@@ -27,6 +28,7 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     pubDate: z.coerce.date(),
     author: z.string().default('ABCO Team'),

@@ -39,6 +39,12 @@ function sitemapRenamer() {
 const configuredBase = process.env.SITE_BASE;
 const defaultBase = process.env.GITHUB_ACTIONS === 'true' ? '/abco/' : '/';
 const base = normalizeBase(configuredBase ?? defaultBase);
+// These public URLs changed in this article update; all others keep the live sitemap timestamp.
+const sitemapLastmodByPath = new Map([
+  ['/', new Date('2026-11-11T00:00:00.000Z')],
+  ['/blog/', new Date('2026-11-11T00:00:00.000Z')],
+  ['/blog/how-to-winterize-a-mobile-home-or-park-model/', new Date('2026-11-11T00:00:00.000Z')],
+]);
 
 export default defineConfig({
   site: 'https://abcoguys.com',
@@ -47,7 +53,22 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
+      // Preserve the currently published timestamps for unchanged pages.
+      lastmod: new Date('2026-11-01T01:28:22.022Z'),
+      // Emit canonical site-root URLs rather than the GitHub Pages project base.
+      serialize(item) {
+        const pageUrl = new URL(item.url);
+        const pathname = pageUrl.pathname;
+        const route = base !== '/' && pathname.startsWith(base)
+          ? `/${pathname.slice(base.length)}`
+          : pathname;
+        const lastmod = sitemapLastmodByPath.get(route);
+        return {
+          ...item,
+          url: `${pageUrl.origin}${route}`,
+          ...(lastmod ? { lastmod } : {}),
+        };
+      },
     }),
     sitemapRenamer(),
   ],

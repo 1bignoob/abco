@@ -46,7 +46,7 @@ function formatDate(d: Date) {
 ---
 
 <BaseLayout
-  title={`${post.data.title} | ABCO Landscaping & Construction`}
+  title={`${post.data.seoTitle ?? post.data.title} | ABCO Landscaping & Construction`}
   description={post.data.description}
   canonical={`/blog/${post.id}/`}
   ogType="article"
@@ -207,4 +207,86 @@ function formatDate(d: Date) {
     transition: color 0.2s;
   }
   .back-link a:hover { color: var(--color-orange); }
+</style>
+
+<script>
+  document.querySelector('#print-checklist')?.addEventListener('click', () => window.print());
+</script>
+
+<style is:global>
+  .winterizing-article { overflow-wrap: anywhere; }
+  .winterizing-article .workflow > h2 { margin-bottom: 0.75rem; }
+  .winterizing-article .workflow-key { margin-bottom: 1.5rem; font-size: 1rem; }
+  .winterizing-article .workflow-steps {
+    list-style: decimal;
+    margin: 1.5rem 0 0;
+    padding-left: 1.5rem;
+  }
+  .winterizing-article .workflow-steps > li { margin: 0 0 2.25rem; padding: 0; }
+  .winterizing-article .workflow-steps > li::marker { color: var(--color-orange); font-weight: 700; }
+  .winterizing-article .workflow-steps > li::before { content: none; }
+  .winterizing-article .workflow-steps h3 { margin: 0 0 0.6rem; }
+  .winterizing-article .workflow-steps p { margin: 0.65rem 0; }
+  .prose .winterizing-article .workflow-steps ul {
+    list-style: disc;
+    margin: 0.65rem 0 0;
+    padding-left: 1.35rem;
+  }
+  .winterizing-article .workflow-steps ul > li { margin-bottom: 0.55rem; padding-left: 0.1rem; }
+  .winterizing-article .workflow-steps ul > li:last-child { margin-bottom: 0; }
+  .winterizing-article .seasonal-checklist { margin-top: 3rem; padding: 0; }
+  .winterizing-article .seasonal-checklist h2 { margin-top: 0; }
+  .winterizing-article .seasonal-checklist fieldset { margin: 1.5rem 0 0; padding: 0; border: 0; }
+  .winterizing-article .seasonal-checklist legend {
+    padding: 0;
+    color: var(--color-text-warm);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .winterizing-article .seasonal-checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-block: 0.6rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    cursor: pointer;
+  }
+  .winterizing-article .seasonal-checklist input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.25rem;
+    accent-color: var(--color-orange);
+  }
+  .winterizing-article .seasonal-checklist label:has(input:checked) span {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+  .winterizing-article .print-button { font-size: 1rem; }
+  .winterizing-article .print-note { margin: 1.5rem 0 0 !important; font-size: 0.9rem !important; }
+
+  @media (max-width: 600px) {
+    .winterizing-article .workflow-steps { padding-left: 1.25rem; }
+  }
+
+  @media print {
+    @page { margin: 16mm; }
+    .site-header, .breadcrumb-bar, .post-header, .post-cta, .back-link, .site-footer, .skip-link { display: none !important; }
+    .winterizing-article > :not(.seasonal-checklist) { display: none !important; }
+    body, .post-body, .post-body .container, .post-body .prose, .winterizing-article, .seasonal-checklist {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      color: black;
+    }
+    .seasonal-checklist h2, .seasonal-checklist legend, .seasonal-checklist p,
+    .seasonal-checklist strong, .seasonal-checklist span { color: black !important; }
+    .seasonal-checklist label { font-size: 10pt; }
+    .seasonal-checklist fieldset { break-inside: avoid; }
+    .seasonal-checklist legend { font-size: 11pt; }
+  }
 </style>
