@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
 
+const base = import.meta.env.BASE_URL;
 const parkModelRepairSchema = createServicePageSchema({
   slug: 'park-model-home-repair',
   name: 'Park Model Home Repair in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -39,6 +40,11 @@ const parkModelRepairSchema = createServicePageSchema({
     secondaryParagraphs={[
       'Park model homes need targeted maintenance across changing weather and occupancy schedules.',
       'We tailor repair planning to access, usage patterns, and site conditions.',
+    ]}
+    richHtmlBlocks={[
+      {
+        html: `<p>Closing a park model for winter? Our <a href="${base}blog/how-to-winterize-a-mobile-home-or-park-model/">step-by-step winterizing guide</a> covers plumbing and appliance procedures; ABCO can help with exterior drainage, cleanup and site preparation.</p>`,
+      },
     ]}
     factsHeading="Park Model Repair Facts"
     facts={[

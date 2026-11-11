@@ -10,8 +10,11 @@
 //   pubDate      → date    (used for sorting; e.g. 2025-04-15)
 //
 // OPTIONAL FRONTMATTER:
-//   seoTitle     → string  (optional search/social title; falls back to title)
+//   seoTitle     → string  (optional complete search/social title; falls back to title + site name)
 //   author       → string  (defaults to "ABCO Team" if omitted)
+//   authorUrl    → string  (optional author profile URL)
+//   dateModified → date    (optional last substantive content update)
+//   articleSection → string (optional article category for structured data)
 //   tags         → string[] (displayed as label chips on cards)
 //   image        → string  (path to hero image, not yet used in templates)
 //   imageAlt     → string  (alt text for the image above)
@@ -31,7 +34,10 @@ const blog = defineCollection({
     seoTitle: z.string().optional(),
     description: z.string(),
     pubDate: z.coerce.date(),
+    dateModified: z.coerce.date().optional(),
     author: z.string().default('ABCO Team'),
+    authorUrl: z.string().url().optional(),
+    articleSection: z.string().optional(),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),

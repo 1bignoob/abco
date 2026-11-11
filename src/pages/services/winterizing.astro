@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceDetailTemplate from '../../components/ServiceDetailTemplate.astro';
 import { createServicePageSchema } from '../../lib/schema';
 
+const base = import.meta.env.BASE_URL;
 const winterizingSchema = createServicePageSchema({
   slug: 'winterizing',
   name: 'Winterizing Services in Eagle Lake, Gouldsboro & Covington Township, PA',
@@ -39,6 +40,11 @@ const winterizingSchema = createServicePageSchema({
     secondaryParagraphs={[
       'Small seasonal issues can become expensive repairs once freeze and thaw cycles begin.',
       'A pre-winter walkthrough gives you a clear action list before severe weather arrives.',
+    ]}
+    richHtmlBlocks={[
+      {
+        html: `<p>For a detailed plumbing checklist for mobile homes and park models, read our <a href="${base}blog/how-to-winterize-a-mobile-home-or-park-model/">winterizing guide</a>. ABCO focuses on exterior drainage, cleanup and site readiness rather than plumbing or gas work.</p>`,
+      },
     ]}
     factsHeading="Winterizing Service Facts"
     facts={[

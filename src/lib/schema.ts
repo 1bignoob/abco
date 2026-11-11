@@ -657,17 +657,21 @@ export function createBlogIndexSchema(posts: Array<{ id: string; data: { title: 
 export function createBlogPostSchema(options: {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   pubDateIso: string;
+  dateModifiedIso?: string;
   author?: string;
+  authorUrl?: string;
   tags?: string[];
+  articleSection?: string;
 }) {
   const pageUrl = `${SITE_URL}/blog/${options.slug}/`;
   const webPage = {
     '@type': 'WebPage',
     '@id': `${pageUrl}#webpage`,
     url: pageUrl,
-    name: `${options.title} | ABCO Landscaping`,
+    name: options.seoTitle ?? `${options.title} | ABCO Landscaping`,
     description: options.description,
     isPartOf: { '@id': IDS.website },
     about: { '@id': IDS.business },
@@ -679,6 +683,12 @@ export function createBlogPostSchema(options: {
     'Landscaping, excavation, tree pruning and removal, and property maintenance in Eagle Lake, PA.'
   );
 
+  const author: Record<string, string> = {
+    '@type': 'Organization',
+    name: options.author ?? 'ABCO Team',
+  };
+  if (options.authorUrl) author.url = options.authorUrl;
+
   const article: Record<string, unknown> = {
     '@type': 'BlogPosting',
     '@id': `${pageUrl}#blogposting`,
@@ -686,13 +696,12 @@ export function createBlogPostSchema(options: {
     description: options.description,
     datePublished: options.pubDateIso,
     mainEntityOfPage: pageUrl,
-    author: {
-      '@type': 'Organization',
-      name: options.author ?? 'ABCO Team',
-    },
+    author,
     publisher: { '@id': IDS.organization },
-    articleSection: 'Landscaping and Outdoor Services',
+    articleSection: options.articleSection ?? 'Landscaping and Outdoor Services',
   };
+
+  if (options.dateModifiedIso) article.dateModified = options.dateModifiedIso;
 
   if (options.tags?.length) {
     article.keywords = options.tags.join(', ');

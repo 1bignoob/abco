@@ -30,13 +30,25 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const isWinterizationArticle = post.id === 'how-to-winterize-a-mobile-home-or-park-model';
+const winterTopicTagLinks: Record<string, string> = isWinterizationArticle
+  ? {
+      Winterizing: `${base}services/winterizing/`,
+      'Park model homes': `${base}services/park-model-home-repair/`,
+      'Seasonal closing': `${base}services/property-maintenance/`,
+    }
+  : {};
 const postSchema = createBlogPostSchema({
   slug: post.id,
   title: post.data.title,
+  seoTitle: post.data.seoTitle,
   description: post.data.description,
   pubDateIso: post.data.pubDate.toISOString(),
+  dateModifiedIso: post.data.dateModified?.toISOString(),
   author: post.data.author,
+  authorUrl: post.data.authorUrl,
   tags: post.data.tags,
+  articleSection: post.data.articleSection,
 });
 
 function formatDate(d: Date) {
@@ -46,7 +58,7 @@ function formatDate(d: Date) {
 ---
 
 <BaseLayout
-  title={`${post.data.seoTitle ?? post.data.title} | ABCO Landscaping & Construction`}
+  title={post.data.seoTitle ?? `${post.data.title} | ABCO Landscaping & Construction`}
   description={post.data.description}
   canonical={`/blog/${post.id}/`}
   ogType="article"
@@ -56,7 +68,7 @@ function formatDate(d: Date) {
   <article class="blog-post">
 
     <!-- Post header -->
-    <header class="post-header">
+    <header class:list={['post-header', isWinterizationArticle && 'winterizing-post']}>
       <div class="container post-header-inner">
 
         <h1>{post.data.title}</h1>
@@ -70,7 +82,9 @@ function formatDate(d: Date) {
           )}
           {post.data.tags && (
             <div class="post-tags" aria-label="Tags">
-              {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+              {post.data.tags.map(tag => winterTopicTagLinks[tag]
+                ? <a class="tag" href={winterTopicTagLinks[tag]}>{tag}</a>
+                : <span class="tag">{tag}</span>)}
             </div>
           )}
         </div>
@@ -83,16 +97,24 @@ function formatDate(d: Date) {
       <div class="container">
         <div class="prose">
           <Content />
+          {isWinterizationArticle && (
+            <section aria-labelledby="winterizing-cta-title">
+              <h2 id="winterizing-cta-title">Need Help Getting the Property Ready?</h2>
+              <p>
+                For seasonal properties in ZIP 18424 and nearby Eagle Lake, Gouldsboro or Covington Township, <a href="tel:+17188771197">call me</a> for a free consultation or <a href={`${base}contact/`}>book with ABCO Guys</a>. I handle exterior closing work, including <a href={`${base}services/winterizing/`}>exterior winterizing and site prep</a>, drainage, cleanup, site readiness and <a href={`${base}services/park-model-home-repair/`}>park-model exterior work</a>. Plumbing and gas service belongs to a qualified trade.
+              </p>
+            </section>
+          )}
         </div>
 
         <!-- End-of-article CTA -->
-        <aside class="post-cta" aria-label="Contact prompt">
+        {!isWinterizationArticle && <aside class="post-cta" aria-label="Contact prompt">
           <p>
             <strong>Ready to put this into action?</strong> ABCO Landscaping serves Eagle Lake,
             Gouldsboro, and Covington Township PA.
             <a href={`${base}contact`} title="Contact ABCO for a free estimate">Contact us for a free estimate.</a>
           </p>
-        </aside>
+        </aside>}
 
         <!-- Nav between posts -->
         <div class="back-link">
@@ -163,6 +185,53 @@ function formatDate(d: Date) {
     letter-spacing: 0.05em;
     padding: 0.2rem 0.55rem;
     border-radius: 3px;
+  }
+
+  .winterizing-post .post-byline .post-tags {
+    flex-basis: 100%;
+    align-items: flex-start;
+    gap: 0.625rem;
+    row-gap: 0.625rem;
+    max-width: 100%;
+    margin-block-start: 0.35rem;
+  }
+
+  .winterizing-post .post-byline .post-tags .tag {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 6px;
+    background: #4a2c1f;
+    color: #ff802f;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.06em;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .winterizing-post .post-byline .post-tags a.tag {
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .winterizing-post .post-byline .post-tags a.tag:hover {
+    background: #62402f;
+    color: #ff9a5c;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .winterizing-post .post-byline .post-tags a.tag:focus-visible {
+    outline: 3px solid #fff3e8;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px #4a2c1f;
   }
 
   /* Body */

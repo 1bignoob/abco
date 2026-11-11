@@ -41,8 +41,10 @@ const defaultBase = process.env.GITHUB_ACTIONS === 'true' ? '/abco/' : '/';
 const base = normalizeBase(configuredBase ?? defaultBase);
 // These public URLs changed in this article update; all others keep the live sitemap timestamp.
 const sitemapLastmodByPath = new Map([
-  ['/blog/', new Date('2026-11-11T11:31:21-05:00')],
-  ['/blog/how-to-winterize-a-mobile-home-or-park-model/', new Date('2026-11-11T11:33:59-05:00')],
+  ['/blog/', new Date('2026-11-11T16:01:29-05:00')],
+  ['/blog/how-to-winterize-a-mobile-home-or-park-model/', new Date('2026-11-11T16:01:29-05:00')],
+  ['/services/winterizing/', new Date('2026-11-11T16:01:29-05:00')],
+  ['/services/park-model-home-repair/', new Date('2026-11-11T16:01:29-05:00')],
 ]);
 
 export default defineConfig({
