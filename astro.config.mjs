@@ -52,6 +52,11 @@ export default defineConfig({
   base,
   integrations: [
     sitemap({
+      filter(page) {
+        const pathname = new URL(page).pathname;
+        return !['/disclaimer/', '/privacy-policy/', '/terms-of-use/']
+          .some(excludedPath => pathname.endsWith(excludedPath));
+      },
       changefreq: 'weekly',
       priority: 0.7,
       // Preserve the currently published timestamps for unchanged pages.

@@ -1,5 +1,6 @@
 ---
 title: "Spring Tree Pruning in Eagle Lake: Why Timing Matters"
+seoTitle: "Spring Tree Pruning in Eagle Lake | ABCO Guys"
 description: "Pruning at the wrong time of year can stress or even kill your trees. Here's what Eagle Lake and Gouldsboro homeowners should know before picking up the loppers."
 pubDate: 2026-03-18
 author: "ABCO Team"

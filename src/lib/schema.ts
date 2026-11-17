@@ -230,7 +230,7 @@ function createOrganization() {
     email: 'sales@abcoguys.com',
     logo: createBusinessLogo(),
     image: toAbsoluteUrl(`${IMG.heroes}/ABCO-hero.webp`),
-    sameAs: ['https://www.facebook.com/yourpage'],
+    sameAs: ['https://www.facebook.com/AbcoGuys/'],
   };
 }
 
@@ -269,7 +269,7 @@ function createLocalBusiness(options?: { offerIds?: string[] }) {
         caption: 'Skid steer performing lot clearing and brush removal at a residential property in Gouldsboro, PA 18424',
       },
     ],
-    sameAs: ['https://www.facebook.com/yourpage'],
+    sameAs: ['https://www.facebook.com/AbcoGuys/'],
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',

@@ -1,5 +1,6 @@
 ---
 title: "Year-Round Lawn Care Tips for Gouldsboro PA Homeowners"
+seoTitle: "Year-Round Lawn Care in Gouldsboro, PA | ABCO Guys"
 description: "Living near Eagle Lake means dealing with real Pennsylvania seasons — hard winters, wet springs, humid summers. Here's a seasonal lawn care calendar built for our area."
 pubDate: 2026-04-10
 author: "ABCO Team"

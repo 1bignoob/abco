@@ -1,5 +1,6 @@
 ---
 title: "What to Expect During a Residential Excavation Project in Covington Township"
+seoTitle: "What to Expect: Excavation in Covington Township | ABCO Guys"
 description: "Excavation sounds intimidating — but understanding the process makes it a lot less stressful. Here's a plain-English breakdown for homeowners in Covington Township and the Gouldsboro area."
 pubDate: 2026-04-02
 author: "ABCO Team"

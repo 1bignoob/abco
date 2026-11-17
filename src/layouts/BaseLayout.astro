@@ -57,6 +57,16 @@ const canonicalUrl = canonical
   : `${siteUrl}${Astro.url.pathname}`;
 const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const ogImageAlt = imageAlt ?? 'ABCO Landscaping & Construction';
+const ogImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/og/og-image-home.webp': { width: 1200, height: 630 },
+  '/images/heros/excavation-hero.webp': { width: 1536, height: 1024 },
+  '/images/heros/google-review-hero.webp': { width: 1536, height: 1024 },
+  '/images/heros/landscaping-hero.webp': { width: 1536, height: 1024 },
+  '/images/heros/seasonal-cleanup-hero.webp': { width: 1536, height: 1024 },
+  '/images/heros/stump-grinding-hero.webp': { width: 1536, height: 1024 },
+  '/images/heros/tree-removal-hero.webp': { width: 1536, height: 1024 },
+};
+const ogDimensions = ogImageDimensions[new URL(ogImage).pathname];
 ---
 
 <!doctype html>
@@ -112,8 +122,8 @@ const ogImageAlt = imageAlt ?? 'ABCO Landscaping & Construction';
     <meta property="og:url"         content={canonicalUrl} />
     <meta property="og:image"       content={ogImage} />
     <meta property="og:image:alt"   content={ogImageAlt} />
-    <meta property="og:image:width"  content="1536" />
-    <meta property="og:image:height" content="1024" />
+    {ogDimensions && <meta property="og:image:width" content={String(ogDimensions.width)} />}
+    {ogDimensions && <meta property="og:image:height" content={String(ogDimensions.height)} />}
     <meta property="og:locale"      content="en_US" />
 
     <!-- Twitter -->
